@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.usoft.sschool_zuul.dao.CfRoleDao" >
+    <resultMap id="BaseResultMap" type="com.usoft.sschool_zuul.entity.CfRole" >
+        <id column="RoleId" property="roleId" jdbcType="INTEGER" />
+        <result column="RoleName" property="roleName" jdbcType="VARCHAR" />
+        <result column="RoleDesc" property="roleDesc" jdbcType="VARCHAR" />
+        <result column="CreateUserID" property="createUserId" jdbcType="INTEGER" />
+        <result column="CreateDate" property="createDate" jdbcType="DATE" />
+        <result column="ModifyUserID" property="modifyUserId" jdbcType="INTEGER" />
+        <result column="ModifyDate" property="modifyDate" jdbcType="TIMESTAMP" />
+        <result column="RecordStatus" property="recordStatus" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        RoleID, RoleName, RoleDesc,  CreateUserID, CreateDate, ModifyUserID, ModifyDate, RecordStatus
+  </sql>
+    <select id="select" resultMap="BaseResultMap" parameterType="com.usoft.sschool_zuul.entity.CfUserrole" >
+        select
+        <include refid="Base_Column_List" />
+        from cf_role
+        where 1=1
+        <if test="roleId!= null" >
+            and RoleId = #{RoleId}
+        </if>
+
+
+    </select>
+
+</mapper>

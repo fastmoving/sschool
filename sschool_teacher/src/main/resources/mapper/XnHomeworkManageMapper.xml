@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.usoft.sschool_teacher.mapper.XnHomeworkManageMapper" >
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.XnHomeworkManage" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="hwName" property="hwname" jdbcType="VARCHAR" />
+    <result column="hwType" property="hwtype" jdbcType="TINYINT" />
+    <result column="acceptClass" property="acceptclass" jdbcType="VARCHAR" />
+    <result column="subject" property="subject" jdbcType="VARCHAR" />
+    <result column="expireTime" property="expiretime" jdbcType="TIMESTAMP" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="UID" property="uid" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.usoft.smartschool.pojo.XnHomeworkManage" extends="BaseResultMap" >
+    <result column="hwContent" property="hwcontent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, hwName, hwType, acceptClass, subject, DATE_FORMAT(expireTime,'%Y-%m-%d %H:%i:%s') expireTime,DATE_FORMAT(createTime,'%Y-%m-%d %H:%i:%s') createTime, UID
+  </sql>
+  <sql id="Blob_Column_List" >
+    hwContent
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.usoft.smartschool.pojo.XnHomeworkManageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from xn_homework_manage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.XnHomeworkManageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from xn_homework_manage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from xn_homework_manage
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from xn_homework_manage
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.XnHomeworkManageExample" >
+    delete from xn_homework_manage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.XnHomeworkManage" >
+    insert into xn_homework_manage (ID, hwName, hwType, 
+      acceptClass, subject, expireTime, 
+      createTime, UID, hwContent
+      )
+    values (#{id,jdbcType=INTEGER}, #{hwname,jdbcType=VARCHAR}, #{hwtype,jdbcType=TINYINT}, 
+      #{acceptclass,jdbcType=VARCHAR}, #{subject,jdbcType=VARCHAR}, #{expiretime,jdbcType=TIMESTAMP}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{uid,jdbcType=INTEGER}, #{hwcontent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.XnHomeworkManage" useGeneratedKeys="true" keyProperty="id" >
+    insert into xn_homework_manage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="hwname != null" >
+        hwName,
+      </if>
+      <if test="hwtype != null" >
+        hwType,
+      </if>
+      <if test="acceptclass != null" >
+        acceptClass,
+      </if>
+      <if test="subject != null" >
+        subject,
+      </if>
+      <if test="expiretime != null" >
+        expireTime,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="uid != null" >
+        UID,
+      </if>
+      <if test="hwcontent != null" >
+        hwContent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="hwname != null" >
+        #{hwname,jdbcType=VARCHAR},
+      </if>
+      <if test="hwtype != null" >
+        #{hwtype,jdbcType=TINYINT},
+      </if>
+      <if test="acceptclass != null" >
+        #{acceptclass,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="expiretime != null" >
+        #{expiretime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="hwcontent != null" >
+        #{hwcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.XnHomeworkManageExample" resultType="java.lang.Integer" >
+    select count(*) from xn_homework_manage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update xn_homework_manage
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.hwname != null" >
+        hwName = #{record.hwname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hwtype != null" >
+        hwType = #{record.hwtype,jdbcType=TINYINT},
+      </if>
+      <if test="record.acceptclass != null" >
+        acceptClass = #{record.acceptclass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subject != null" >
+        subject = #{record.subject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expiretime != null" >
+        expireTime = #{record.expiretime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.uid != null" >
+        UID = #{record.uid,jdbcType=INTEGER},
+      </if>
+      <if test="record.hwcontent != null" >
+        hwContent = #{record.hwcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update xn_homework_manage
+    set ID = #{record.id,jdbcType=INTEGER},
+      hwName = #{record.hwname,jdbcType=VARCHAR},
+      hwType = #{record.hwtype,jdbcType=TINYINT},
+      acceptClass = #{record.acceptclass,jdbcType=VARCHAR},
+      subject = #{record.subject,jdbcType=VARCHAR},
+      expireTime = #{record.expiretime,jdbcType=TIMESTAMP},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      UID = #{record.uid,jdbcType=INTEGER},
+      hwContent = #{record.hwcontent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update xn_homework_manage
+    set ID = #{record.id,jdbcType=INTEGER},
+      hwName = #{record.hwname,jdbcType=VARCHAR},
+      hwType = #{record.hwtype,jdbcType=TINYINT},
+      acceptClass = #{record.acceptclass,jdbcType=VARCHAR},
+      subject = #{record.subject,jdbcType=VARCHAR},
+      expireTime = #{record.expiretime,jdbcType=TIMESTAMP},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      UID = #{record.uid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.XnHomeworkManage" >
+    update xn_homework_manage
+    <set >
+      <if test="hwname != null" >
+        hwName = #{hwname,jdbcType=VARCHAR},
+      </if>
+      <if test="hwtype != null" >
+        hwType = #{hwtype,jdbcType=TINYINT},
+      </if>
+      <if test="acceptclass != null" >
+        acceptClass = #{acceptclass,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="expiretime != null" >
+        expireTime = #{expiretime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uid != 0 " >
+        UID = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="hwcontent != null" >
+        hwContent = #{hwcontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.usoft.smartschool.pojo.XnHomeworkManage" >
+    update xn_homework_manage
+    set hwName = #{hwname,jdbcType=VARCHAR},
+      hwType = #{hwtype,jdbcType=TINYINT},
+      acceptClass = #{acceptclass,jdbcType=VARCHAR},
+      subject = #{subject,jdbcType=VARCHAR},
+      expireTime = #{expiretime,jdbcType=TIMESTAMP},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      UID = #{uid,jdbcType=INTEGER},
+      hwContent = #{hwcontent,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.XnHomeworkManage" >
+    update xn_homework_manage
+    set hwName = #{hwname,jdbcType=VARCHAR},
+      hwType = #{hwtype,jdbcType=TINYINT},
+      acceptClass = #{acceptclass,jdbcType=VARCHAR},
+      subject = #{subject,jdbcType=VARCHAR},
+      expireTime = #{expiretime,jdbcType=TIMESTAMP},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      UID = #{uid,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getHomeworkInformation" resultType="java.util.Map" parameterType="java.lang.Integer">
+    SELECT
+xhm.ID as hewId,
+xhm.hwName,
+xhm.hwType,
+xhm.acceptClass,
+xhm.`subject`,
+xhm.expireTime,
+xhm.hwContent,
+xhm.createTime,
+xhm.UID as teacherId,
+xht.ID as titleId,
+xht.title,
+xht.answerA,
+xht.answerB,
+xht.answerC,
+xht.answerD,
+xht.rightAnswer,
+xht.hwId
+from xn_homework_manage xhm
+ LEFT join xn_homework_title xht on xht.hwId = xhm.ID
+ <where>
+   <if test="homeworkId != null">
+     xhm.ID = #{homeworkId,jdbcType=INTEGER}
+   </if>
+ </where>
+  </select>
+
+  <select id="getHomeworkWeb" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from xn_homework_manage
+    <where>
+      <if test="teacherId != null ">
+        UID = #{teacherId}
+      </if>
+      <if test="hewName !=null and hewName !=''">
+        and hwName like CONCAT('%',#{hewName},'%')
+      </if>
+      <if test="type != null">
+        and hwType = #{type}
+      </if>
+      <if test="expireTime !=null">
+        and expireTime <![CDATA[<=]]> #{expireTime}
+      </if>
+    </where>
+    order by createTime DESC
+    <if test="page !=null and start !=null">
+      LIMIT #{start},#{page}
+    </if>
+  </select>
+
+  <select id="getHomeworkWebCount" resultType="java.lang.Integer" parameterType="java.util.Map">
+    select
+        count(1)
+    from xn_homework_manage
+    <where>
+      <if test="teacherId != null ">
+        UID = #{teacherId}
+      </if>
+      <if test="hewName !=null and hewName !=''">
+        and hwName = #{hewName}
+      </if>
+      <if test="type != null">
+        and hwType = #{type}
+      </if>
+      <if test="expireTime !=null">
+        and expireTime <![CDATA[<=]]> #{expireTime}
+      </if>
+    </where>
+  </select>
+</mapper>

@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.usoft.sschool_teacher.mapper.XnMessageCenterMapper" >
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.XnMessageCenter" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="messageContent" property="messagecontent" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="createUserType" property="createusertype" jdbcType="INTEGER" />
+    <result column="createUserId" property="createuserid" jdbcType="INTEGER" />
+    <result column="createUser" property="createuser" jdbcType="VARCHAR" />
+    <result column="isRead" property="isread" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <result column="userType" property="usertype" jdbcType="INTEGER" />
+    <result column="messageType" property="messagetype" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="typeId" property="typeid" jdbcType="INTEGER" />
+    <result column="attr1" property="attr1" jdbcType="VARCHAR" />
+    <result column="attr2" property="attr2" jdbcType="VARCHAR" />
+    <result column="attr3" property="attr3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, messageContent, createTime, createUserType, createUserId, createUser, isRead, 
+    userId, userType, messageType, type, typeId, attr1, attr2, attr3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.XnMessageCenterExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from xn_message_center
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from xn_message_center
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from xn_message_center
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.XnMessageCenterExample" >
+    delete from xn_message_center
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.XnMessageCenter" >
+    insert into xn_message_center (id, messageContent, createTime, 
+      createUserType, createUserId, createUser, 
+      isRead, userId, userType, 
+      messageType, type, typeId, 
+      attr1, attr2, attr3
+      )
+    values (#{id,jdbcType=INTEGER}, #{messagecontent,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{createusertype,jdbcType=INTEGER}, #{createuserid,jdbcType=INTEGER}, #{createuser,jdbcType=VARCHAR}, 
+      #{isread,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{usertype,jdbcType=INTEGER}, 
+      #{messagetype,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{typeid,jdbcType=INTEGER}, 
+      #{attr1,jdbcType=VARCHAR}, #{attr2,jdbcType=VARCHAR}, #{attr3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.XnMessageCenter" >
+    insert into xn_message_center
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="messagecontent != null" >
+        messageContent,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="createusertype != null" >
+        createUserType,
+      </if>
+      <if test="createuserid != null" >
+        createUserId,
+      </if>
+      <if test="createuser != null" >
+        createUser,
+      </if>
+      <if test="isread != null" >
+        isRead,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="usertype != null" >
+        userType,
+      </if>
+      <if test="messagetype != null" >
+        messageType,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="typeid != null" >
+        typeId,
+      </if>
+      <if test="attr1 != null" >
+        attr1,
+      </if>
+      <if test="attr2 != null" >
+        attr2,
+      </if>
+      <if test="attr3 != null" >
+        attr3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="messagecontent != null" >
+        #{messagecontent,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createusertype != null" >
+        #{createusertype,jdbcType=INTEGER},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="isread != null" >
+        #{isread,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="messagetype != null" >
+        #{messagetype,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="typeid != null" >
+        #{typeid,jdbcType=INTEGER},
+      </if>
+      <if test="attr1 != null" >
+        #{attr1,jdbcType=VARCHAR},
+      </if>
+      <if test="attr2 != null" >
+        #{attr2,jdbcType=VARCHAR},
+      </if>
+      <if test="attr3 != null" >
+        #{attr3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.XnMessageCenterExample" resultType="java.lang.Integer" >
+    select count(*) from xn_message_center
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update xn_message_center
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.messagecontent != null" >
+        messageContent = #{record.messagecontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createusertype != null" >
+        createUserType = #{record.createusertype,jdbcType=INTEGER},
+      </if>
+      <if test="record.createuserid != null" >
+        createUserId = #{record.createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createuser != null" >
+        createUser = #{record.createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isread != null" >
+        isRead = #{record.isread,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.usertype != null" >
+        userType = #{record.usertype,jdbcType=INTEGER},
+      </if>
+      <if test="record.messagetype != null" >
+        messageType = #{record.messagetype,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.typeid != null" >
+        typeId = #{record.typeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.attr1 != null" >
+        attr1 = #{record.attr1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attr2 != null" >
+        attr2 = #{record.attr2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attr3 != null" >
+        attr3 = #{record.attr3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update xn_message_center
+    set id = #{record.id,jdbcType=INTEGER},
+      messageContent = #{record.messagecontent,jdbcType=VARCHAR},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      createUserType = #{record.createusertype,jdbcType=INTEGER},
+      createUserId = #{record.createuserid,jdbcType=INTEGER},
+      createUser = #{record.createuser,jdbcType=VARCHAR},
+      isRead = #{record.isread,jdbcType=INTEGER},
+      userId = #{record.userid,jdbcType=INTEGER},
+      userType = #{record.usertype,jdbcType=INTEGER},
+      messageType = #{record.messagetype,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
+      typeId = #{record.typeid,jdbcType=INTEGER},
+      attr1 = #{record.attr1,jdbcType=VARCHAR},
+      attr2 = #{record.attr2,jdbcType=VARCHAR},
+      attr3 = #{record.attr3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.XnMessageCenter" >
+    update xn_message_center
+    <set >
+      <if test="messagecontent != null" >
+        messageContent = #{messagecontent,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createusertype != null" >
+        createUserType = #{createusertype,jdbcType=INTEGER},
+      </if>
+      <if test="createuserid != null" >
+        createUserId = #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="createuser != null" >
+        createUser = #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="isread != null" >
+        isRead = #{isread,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="usertype != null" >
+        userType = #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="messagetype != null" >
+        messageType = #{messagetype,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="typeid != null" >
+        typeId = #{typeid,jdbcType=INTEGER},
+      </if>
+      <if test="attr1 != null" >
+        attr1 = #{attr1,jdbcType=VARCHAR},
+      </if>
+      <if test="attr2 != null" >
+        attr2 = #{attr2,jdbcType=VARCHAR},
+      </if>
+      <if test="attr3 != null" >
+        attr3 = #{attr3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.XnMessageCenter" >
+    update xn_message_center
+    set messageContent = #{messagecontent,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      createUserType = #{createusertype,jdbcType=INTEGER},
+      createUserId = #{createuserid,jdbcType=INTEGER},
+      createUser = #{createuser,jdbcType=VARCHAR},
+      isRead = #{isread,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=INTEGER},
+      userType = #{usertype,jdbcType=INTEGER},
+      messageType = #{messagetype,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      typeId = #{typeid,jdbcType=INTEGER},
+      attr1 = #{attr1,jdbcType=VARCHAR},
+      attr2 = #{attr2,jdbcType=VARCHAR},
+      attr3 = #{attr3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="insertClassOver"  parameterType="java.util.List">
+    insert into xn_message_center
+    (id, messageContent, createTime,
+    createUserType, createUserId, createUser,
+    isRead, userId, userType,
+    messageType, type, typeId,
+    attr1, attr2, attr3
+    )
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.id,jdbcType=INTEGER}, #{item.messagecontent,jdbcType=VARCHAR}, #{item.createtime,jdbcType=TIMESTAMP},
+      #{item.createusertype,jdbcType=INTEGER}, #{item.createuserid,jdbcType=INTEGER}, #{item.createuser,jdbcType=VARCHAR},
+      #{item.isread,jdbcType=INTEGER}, #{item.userid,jdbcType=INTEGER}, #{item.usertype,jdbcType=INTEGER},
+      #{item.messagetype,jdbcType=INTEGER}, #{item.type,jdbcType=INTEGER}, #{item.typeid,jdbcType=INTEGER},
+      #{item.attr1,jdbcType=VARCHAR}, #{item.attr2,jdbcType=VARCHAR}, #{item.attr3,jdbcType=VARCHAR}
+      )
+    </foreach>
+  </insert>
+</mapper>

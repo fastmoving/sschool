@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.usoft.sschool_pub.mapper.XnVideoRuleMapper" >
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.XnVideoRule" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="userType" property="usertype" jdbcType="TINYINT" />
+    <result column="payRule" property="payrule" jdbcType="TINYINT" />
+    <result column="testDays" property="testdays" jdbcType="INTEGER" />
+    <result column="ownApply" property="ownapply" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="createUser" property="createuser" jdbcType="VARCHAR" />
+    <result column="UID" property="uid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, userType, payRule, testDays, ownApply, createTime, createUser, UID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.XnVideoRuleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from xn_video_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from xn_video_rule
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from xn_video_rule
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.XnVideoRuleExample" >
+    delete from xn_video_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.XnVideoRule" >
+    insert into xn_video_rule (ID, userType, payRule, 
+      testDays, ownApply, createTime, 
+      createUser, UID)
+    values (#{id,jdbcType=INTEGER}, #{usertype,jdbcType=TINYINT}, #{payrule,jdbcType=TINYINT}, 
+      #{testdays,jdbcType=INTEGER}, #{ownapply,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{createuser,jdbcType=VARCHAR}, #{uid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.XnVideoRule" >
+    insert into xn_video_rule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="usertype != null" >
+        userType,
+      </if>
+      <if test="payrule != null" >
+        payRule,
+      </if>
+      <if test="testdays != null" >
+        testDays,
+      </if>
+      <if test="ownapply != null" >
+        ownApply,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="createuser != null" >
+        createUser,
+      </if>
+      <if test="uid != null" >
+        UID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=TINYINT},
+      </if>
+      <if test="payrule != null" >
+        #{payrule,jdbcType=TINYINT},
+      </if>
+      <if test="testdays != null" >
+        #{testdays,jdbcType=INTEGER},
+      </if>
+      <if test="ownapply != null" >
+        #{ownapply,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.XnVideoRuleExample" resultType="java.lang.Integer" >
+    select count(*) from xn_video_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update xn_video_rule
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.usertype != null" >
+        userType = #{record.usertype,jdbcType=TINYINT},
+      </if>
+      <if test="record.payrule != null" >
+        payRule = #{record.payrule,jdbcType=TINYINT},
+      </if>
+      <if test="record.testdays != null" >
+        testDays = #{record.testdays,jdbcType=INTEGER},
+      </if>
+      <if test="record.ownapply != null" >
+        ownApply = #{record.ownapply,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createuser != null" >
+        createUser = #{record.createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uid != null" >
+        UID = #{record.uid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update xn_video_rule
+    set ID = #{record.id,jdbcType=INTEGER},
+      userType = #{record.usertype,jdbcType=TINYINT},
+      payRule = #{record.payrule,jdbcType=TINYINT},
+      testDays = #{record.testdays,jdbcType=INTEGER},
+      ownApply = #{record.ownapply,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      createUser = #{record.createuser,jdbcType=VARCHAR},
+      UID = #{record.uid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.XnVideoRule" >
+    update xn_video_rule
+    <set >
+      <if test="usertype != null" >
+        userType = #{usertype,jdbcType=TINYINT},
+      </if>
+      <if test="payrule != null" >
+        payRule = #{payrule,jdbcType=TINYINT},
+      </if>
+      <if test="testdays != null" >
+        testDays = #{testdays,jdbcType=INTEGER},
+      </if>
+      <if test="ownapply != null" >
+        ownApply = #{ownapply,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        createUser = #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        UID = #{uid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.XnVideoRule" >
+    update xn_video_rule
+    set userType = #{usertype,jdbcType=TINYINT},
+      payRule = #{payrule,jdbcType=TINYINT},
+      testDays = #{testdays,jdbcType=INTEGER},
+      ownApply = #{ownapply,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      createUser = #{createuser,jdbcType=VARCHAR},
+      UID = #{uid,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

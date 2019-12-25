@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.usoft.sschool_manage.mapper.base.HlVideomanagementMapper" >
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.HlVideomanagement" >
+    <id column="VideoID" property="videoid" jdbcType="INTEGER" />
+    <id column="DeptID" property="deptid" jdbcType="INTEGER" />
+    <result column="VideoCode" property="videocode" jdbcType="VARCHAR" />
+    <result column="VideoNameID" property="videonameid" jdbcType="INTEGER" />
+    <result column="VideoName" property="videoname" jdbcType="VARCHAR" />
+    <result column="ClassID" property="classid" jdbcType="INTEGER" />
+    <result column="IPAddress" property="ipaddress" jdbcType="VARCHAR" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+    <result column="ChannelID" property="channelid" jdbcType="VARCHAR" />
+    <result column="GXtime" property="gxtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    VideoID, DeptID, VideoCode, VideoNameID, VideoName, ClassID, IPAddress, Remark, ChannelID, 
+    GXtime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.HlVideomanagementExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hl_videomanagement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.HlVideomanagementKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from hl_videomanagement
+    where VideoID = #{videoid,jdbcType=INTEGER}
+      and DeptID = #{deptid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.usoft.smartschool.pojo.HlVideomanagementKey" >
+    delete from hl_videomanagement
+    where VideoID = #{videoid,jdbcType=INTEGER}
+      and DeptID = #{deptid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.HlVideomanagementExample" >
+    delete from hl_videomanagement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.HlVideomanagement" >
+    insert into hl_videomanagement (VideoID, DeptID, VideoCode, 
+      VideoNameID, VideoName, ClassID, 
+      IPAddress, Remark, ChannelID, 
+      GXtime)
+    values (#{videoid,jdbcType=INTEGER}, #{deptid,jdbcType=INTEGER}, #{videocode,jdbcType=VARCHAR}, 
+      #{videonameid,jdbcType=INTEGER}, #{videoname,jdbcType=VARCHAR}, #{classid,jdbcType=INTEGER}, 
+      #{ipaddress,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{channelid,jdbcType=VARCHAR}, 
+      #{gxtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.HlVideomanagement" >
+    insert into hl_videomanagement
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="videoid != null" >
+        VideoID,
+      </if>
+      <if test="deptid != null" >
+        DeptID,
+      </if>
+      <if test="videocode != null" >
+        VideoCode,
+      </if>
+      <if test="videonameid != null" >
+        VideoNameID,
+      </if>
+      <if test="videoname != null" >
+        VideoName,
+      </if>
+      <if test="classid != null" >
+        ClassID,
+      </if>
+      <if test="ipaddress != null" >
+        IPAddress,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="channelid != null" >
+        ChannelID,
+      </if>
+      <if test="gxtime != null" >
+        GXtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="videoid != null" >
+        #{videoid,jdbcType=INTEGER},
+      </if>
+      <if test="deptid != null" >
+        #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="videocode != null" >
+        #{videocode,jdbcType=VARCHAR},
+      </if>
+      <if test="videonameid != null" >
+        #{videonameid,jdbcType=INTEGER},
+      </if>
+      <if test="videoname != null" >
+        #{videoname,jdbcType=VARCHAR},
+      </if>
+      <if test="classid != null" >
+        #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="ipaddress != null" >
+        #{ipaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="channelid != null" >
+        #{channelid,jdbcType=VARCHAR},
+      </if>
+      <if test="gxtime != null" >
+        #{gxtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.HlVideomanagementExample" resultType="java.lang.Integer" >
+    select count(*) from hl_videomanagement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hl_videomanagement
+    <set >
+      <if test="record.videoid != null" >
+        VideoID = #{record.videoid,jdbcType=INTEGER},
+      </if>
+      <if test="record.deptid != null" >
+        DeptID = #{record.deptid,jdbcType=INTEGER},
+      </if>
+      <if test="record.videocode != null" >
+        VideoCode = #{record.videocode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videonameid != null" >
+        VideoNameID = #{record.videonameid,jdbcType=INTEGER},
+      </if>
+      <if test="record.videoname != null" >
+        VideoName = #{record.videoname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classid != null" >
+        ClassID = #{record.classid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ipaddress != null" >
+        IPAddress = #{record.ipaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelid != null" >
+        ChannelID = #{record.channelid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gxtime != null" >
+        GXtime = #{record.gxtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hl_videomanagement
+    set VideoID = #{record.videoid,jdbcType=INTEGER},
+      DeptID = #{record.deptid,jdbcType=INTEGER},
+      VideoCode = #{record.videocode,jdbcType=VARCHAR},
+      VideoNameID = #{record.videonameid,jdbcType=INTEGER},
+      VideoName = #{record.videoname,jdbcType=VARCHAR},
+      ClassID = #{record.classid,jdbcType=INTEGER},
+      IPAddress = #{record.ipaddress,jdbcType=VARCHAR},
+      Remark = #{record.remark,jdbcType=VARCHAR},
+      ChannelID = #{record.channelid,jdbcType=VARCHAR},
+      GXtime = #{record.gxtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.HlVideomanagement" >
+    update hl_videomanagement
+    <set >
+      <if test="videocode != null" >
+        VideoCode = #{videocode,jdbcType=VARCHAR},
+      </if>
+      <if test="videonameid != null" >
+        VideoNameID = #{videonameid,jdbcType=INTEGER},
+      </if>
+      <if test="videoname != null" >
+        VideoName = #{videoname,jdbcType=VARCHAR},
+      </if>
+      <if test="classid != null" >
+        ClassID = #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="ipaddress != null" >
+        IPAddress = #{ipaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="channelid != null" >
+        ChannelID = #{channelid,jdbcType=VARCHAR},
+      </if>
+      <if test="gxtime != null" >
+        GXtime = #{gxtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where VideoID = #{videoid,jdbcType=INTEGER}
+      and DeptID = #{deptid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.HlVideomanagement" >
+    update hl_videomanagement
+    set VideoCode = #{videocode,jdbcType=VARCHAR},
+      VideoNameID = #{videonameid,jdbcType=INTEGER},
+      VideoName = #{videoname,jdbcType=VARCHAR},
+      ClassID = #{classid,jdbcType=INTEGER},
+      IPAddress = #{ipaddress,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=VARCHAR},
+      ChannelID = #{channelid,jdbcType=VARCHAR},
+      GXtime = #{gxtime,jdbcType=TIMESTAMP}
+    where VideoID = #{videoid,jdbcType=INTEGER}
+      and DeptID = #{deptid,jdbcType=INTEGER}
+  </update>
+</mapper>

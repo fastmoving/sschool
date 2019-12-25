@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.usoft.sschool_manage.mapper.base.FloorInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.FloorInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="flr_No" property="flrNo" jdbcType="VARCHAR" />
+    <result column="flr_name" property="flrName" jdbcType="VARCHAR" />
+    <result column="flr_belongbuild" property="flrBelongbuild" jdbcType="INTEGER" />
+    <result column="flr_remark" property="flrRemark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, flr_No, flr_name, flr_belongbuild, flr_remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.FloorInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from floor_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from floor_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from floor_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.FloorInfoExample" >
+    delete from floor_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.FloorInfo" >
+    insert into floor_info (id, flr_No, flr_name, 
+      flr_belongbuild, flr_remark)
+    values (#{id,jdbcType=INTEGER}, #{flrNo,jdbcType=VARCHAR}, #{flrName,jdbcType=VARCHAR}, 
+      #{flrBelongbuild,jdbcType=INTEGER}, #{flrRemark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.FloorInfo" >
+    insert into floor_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="flrNo != null" >
+        flr_No,
+      </if>
+      <if test="flrName != null" >
+        flr_name,
+      </if>
+      <if test="flrBelongbuild != null" >
+        flr_belongbuild,
+      </if>
+      <if test="flrRemark != null" >
+        flr_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="flrNo != null" >
+        #{flrNo,jdbcType=VARCHAR},
+      </if>
+      <if test="flrName != null" >
+        #{flrName,jdbcType=VARCHAR},
+      </if>
+      <if test="flrBelongbuild != null" >
+        #{flrBelongbuild,jdbcType=INTEGER},
+      </if>
+      <if test="flrRemark != null" >
+        #{flrRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.FloorInfoExample" resultType="java.lang.Integer" >
+    select count(*) from floor_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update floor_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.flrNo != null" >
+        flr_No = #{record.flrNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flrName != null" >
+        flr_name = #{record.flrName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flrBelongbuild != null" >
+        flr_belongbuild = #{record.flrBelongbuild,jdbcType=INTEGER},
+      </if>
+      <if test="record.flrRemark != null" >
+        flr_remark = #{record.flrRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update floor_info
+    set id = #{record.id,jdbcType=INTEGER},
+      flr_No = #{record.flrNo,jdbcType=VARCHAR},
+      flr_name = #{record.flrName,jdbcType=VARCHAR},
+      flr_belongbuild = #{record.flrBelongbuild,jdbcType=INTEGER},
+      flr_remark = #{record.flrRemark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.FloorInfo" >
+    update floor_info
+    <set >
+      <if test="flrNo != null" >
+        flr_No = #{flrNo,jdbcType=VARCHAR},
+      </if>
+      <if test="flrName != null" >
+        flr_name = #{flrName,jdbcType=VARCHAR},
+      </if>
+      <if test="flrBelongbuild != null" >
+        flr_belongbuild = #{flrBelongbuild,jdbcType=INTEGER},
+      </if>
+      <if test="flrRemark != null" >
+        flr_remark = #{flrRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.FloorInfo" >
+    update floor_info
+    set flr_No = #{flrNo,jdbcType=VARCHAR},
+      flr_name = #{flrName,jdbcType=VARCHAR},
+      flr_belongbuild = #{flrBelongbuild,jdbcType=INTEGER},
+      flr_remark = #{flrRemark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

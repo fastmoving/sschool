@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.usoft.sschool_manage.mapper.base.XnGoodsOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.XnGoodsOrder" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="UID" property="uid" jdbcType="INTEGER" />
+    <result column="goodsId" property="goodsid" jdbcType="INTEGER" />
+    <result column="goodsName" property="goodsname" jdbcType="VARCHAR" />
+    <result column="addressId" property="addressid" jdbcType="INTEGER" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="orderNumber" property="ordernumber" jdbcType="VARCHAR" />
+    <result column="buyTime" property="buytime" jdbcType="TIMESTAMP" />
+    <result column="orderState" property="orderstate" jdbcType="TINYINT" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="totalPrice" property="totalprice" jdbcType="DECIMAL" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="attr1" property="attr1" jdbcType="VARCHAR" />
+    <result column="attr2" property="attr2" jdbcType="VARCHAR" />
+    <result column="attr3" property="attr3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, userName, UID, goodsId, goodsName, addressId, number, orderNumber, buyTime, orderState, 
+    price, totalPrice, type, phone, createTime, attr1, attr2, attr3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.XnGoodsOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from xn_goods_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from xn_goods_order
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from xn_goods_order
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.XnGoodsOrderExample" >
+    delete from xn_goods_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.XnGoodsOrder" >
+    insert into xn_goods_order (ID, userName, UID, 
+      goodsId, goodsName, addressId, 
+      number, orderNumber, buyTime, 
+      orderState, price, totalPrice, 
+      type, phone, createTime, 
+      attr1, attr2, attr3
+      )
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{uid,jdbcType=INTEGER}, 
+      #{goodsid,jdbcType=INTEGER}, #{goodsname,jdbcType=VARCHAR}, #{addressid,jdbcType=INTEGER}, 
+      #{number,jdbcType=INTEGER}, #{ordernumber,jdbcType=VARCHAR}, #{buytime,jdbcType=TIMESTAMP}, 
+      #{orderstate,jdbcType=TINYINT}, #{price,jdbcType=DECIMAL}, #{totalprice,jdbcType=DECIMAL}, 
+      #{type,jdbcType=TINYINT}, #{phone,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{attr1,jdbcType=VARCHAR}, #{attr2,jdbcType=VARCHAR}, #{attr3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.XnGoodsOrder" >
+    insert into xn_goods_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="uid != null" >
+        UID,
+      </if>
+      <if test="goodsid != null" >
+        goodsId,
+      </if>
+      <if test="goodsname != null" >
+        goodsName,
+      </if>
+      <if test="addressid != null" >
+        addressId,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="ordernumber != null" >
+        orderNumber,
+      </if>
+      <if test="buytime != null" >
+        buyTime,
+      </if>
+      <if test="orderstate != null" >
+        orderState,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="totalprice != null" >
+        totalPrice,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="attr1 != null" >
+        attr1,
+      </if>
+      <if test="attr2 != null" >
+        attr2,
+      </if>
+      <if test="attr3 != null" >
+        attr3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsid != null" >
+        #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsname != null" >
+        #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="addressid != null" >
+        #{addressid,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="ordernumber != null" >
+        #{ordernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="buytime != null" >
+        #{buytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderstate != null" >
+        #{orderstate,jdbcType=TINYINT},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="totalprice != null" >
+        #{totalprice,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attr1 != null" >
+        #{attr1,jdbcType=VARCHAR},
+      </if>
+      <if test="attr2 != null" >
+        #{attr2,jdbcType=VARCHAR},
+      </if>
+      <if test="attr3 != null" >
+        #{attr3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.XnGoodsOrderExample" resultType="java.lang.Integer" >
+    select count(*) from xn_goods_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update xn_goods_order
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null" >
+        userName = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uid != null" >
+        UID = #{record.uid,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsid != null" >
+        goodsId = #{record.goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsname != null" >
+        goodsName = #{record.goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressid != null" >
+        addressId = #{record.addressid,jdbcType=INTEGER},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.ordernumber != null" >
+        orderNumber = #{record.ordernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buytime != null" >
+        buyTime = #{record.buytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderstate != null" >
+        orderState = #{record.orderstate,jdbcType=TINYINT},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalprice != null" >
+        totalPrice = #{record.totalprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=TINYINT},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.attr1 != null" >
+        attr1 = #{record.attr1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attr2 != null" >
+        attr2 = #{record.attr2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attr3 != null" >
+        attr3 = #{record.attr3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update xn_goods_order
+    set ID = #{record.id,jdbcType=INTEGER},
+      userName = #{record.username,jdbcType=VARCHAR},
+      UID = #{record.uid,jdbcType=INTEGER},
+      goodsId = #{record.goodsid,jdbcType=INTEGER},
+      goodsName = #{record.goodsname,jdbcType=VARCHAR},
+      addressId = #{record.addressid,jdbcType=INTEGER},
+      number = #{record.number,jdbcType=INTEGER},
+      orderNumber = #{record.ordernumber,jdbcType=VARCHAR},
+      buyTime = #{record.buytime,jdbcType=TIMESTAMP},
+      orderState = #{record.orderstate,jdbcType=TINYINT},
+      price = #{record.price,jdbcType=DECIMAL},
+      totalPrice = #{record.totalprice,jdbcType=DECIMAL},
+      type = #{record.type,jdbcType=TINYINT},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      attr1 = #{record.attr1,jdbcType=VARCHAR},
+      attr2 = #{record.attr2,jdbcType=VARCHAR},
+      attr3 = #{record.attr3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.XnGoodsOrder" >
+    update xn_goods_order
+    <set >
+      <if test="username != null" >
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        UID = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsid != null" >
+        goodsId = #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsname != null" >
+        goodsName = #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="addressid != null" >
+        addressId = #{addressid,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="ordernumber != null" >
+        orderNumber = #{ordernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="buytime != null" >
+        buyTime = #{buytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderstate != null" >
+        orderState = #{orderstate,jdbcType=TINYINT},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="totalprice != null" >
+        totalPrice = #{totalprice,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attr1 != null" >
+        attr1 = #{attr1,jdbcType=VARCHAR},
+      </if>
+      <if test="attr2 != null" >
+        attr2 = #{attr2,jdbcType=VARCHAR},
+      </if>
+      <if test="attr3 != null" >
+        attr3 = #{attr3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.XnGoodsOrder" >
+    update xn_goods_order
+    set userName = #{username,jdbcType=VARCHAR},
+      UID = #{uid,jdbcType=INTEGER},
+      goodsId = #{goodsid,jdbcType=INTEGER},
+      goodsName = #{goodsname,jdbcType=VARCHAR},
+      addressId = #{addressid,jdbcType=INTEGER},
+      number = #{number,jdbcType=INTEGER},
+      orderNumber = #{ordernumber,jdbcType=VARCHAR},
+      buyTime = #{buytime,jdbcType=TIMESTAMP},
+      orderState = #{orderstate,jdbcType=TINYINT},
+      price = #{price,jdbcType=DECIMAL},
+      totalPrice = #{totalprice,jdbcType=DECIMAL},
+      type = #{type,jdbcType=TINYINT},
+      phone = #{phone,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      attr1 = #{attr1,jdbcType=VARCHAR},
+      attr2 = #{attr2,jdbcType=VARCHAR},
+      attr3 = #{attr3,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+
+
+
+  <!--*********************************************************personal**************************************************************-->
+
+
+  <!--商品订单列表-->
+  <select id="listGoodsOrder" resultType="map">
+    select id, username, DATE_FORMAT(createTime, '%Y-%m-%d %H:%i:%s') buyTime, orderState, totalPrice, phone
+    from xn_goods_order
+    where
+    type = #{type} and attr2 = #{sid}
+      <if test="userName!=null and userName!=''">
+        and username like concat('%',#{userName},'%')
+      </if>
+      <if test="orderState!=null ">
+        and orderState = #{orderState}
+      </if>
+      <if test="buyTimeBegin!=null and buyTimeBegin!=''">
+        and   DATE_FORMAT(createTime,'%Y-%m-%d') &gt;= #{buyTimeBegin}
+      </if>
+      <if test="buyTimeEnd!=null and buyTimeEnd!=''">
+        and   DATE_FORMAT(createTime,'%Y-%m-%d') &lt;= #{buyTimeEnd}
+      </if>
+      <if test="priceBegin!=null and priceBegin !='' ">
+        and totalPrice &gt;= CAST(#{priceBegin} AS DECIMAL(20,2))
+      </if>
+      <if test="priceEnd!=null and priceEnd !='' ">
+        and totalPrice &lt;=  CAST(#{priceEnd} AS DECIMAL(20,2))
+      </if>
+      <if test="phone!=null and phone!=''">
+        and phone like concat('%',#{phone},'%')
+      </if>
+      <if test="orderNumber!=null and orderNumber!=''">
+        and orderNumber like concat('%',#{orderNumber},'%')
+      </if>
+  </select>
+
+
+  <!--商品订单统计-->
+  <select id="orderTypeCollection"  resultType="map">
+  SELECT
+	(
+		CASE orderState
+		WHEN 1 THEN
+			'待支付'
+		WHEN 2 THEN
+			'已支付'
+		WHEN 3 THEN
+			'已取消'
+		WHEN 4 THEN
+			'已删除'
+		WHEN 9 THEN
+			'已成功'
+		ELSE
+			'未知'
+		END
+	) state,
+      count(*) total
+  FROM
+      xn_goods_order
+  WHERE
+    `type` =#{type}
+    <if test="beginTime!= null and beginTime !=''">
+      and DATE_FORMAT(buyTime,'%Y-%m-%d')  >= #{beginTime}
+    </if>
+    <if test="endTime!=null and endTime!=''">
+      and DATE_FORMAT(buyTime,'%Y-%m-%d')  &lt;= #{endTime}
+    </if>
+  GROUP BY
+      orderState
+  </select>
+
+  <!--年统计-->
+  <select id="yearDoneCollection" parameterType="string" resultType="map">
+    SELECT
+      DATE_FORMAT(buyTime,'%Y') buyTimes,
+      count(*) number
+    FROM
+        xn_goods_order a
+    WHERE
+        a.orderState in (2,9)
+        <if test="beginYear !=null and beginYear!=''">
+          and DATE_FORMAT(buyTime,'%Y') >= #{beginYear}
+        </if>
+        <if test="endYear!=null and endYear!=''">
+          and DATE_FORMAT(buyTime,'%Y') &lt;= #{endYear}
+        </if>
+    GROUP BY
+        buyTimes
+    ORDER BY
+        buyTimes ASC;
+
+  </select>
+  <!--月统计-->
+  <select id="monthDoneCollection" parameterType="string" resultType="map">
+    SELECT
+      DATE_FORMAT(buyTime, '%m') buyTimes,
+      count(*) number
+    FROM
+        xn_goods_order a
+    WHERE
+        a.orderState in (2,9)
+        <if test="year !=null and year!=''">
+          and DATE_FORMAT(buyTime,'%Y') = #{year}
+        </if>
+    GROUP BY
+        buyTimes
+    ORDER BY
+        buyTimes ASC;
+
+  </select>
+  <!--日统计-->
+  <select id="dayDoneCollection" parameterType="string" resultType="map">
+    SELECT
+      DATE_FORMAT(buyTime, '%d') buyTimes,
+      count(*) number
+    FROM
+        xn_goods_order a
+    WHERE
+        a.orderState in (2,9)
+        <if test="month !=null and month!=''">
+          and DATE_FORMAT(buyTime,'%Y-%m') = #{month}
+        </if>
+
+    GROUP BY
+        buyTimes
+    ORDER BY
+        buyTimes ASC;
+
+  </select>
+  <!--时统计-->
+  <select id="hourDoneCollection" parameterType="string" resultType="map">
+    SELECT
+    DATE_FORMAT(buyTime, '%H') buyTimes,
+    count(*) number
+    FROM
+    xn_goods_order a
+    WHERE
+    a.orderState in (2,9)
+    and DATE_FORMAT(buyTime,'%Y-%m-%d') =#{day}
+
+    GROUP BY
+    buyTimes
+    ORDER BY
+    buyTimes ASC;
+
+  </select>
+
+  <!--订单总数 -->
+  <select id="totalOrderAndAveragePrice" parameterType="string" resultType="map">
+    SELECT count(*) num,sum(price) price
+    FROM
+    xn_goods_order
+    WHERE
+    orderState in (2,9)
+    <if test="beginTime!= null and beginTime !=''">
+      and DATE_FORMAT(buyTime,'%Y-%m-%d')  >= #{beginTime}
+    </if>
+    <if test="endTime!=null and endTime!=''">
+      and DATE_FORMAT(buyTime,'%Y-%m-%d')  &lt;= #{endTime}
+    </if>
+
+  </select>
+
+</mapper>

@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.usoft.sschool_pub.mapper.HlSchoolsevipMapper" >
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.HlSchoolsevip" >
+    <id column="SID" property="sid" jdbcType="INTEGER" />
+    <result column="LanSevIP" property="lansevip" jdbcType="VARCHAR" />
+    <result column="WanSevIP" property="wansevip" jdbcType="VARCHAR" />
+    <result column="WanSevIPR" property="wansevipr" jdbcType="VARCHAR" />
+    <result column="School" property="school" jdbcType="VARCHAR" />
+    <result column="LanSevPort" property="lansevport" jdbcType="VARCHAR" />
+    <result column="WanSevPort" property="wansevport" jdbcType="VARCHAR" />
+    <result column="InternetPort" property="internetport" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SID, LanSevIP, WanSevIP, WanSevIPR, School, LanSevPort, WanSevPort, InternetPort
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.HlSchoolsevipExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hl_schoolsevip
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from hl_schoolsevip
+    where SID = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from hl_schoolsevip
+    where SID = #{sid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.HlSchoolsevipExample" >
+    delete from hl_schoolsevip
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.HlSchoolsevip" >
+    insert into hl_schoolsevip (SID, LanSevIP, WanSevIP, 
+      WanSevIPR, School, LanSevPort, 
+      WanSevPort, InternetPort)
+    values (#{sid,jdbcType=INTEGER}, #{lansevip,jdbcType=VARCHAR}, #{wansevip,jdbcType=VARCHAR}, 
+      #{wansevipr,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{lansevport,jdbcType=VARCHAR}, 
+      #{wansevport,jdbcType=VARCHAR}, #{internetport,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.HlSchoolsevip" >
+    insert into hl_schoolsevip
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        SID,
+      </if>
+      <if test="lansevip != null" >
+        LanSevIP,
+      </if>
+      <if test="wansevip != null" >
+        WanSevIP,
+      </if>
+      <if test="wansevipr != null" >
+        WanSevIPR,
+      </if>
+      <if test="school != null" >
+        School,
+      </if>
+      <if test="lansevport != null" >
+        LanSevPort,
+      </if>
+      <if test="wansevport != null" >
+        WanSevPort,
+      </if>
+      <if test="internetport != null" >
+        InternetPort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="lansevip != null" >
+        #{lansevip,jdbcType=VARCHAR},
+      </if>
+      <if test="wansevip != null" >
+        #{wansevip,jdbcType=VARCHAR},
+      </if>
+      <if test="wansevipr != null" >
+        #{wansevipr,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="lansevport != null" >
+        #{lansevport,jdbcType=VARCHAR},
+      </if>
+      <if test="wansevport != null" >
+        #{wansevport,jdbcType=VARCHAR},
+      </if>
+      <if test="internetport != null" >
+        #{internetport,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.HlSchoolsevipExample" resultType="java.lang.Integer" >
+    select count(*) from hl_schoolsevip
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hl_schoolsevip
+    <set >
+      <if test="record.sid != null" >
+        SID = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.lansevip != null" >
+        LanSevIP = #{record.lansevip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wansevip != null" >
+        WanSevIP = #{record.wansevip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wansevipr != null" >
+        WanSevIPR = #{record.wansevipr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.school != null" >
+        School = #{record.school,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lansevport != null" >
+        LanSevPort = #{record.lansevport,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wansevport != null" >
+        WanSevPort = #{record.wansevport,jdbcType=VARCHAR},
+      </if>
+      <if test="record.internetport != null" >
+        InternetPort = #{record.internetport,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hl_schoolsevip
+    set SID = #{record.sid,jdbcType=INTEGER},
+      LanSevIP = #{record.lansevip,jdbcType=VARCHAR},
+      WanSevIP = #{record.wansevip,jdbcType=VARCHAR},
+      WanSevIPR = #{record.wansevipr,jdbcType=VARCHAR},
+      School = #{record.school,jdbcType=VARCHAR},
+      LanSevPort = #{record.lansevport,jdbcType=VARCHAR},
+      WanSevPort = #{record.wansevport,jdbcType=VARCHAR},
+      InternetPort = #{record.internetport,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.HlSchoolsevip" >
+    update hl_schoolsevip
+    <set >
+      <if test="lansevip != null" >
+        LanSevIP = #{lansevip,jdbcType=VARCHAR},
+      </if>
+      <if test="wansevip != null" >
+        WanSevIP = #{wansevip,jdbcType=VARCHAR},
+      </if>
+      <if test="wansevipr != null" >
+        WanSevIPR = #{wansevipr,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        School = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="lansevport != null" >
+        LanSevPort = #{lansevport,jdbcType=VARCHAR},
+      </if>
+      <if test="wansevport != null" >
+        WanSevPort = #{wansevport,jdbcType=VARCHAR},
+      </if>
+      <if test="internetport != null" >
+        InternetPort = #{internetport,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SID = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.HlSchoolsevip" >
+    update hl_schoolsevip
+    set LanSevIP = #{lansevip,jdbcType=VARCHAR},
+      WanSevIP = #{wansevip,jdbcType=VARCHAR},
+      WanSevIPR = #{wansevipr,jdbcType=VARCHAR},
+      School = #{school,jdbcType=VARCHAR},
+      LanSevPort = #{lansevport,jdbcType=VARCHAR},
+      WanSevPort = #{wansevport,jdbcType=VARCHAR},
+      InternetPort = #{internetport,jdbcType=VARCHAR}
+    where SID = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.usoft.sschool_pub.mapper.HlVideoinfonewMapper" >
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.HlVideoinfonew" >
+    <id column="newID" property="newid" jdbcType="INTEGER" />
+    <id column="SchoolId" property="schoolid" jdbcType="INTEGER" />
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="prg_name" property="prgName" jdbcType="VARCHAR" />
+    <result column="prg_datetime" property="prgDatetime" jdbcType="VARCHAR" />
+    <result column="prg_starttime" property="prgStarttime" jdbcType="VARCHAR" />
+    <result column="prg_endtime" property="prgEndtime" jdbcType="VARCHAR" />
+    <result column="prg_classroom_id" property="prgClassroomId" jdbcType="INTEGER" />
+    <result column="flr_name" property="flrName" jdbcType="VARCHAR" />
+    <result column="build_name" property="buildName" jdbcType="VARCHAR" />
+    <result column="clarm_name" property="clarmName" jdbcType="VARCHAR" />
+    <result column="week" property="week" jdbcType="VARCHAR" />
+    <result column="Cycle" property="cycle" jdbcType="VARCHAR" />
+    <result column="ClassTeacher" property="classteacher" jdbcType="VARCHAR" />
+    <result column="Lesson" property="lesson" jdbcType="INTEGER" />
+    <result column="DisciplineNmae" property="disciplinenmae" jdbcType="VARCHAR" />
+    <result column="YearName" property="yearname" jdbcType="VARCHAR" />
+    <result column="IsNowYear" property="isnowyear" jdbcType="INTEGER" />
+    <result column="TName" property="tname" jdbcType="VARCHAR" />
+    <result column="prg_status" property="prgStatus" jdbcType="INTEGER" />
+    <result column="prg_hot" property="prgHot" jdbcType="INTEGER" />
+    <result column="VideoNameID" property="videonameid" jdbcType="INTEGER" />
+    <result column="VideoName" property="videoname" jdbcType="VARCHAR" />
+    <result column="ChannelID" property="channelid" jdbcType="VARCHAR" />
+    <result column="file_path" property="filePath" jdbcType="VARCHAR" />
+    <result column="file_absolute_path" property="fileAbsolutePath" jdbcType="VARCHAR" />
+    <result column="file_thumbnails_path" property="fileThumbnailsPath" jdbcType="VARCHAR" />
+    <result column="file_thumbnail_absolute_path" property="fileThumbnailAbsolutePath" jdbcType="VARCHAR" />
+    <result column="_MASK_FROM_V2" property="maskFromV2" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    newID, SchoolId, id, prg_name, prg_datetime, prg_starttime, prg_endtime, prg_classroom_id, 
+    flr_name, build_name, clarm_name, week, Cycle, ClassTeacher, Lesson, DisciplineNmae, 
+    YearName, IsNowYear, TName, prg_status, prg_hot, VideoNameID, VideoName, ChannelID, 
+    file_path, file_absolute_path, file_thumbnails_path, file_thumbnail_absolute_path, 
+    _MASK_FROM_V2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.HlVideoinfonewExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hl_videoinfonew
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.HlVideoinfonewKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from hl_videoinfonew
+    where newID = #{newid,jdbcType=INTEGER}
+      and SchoolId = #{schoolid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.usoft.smartschool.pojo.HlVideoinfonewKey" >
+    delete from hl_videoinfonew
+    where newID = #{newid,jdbcType=INTEGER}
+      and SchoolId = #{schoolid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.HlVideoinfonewExample" >
+    delete from hl_videoinfonew
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.HlVideoinfonew" >
+    insert into hl_videoinfonew (newID, SchoolId, id, 
+      prg_name, prg_datetime, prg_starttime, 
+      prg_endtime, prg_classroom_id, flr_name, 
+      build_name, clarm_name, week, 
+      Cycle, ClassTeacher, Lesson, 
+      DisciplineNmae, YearName, IsNowYear, 
+      TName, prg_status, prg_hot, 
+      VideoNameID, VideoName, ChannelID, 
+      file_path, file_absolute_path, file_thumbnails_path, 
+      file_thumbnail_absolute_path, _MASK_FROM_V2
+      )
+    values (#{newid,jdbcType=INTEGER}, #{schoolid,jdbcType=INTEGER}, #{id,jdbcType=INTEGER}, 
+      #{prgName,jdbcType=VARCHAR}, #{prgDatetime,jdbcType=VARCHAR}, #{prgStarttime,jdbcType=VARCHAR}, 
+      #{prgEndtime,jdbcType=VARCHAR}, #{prgClassroomId,jdbcType=INTEGER}, #{flrName,jdbcType=VARCHAR}, 
+      #{buildName,jdbcType=VARCHAR}, #{clarmName,jdbcType=VARCHAR}, #{week,jdbcType=VARCHAR}, 
+      #{cycle,jdbcType=VARCHAR}, #{classteacher,jdbcType=VARCHAR}, #{lesson,jdbcType=INTEGER}, 
+      #{disciplinenmae,jdbcType=VARCHAR}, #{yearname,jdbcType=VARCHAR}, #{isnowyear,jdbcType=INTEGER}, 
+      #{tname,jdbcType=VARCHAR}, #{prgStatus,jdbcType=INTEGER}, #{prgHot,jdbcType=INTEGER}, 
+      #{videonameid,jdbcType=INTEGER}, #{videoname,jdbcType=VARCHAR}, #{channelid,jdbcType=VARCHAR}, 
+      #{filePath,jdbcType=VARCHAR}, #{fileAbsolutePath,jdbcType=VARCHAR}, #{fileThumbnailsPath,jdbcType=VARCHAR}, 
+      #{fileThumbnailAbsolutePath,jdbcType=VARCHAR}, #{maskFromV2,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.HlVideoinfonew" >
+    insert into hl_videoinfonew
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="newid != null" >
+        newID,
+      </if>
+      <if test="schoolid != null" >
+        SchoolId,
+      </if>
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="prgName != null" >
+        prg_name,
+      </if>
+      <if test="prgDatetime != null" >
+        prg_datetime,
+      </if>
+      <if test="prgStarttime != null" >
+        prg_starttime,
+      </if>
+      <if test="prgEndtime != null" >
+        prg_endtime,
+      </if>
+      <if test="prgClassroomId != null" >
+        prg_classroom_id,
+      </if>
+      <if test="flrName != null" >
+        flr_name,
+      </if>
+      <if test="buildName != null" >
+        build_name,
+      </if>
+      <if test="clarmName != null" >
+        clarm_name,
+      </if>
+      <if test="week != null" >
+        week,
+      </if>
+      <if test="cycle != null" >
+        Cycle,
+      </if>
+      <if test="classteacher != null" >
+        ClassTeacher,
+      </if>
+      <if test="lesson != null" >
+        Lesson,
+      </if>
+      <if test="disciplinenmae != null" >
+        DisciplineNmae,
+      </if>
+      <if test="yearname != null" >
+        YearName,
+      </if>
+      <if test="isnowyear != null" >
+        IsNowYear,
+      </if>
+      <if test="tname != null" >
+        TName,
+      </if>
+      <if test="prgStatus != null" >
+        prg_status,
+      </if>
+      <if test="prgHot != null" >
+        prg_hot,
+      </if>
+      <if test="videonameid != null" >
+        VideoNameID,
+      </if>
+      <if test="videoname != null" >
+        VideoName,
+      </if>
+      <if test="channelid != null" >
+        ChannelID,
+      </if>
+      <if test="filePath != null" >
+        file_path,
+      </if>
+      <if test="fileAbsolutePath != null" >
+        file_absolute_path,
+      </if>
+      <if test="fileThumbnailsPath != null" >
+        file_thumbnails_path,
+      </if>
+      <if test="fileThumbnailAbsolutePath != null" >
+        file_thumbnail_absolute_path,
+      </if>
+      <if test="maskFromV2 != null" >
+        _MASK_FROM_V2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="newid != null" >
+        #{newid,jdbcType=INTEGER},
+      </if>
+      <if test="schoolid != null" >
+        #{schoolid,jdbcType=INTEGER},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="prgName != null" >
+        #{prgName,jdbcType=VARCHAR},
+      </if>
+      <if test="prgDatetime != null" >
+        #{prgDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="prgStarttime != null" >
+        #{prgStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="prgEndtime != null" >
+        #{prgEndtime,jdbcType=VARCHAR},
+      </if>
+      <if test="prgClassroomId != null" >
+        #{prgClassroomId,jdbcType=INTEGER},
+      </if>
+      <if test="flrName != null" >
+        #{flrName,jdbcType=VARCHAR},
+      </if>
+      <if test="buildName != null" >
+        #{buildName,jdbcType=VARCHAR},
+      </if>
+      <if test="clarmName != null" >
+        #{clarmName,jdbcType=VARCHAR},
+      </if>
+      <if test="week != null" >
+        #{week,jdbcType=VARCHAR},
+      </if>
+      <if test="cycle != null" >
+        #{cycle,jdbcType=VARCHAR},
+      </if>
+      <if test="classteacher != null" >
+        #{classteacher,jdbcType=VARCHAR},
+      </if>
+      <if test="lesson != null" >
+        #{lesson,jdbcType=INTEGER},
+      </if>
+      <if test="disciplinenmae != null" >
+        #{disciplinenmae,jdbcType=VARCHAR},
+      </if>
+      <if test="yearname != null" >
+        #{yearname,jdbcType=VARCHAR},
+      </if>
+      <if test="isnowyear != null" >
+        #{isnowyear,jdbcType=INTEGER},
+      </if>
+      <if test="tname != null" >
+        #{tname,jdbcType=VARCHAR},
+      </if>
+      <if test="prgStatus != null" >
+        #{prgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="prgHot != null" >
+        #{prgHot,jdbcType=INTEGER},
+      </if>
+      <if test="videonameid != null" >
+        #{videonameid,jdbcType=INTEGER},
+      </if>
+      <if test="videoname != null" >
+        #{videoname,jdbcType=VARCHAR},
+      </if>
+      <if test="channelid != null" >
+        #{channelid,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileAbsolutePath != null" >
+        #{fileAbsolutePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileThumbnailsPath != null" >
+        #{fileThumbnailsPath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileThumbnailAbsolutePath != null" >
+        #{fileThumbnailAbsolutePath,jdbcType=VARCHAR},
+      </if>
+      <if test="maskFromV2 != null" >
+        #{maskFromV2,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.HlVideoinfonewExample" resultType="java.lang.Integer" >
+    select count(*) from hl_videoinfonew
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hl_videoinfonew
+    <set >
+      <if test="record.newid != null" >
+        newID = #{record.newid,jdbcType=INTEGER},
+      </if>
+      <if test="record.schoolid != null" >
+        SchoolId = #{record.schoolid,jdbcType=INTEGER},
+      </if>
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.prgName != null" >
+        prg_name = #{record.prgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prgDatetime != null" >
+        prg_datetime = #{record.prgDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prgStarttime != null" >
+        prg_starttime = #{record.prgStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prgEndtime != null" >
+        prg_endtime = #{record.prgEndtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prgClassroomId != null" >
+        prg_classroom_id = #{record.prgClassroomId,jdbcType=INTEGER},
+      </if>
+      <if test="record.flrName != null" >
+        flr_name = #{record.flrName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buildName != null" >
+        build_name = #{record.buildName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clarmName != null" >
+        clarm_name = #{record.clarmName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.week != null" >
+        week = #{record.week,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cycle != null" >
+        Cycle = #{record.cycle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classteacher != null" >
+        ClassTeacher = #{record.classteacher,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lesson != null" >
+        Lesson = #{record.lesson,jdbcType=INTEGER},
+      </if>
+      <if test="record.disciplinenmae != null" >
+        DisciplineNmae = #{record.disciplinenmae,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yearname != null" >
+        YearName = #{record.yearname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isnowyear != null" >
+        IsNowYear = #{record.isnowyear,jdbcType=INTEGER},
+      </if>
+      <if test="record.tname != null" >
+        TName = #{record.tname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prgStatus != null" >
+        prg_status = #{record.prgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.prgHot != null" >
+        prg_hot = #{record.prgHot,jdbcType=INTEGER},
+      </if>
+      <if test="record.videonameid != null" >
+        VideoNameID = #{record.videonameid,jdbcType=INTEGER},
+      </if>
+      <if test="record.videoname != null" >
+        VideoName = #{record.videoname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channelid != null" >
+        ChannelID = #{record.channelid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filePath != null" >
+        file_path = #{record.filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileAbsolutePath != null" >
+        file_absolute_path = #{record.fileAbsolutePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileThumbnailsPath != null" >
+        file_thumbnails_path = #{record.fileThumbnailsPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileThumbnailAbsolutePath != null" >
+        file_thumbnail_absolute_path = #{record.fileThumbnailAbsolutePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maskFromV2 != null" >
+        _MASK_FROM_V2 = #{record.maskFromV2,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hl_videoinfonew
+    set newID = #{record.newid,jdbcType=INTEGER},
+      SchoolId = #{record.schoolid,jdbcType=INTEGER},
+      id = #{record.id,jdbcType=INTEGER},
+      prg_name = #{record.prgName,jdbcType=VARCHAR},
+      prg_datetime = #{record.prgDatetime,jdbcType=VARCHAR},
+      prg_starttime = #{record.prgStarttime,jdbcType=VARCHAR},
+      prg_endtime = #{record.prgEndtime,jdbcType=VARCHAR},
+      prg_classroom_id = #{record.prgClassroomId,jdbcType=INTEGER},
+      flr_name = #{record.flrName,jdbcType=VARCHAR},
+      build_name = #{record.buildName,jdbcType=VARCHAR},
+      clarm_name = #{record.clarmName,jdbcType=VARCHAR},
+      week = #{record.week,jdbcType=VARCHAR},
+      Cycle = #{record.cycle,jdbcType=VARCHAR},
+      ClassTeacher = #{record.classteacher,jdbcType=VARCHAR},
+      Lesson = #{record.lesson,jdbcType=INTEGER},
+      DisciplineNmae = #{record.disciplinenmae,jdbcType=VARCHAR},
+      YearName = #{record.yearname,jdbcType=VARCHAR},
+      IsNowYear = #{record.isnowyear,jdbcType=INTEGER},
+      TName = #{record.tname,jdbcType=VARCHAR},
+      prg_status = #{record.prgStatus,jdbcType=INTEGER},
+      prg_hot = #{record.prgHot,jdbcType=INTEGER},
+      VideoNameID = #{record.videonameid,jdbcType=INTEGER},
+      VideoName = #{record.videoname,jdbcType=VARCHAR},
+      ChannelID = #{record.channelid,jdbcType=VARCHAR},
+      file_path = #{record.filePath,jdbcType=VARCHAR},
+      file_absolute_path = #{record.fileAbsolutePath,jdbcType=VARCHAR},
+      file_thumbnails_path = #{record.fileThumbnailsPath,jdbcType=VARCHAR},
+      file_thumbnail_absolute_path = #{record.fileThumbnailAbsolutePath,jdbcType=VARCHAR},
+      _MASK_FROM_V2 = #{record.maskFromV2,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.HlVideoinfonew" >
+    update hl_videoinfonew
+    <set >
+      <if test="id != null" >
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="prgName != null" >
+        prg_name = #{prgName,jdbcType=VARCHAR},
+      </if>
+      <if test="prgDatetime != null" >
+        prg_datetime = #{prgDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="prgStarttime != null" >
+        prg_starttime = #{prgStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="prgEndtime != null" >
+        prg_endtime = #{prgEndtime,jdbcType=VARCHAR},
+      </if>
+      <if test="prgClassroomId != null" >
+        prg_classroom_id = #{prgClassroomId,jdbcType=INTEGER},
+      </if>
+      <if test="flrName != null" >
+        flr_name = #{flrName,jdbcType=VARCHAR},
+      </if>
+      <if test="buildName != null" >
+        build_name = #{buildName,jdbcType=VARCHAR},
+      </if>
+      <if test="clarmName != null" >
+        clarm_name = #{clarmName,jdbcType=VARCHAR},
+      </if>
+      <if test="week != null" >
+        week = #{week,jdbcType=VARCHAR},
+      </if>
+      <if test="cycle != null" >
+        Cycle = #{cycle,jdbcType=VARCHAR},
+      </if>
+      <if test="classteacher != null" >
+        ClassTeacher = #{classteacher,jdbcType=VARCHAR},
+      </if>
+      <if test="lesson != null" >
+        Lesson = #{lesson,jdbcType=INTEGER},
+      </if>
+      <if test="disciplinenmae != null" >
+        DisciplineNmae = #{disciplinenmae,jdbcType=VARCHAR},
+      </if>
+      <if test="yearname != null" >
+        YearName = #{yearname,jdbcType=VARCHAR},
+      </if>
+      <if test="isnowyear != null" >
+        IsNowYear = #{isnowyear,jdbcType=INTEGER},
+      </if>
+      <if test="tname != null" >
+        TName = #{tname,jdbcType=VARCHAR},
+      </if>
+      <if test="prgStatus != null" >
+        prg_status = #{prgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="prgHot != null" >
+        prg_hot = #{prgHot,jdbcType=INTEGER},
+      </if>
+      <if test="videonameid != null" >
+        VideoNameID = #{videonameid,jdbcType=INTEGER},
+      </if>
+      <if test="videoname != null" >
+        VideoName = #{videoname,jdbcType=VARCHAR},
+      </if>
+      <if test="channelid != null" >
+        ChannelID = #{channelid,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        file_path = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileAbsolutePath != null" >
+        file_absolute_path = #{fileAbsolutePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileThumbnailsPath != null" >
+        file_thumbnails_path = #{fileThumbnailsPath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileThumbnailAbsolutePath != null" >
+        file_thumbnail_absolute_path = #{fileThumbnailAbsolutePath,jdbcType=VARCHAR},
+      </if>
+      <if test="maskFromV2 != null" >
+        _MASK_FROM_V2 = #{maskFromV2,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where newID = #{newid,jdbcType=INTEGER}
+      and SchoolId = #{schoolid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.HlVideoinfonew" >
+    update hl_videoinfonew
+    set id = #{id,jdbcType=INTEGER},
+      prg_name = #{prgName,jdbcType=VARCHAR},
+      prg_datetime = #{prgDatetime,jdbcType=VARCHAR},
+      prg_starttime = #{prgStarttime,jdbcType=VARCHAR},
+      prg_endtime = #{prgEndtime,jdbcType=VARCHAR},
+      prg_classroom_id = #{prgClassroomId,jdbcType=INTEGER},
+      flr_name = #{flrName,jdbcType=VARCHAR},
+      build_name = #{buildName,jdbcType=VARCHAR},
+      clarm_name = #{clarmName,jdbcType=VARCHAR},
+      week = #{week,jdbcType=VARCHAR},
+      Cycle = #{cycle,jdbcType=VARCHAR},
+      ClassTeacher = #{classteacher,jdbcType=VARCHAR},
+      Lesson = #{lesson,jdbcType=INTEGER},
+      DisciplineNmae = #{disciplinenmae,jdbcType=VARCHAR},
+      YearName = #{yearname,jdbcType=VARCHAR},
+      IsNowYear = #{isnowyear,jdbcType=INTEGER},
+      TName = #{tname,jdbcType=VARCHAR},
+      prg_status = #{prgStatus,jdbcType=INTEGER},
+      prg_hot = #{prgHot,jdbcType=INTEGER},
+      VideoNameID = #{videonameid,jdbcType=INTEGER},
+      VideoName = #{videoname,jdbcType=VARCHAR},
+      ChannelID = #{channelid,jdbcType=VARCHAR},
+      file_path = #{filePath,jdbcType=VARCHAR},
+      file_absolute_path = #{fileAbsolutePath,jdbcType=VARCHAR},
+      file_thumbnails_path = #{fileThumbnailsPath,jdbcType=VARCHAR},
+      file_thumbnail_absolute_path = #{fileThumbnailAbsolutePath,jdbcType=VARCHAR},
+      _MASK_FROM_V2 = #{maskFromV2,jdbcType=TIMESTAMP}
+    where newID = #{newid,jdbcType=INTEGER}
+      and SchoolId = #{schoolid,jdbcType=INTEGER}
+  </update>
+</mapper>

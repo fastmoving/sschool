@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.usoft.sschool_pub.mapper.CfUserMapper" >
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.CfUser" >
+    <id column="UserID" property="userid" jdbcType="INTEGER" />
+    <id column="DeptID" property="deptid" jdbcType="INTEGER" />
+    <result column="LoginName" property="loginname" jdbcType="VARCHAR" />
+    <result column="LoginPassword" property="loginpassword" jdbcType="VARCHAR" />
+    <result column="SupplierID" property="supplierid" jdbcType="INTEGER" />
+    <result column="EmployeeID" property="employeeid" jdbcType="INTEGER" />
+    <result column="RealName" property="realname" jdbcType="VARCHAR" />
+    <result column="Title" property="title" jdbcType="VARCHAR" />
+    <result column="Sex" property="sex" jdbcType="VARCHAR" />
+    <result column="Phone" property="phone" jdbcType="VARCHAR" />
+    <result column="Fax" property="fax" jdbcType="VARCHAR" />
+    <result column="Email" property="email" jdbcType="VARCHAR" />
+    <result column="QQ" property="qq" jdbcType="VARCHAR" />
+    <result column="NickName" property="nickname" jdbcType="VARCHAR" />
+    <result column="Address" property="address" jdbcType="VARCHAR" />
+    <result column="LastLoginTime" property="lastlogintime" jdbcType="TIMESTAMP" />
+    <result column="CreateUserID" property="createuserid" jdbcType="INTEGER" />
+    <result column="CreateDate" property="createdate" jdbcType="DATE" />
+    <result column="ModifyUserID" property="modifyuserid" jdbcType="INTEGER" />
+    <result column="ModifyDate" property="modifydate" jdbcType="DATE" />
+    <result column="RecordStatus" property="recordstatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UserID, DeptID, LoginName, LoginPassword, SupplierID, EmployeeID, RealName, Title, 
+    Sex, Phone, Fax, Email, QQ, NickName, Address, LastLoginTime, CreateUserID, CreateDate, 
+    ModifyUserID, ModifyDate, RecordStatus
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.CfUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.CfUserKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from cf_user
+    where UserID = #{userid,jdbcType=INTEGER}
+      and DeptID = #{deptid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.usoft.smartschool.pojo.CfUserKey" >
+    delete from cf_user
+    where UserID = #{userid,jdbcType=INTEGER}
+      and DeptID = #{deptid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.CfUserExample" >
+    delete from cf_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.CfUser" >
+    insert into cf_user (UserID, DeptID, LoginName, 
+      LoginPassword, SupplierID, EmployeeID, 
+      RealName, Title, Sex, 
+      Phone, Fax, Email, 
+      QQ, NickName, Address, 
+      LastLoginTime, CreateUserID, CreateDate, 
+      ModifyUserID, ModifyDate, RecordStatus
+      )
+    values (#{userid,jdbcType=INTEGER}, #{deptid,jdbcType=INTEGER}, #{loginname,jdbcType=VARCHAR}, 
+      #{loginpassword,jdbcType=VARCHAR}, #{supplierid,jdbcType=INTEGER}, #{employeeid,jdbcType=INTEGER}, 
+      #{realname,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{qq,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{lastlogintime,jdbcType=TIMESTAMP}, #{createuserid,jdbcType=INTEGER}, #{createdate,jdbcType=DATE}, 
+      #{modifyuserid,jdbcType=INTEGER}, #{modifydate,jdbcType=DATE}, #{recordstatus,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.CfUser" >
+    insert into cf_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="deptid != null" >
+        DeptID,
+      </if>
+      <if test="loginname != null" >
+        LoginName,
+      </if>
+      <if test="loginpassword != null" >
+        LoginPassword,
+      </if>
+      <if test="supplierid != null" >
+        SupplierID,
+      </if>
+      <if test="employeeid != null" >
+        EmployeeID,
+      </if>
+      <if test="realname != null" >
+        RealName,
+      </if>
+      <if test="title != null" >
+        Title,
+      </if>
+      <if test="sex != null" >
+        Sex,
+      </if>
+      <if test="phone != null" >
+        Phone,
+      </if>
+      <if test="fax != null" >
+        Fax,
+      </if>
+      <if test="email != null" >
+        Email,
+      </if>
+      <if test="qq != null" >
+        QQ,
+      </if>
+      <if test="nickname != null" >
+        NickName,
+      </if>
+      <if test="address != null" >
+        Address,
+      </if>
+      <if test="lastlogintime != null" >
+        LastLoginTime,
+      </if>
+      <if test="createuserid != null" >
+        CreateUserID,
+      </if>
+      <if test="createdate != null" >
+        CreateDate,
+      </if>
+      <if test="modifyuserid != null" >
+        ModifyUserID,
+      </if>
+      <if test="modifydate != null" >
+        ModifyDate,
+      </if>
+      <if test="recordstatus != null" >
+        RecordStatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="deptid != null" >
+        #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="loginname != null" >
+        #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="loginpassword != null" >
+        #{loginpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierid != null" >
+        #{supplierid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null" >
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="lastlogintime != null" >
+        #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=DATE},
+      </if>
+      <if test="modifyuserid != null" >
+        #{modifyuserid,jdbcType=INTEGER},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=DATE},
+      </if>
+      <if test="recordstatus != null" >
+        #{recordstatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.CfUserExample" resultType="java.lang.Integer" >
+    select count(*) from cf_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_user
+    <set >
+      <if test="record.userid != null" >
+        UserID = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.deptid != null" >
+        DeptID = #{record.deptid,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginname != null" >
+        LoginName = #{record.loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginpassword != null" >
+        LoginPassword = #{record.loginpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplierid != null" >
+        SupplierID = #{record.supplierid,jdbcType=INTEGER},
+      </if>
+      <if test="record.employeeid != null" >
+        EmployeeID = #{record.employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.realname != null" >
+        RealName = #{record.realname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        Title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        Sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        Phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fax != null" >
+        Fax = #{record.fax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        Email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qq != null" >
+        QQ = #{record.qq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickname != null" >
+        NickName = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        Address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastlogintime != null" >
+        LastLoginTime = #{record.lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createuserid != null" >
+        CreateUserID = #{record.createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdate != null" >
+        CreateDate = #{record.createdate,jdbcType=DATE},
+      </if>
+      <if test="record.modifyuserid != null" >
+        ModifyUserID = #{record.modifyuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.modifydate != null" >
+        ModifyDate = #{record.modifydate,jdbcType=DATE},
+      </if>
+      <if test="record.recordstatus != null" >
+        RecordStatus = #{record.recordstatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_user
+    set UserID = #{record.userid,jdbcType=INTEGER},
+      DeptID = #{record.deptid,jdbcType=INTEGER},
+      LoginName = #{record.loginname,jdbcType=VARCHAR},
+      LoginPassword = #{record.loginpassword,jdbcType=VARCHAR},
+      SupplierID = #{record.supplierid,jdbcType=INTEGER},
+      EmployeeID = #{record.employeeid,jdbcType=INTEGER},
+      RealName = #{record.realname,jdbcType=VARCHAR},
+      Title = #{record.title,jdbcType=VARCHAR},
+      Sex = #{record.sex,jdbcType=VARCHAR},
+      Phone = #{record.phone,jdbcType=VARCHAR},
+      Fax = #{record.fax,jdbcType=VARCHAR},
+      Email = #{record.email,jdbcType=VARCHAR},
+      QQ = #{record.qq,jdbcType=VARCHAR},
+      NickName = #{record.nickname,jdbcType=VARCHAR},
+      Address = #{record.address,jdbcType=VARCHAR},
+      LastLoginTime = #{record.lastlogintime,jdbcType=TIMESTAMP},
+      CreateUserID = #{record.createuserid,jdbcType=INTEGER},
+      CreateDate = #{record.createdate,jdbcType=DATE},
+      ModifyUserID = #{record.modifyuserid,jdbcType=INTEGER},
+      ModifyDate = #{record.modifydate,jdbcType=DATE},
+      RecordStatus = #{record.recordstatus,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.CfUser" >
+    update cf_user
+    <set >
+      <if test="loginname != null" >
+        LoginName = #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="loginpassword != null" >
+        LoginPassword = #{loginpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierid != null" >
+        SupplierID = #{supplierid,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null" >
+        EmployeeID = #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="realname != null" >
+        RealName = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        Title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        Sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        Phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        Fax = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        Email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        QQ = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        NickName = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        Address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="lastlogintime != null" >
+        LastLoginTime = #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuserid != null" >
+        CreateUserID = #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        CreateDate = #{createdate,jdbcType=DATE},
+      </if>
+      <if test="modifyuserid != null" >
+        ModifyUserID = #{modifyuserid,jdbcType=INTEGER},
+      </if>
+      <if test="modifydate != null" >
+        ModifyDate = #{modifydate,jdbcType=DATE},
+      </if>
+      <if test="recordstatus != null" >
+        RecordStatus = #{recordstatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UserID = #{userid,jdbcType=INTEGER}
+      and DeptID = #{deptid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.CfUser" >
+    update cf_user
+    set LoginName = #{loginname,jdbcType=VARCHAR},
+      LoginPassword = #{loginpassword,jdbcType=VARCHAR},
+      SupplierID = #{supplierid,jdbcType=INTEGER},
+      EmployeeID = #{employeeid,jdbcType=INTEGER},
+      RealName = #{realname,jdbcType=VARCHAR},
+      Title = #{title,jdbcType=VARCHAR},
+      Sex = #{sex,jdbcType=VARCHAR},
+      Phone = #{phone,jdbcType=VARCHAR},
+      Fax = #{fax,jdbcType=VARCHAR},
+      Email = #{email,jdbcType=VARCHAR},
+      QQ = #{qq,jdbcType=VARCHAR},
+      NickName = #{nickname,jdbcType=VARCHAR},
+      Address = #{address,jdbcType=VARCHAR},
+      LastLoginTime = #{lastlogintime,jdbcType=TIMESTAMP},
+      CreateUserID = #{createuserid,jdbcType=INTEGER},
+      CreateDate = #{createdate,jdbcType=DATE},
+      ModifyUserID = #{modifyuserid,jdbcType=INTEGER},
+      ModifyDate = #{modifydate,jdbcType=DATE},
+      RecordStatus = #{recordstatus,jdbcType=VARCHAR}
+    where UserID = #{userid,jdbcType=INTEGER}
+      and DeptID = #{deptid,jdbcType=INTEGER}
+  </update>
+</mapper>

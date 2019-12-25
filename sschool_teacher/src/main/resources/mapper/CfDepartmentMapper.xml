@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.usoft.sschool_teacher.mapper.CfDepartmentMapper" >
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.CfDepartment" >
+    <id column="DeptID" property="deptid" jdbcType="INTEGER" />
+    <result column="DeptCode" property="deptcode" jdbcType="VARCHAR" />
+    <result column="DeptName" property="deptname" jdbcType="VARCHAR" />
+    <result column="DeptType" property="depttype" jdbcType="INTEGER" />
+    <result column="DeptTell" property="depttell" jdbcType="VARCHAR" />
+    <result column="DeptAddress" property="deptaddress" jdbcType="VARCHAR" />
+    <result column="DeptParentID" property="deptparentid" jdbcType="INTEGER" />
+    <result column="President" property="president" jdbcType="VARCHAR" />
+    <result column="DeptDesc" property="deptdesc" jdbcType="VARCHAR" />
+    <result column="CreateUserID" property="createuserid" jdbcType="INTEGER" />
+    <result column="CreateDate" property="createdate" jdbcType="VARCHAR" />
+    <result column="ModifyUserID" property="modifyuserid" jdbcType="INTEGER" />
+    <result column="ModifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+    <result column="CountyID" property="countyid" jdbcType="INTEGER" />
+    <result column="DeptStatusID" property="deptstatusid" jdbcType="INTEGER" />
+    <result column="AuditStatusID" property="auditstatusid" jdbcType="INTEGER" />
+    <result column="Longitude" property="longitude" jdbcType="VARCHAR" />
+    <result column="Altitudes" property="altitudes" jdbcType="VARCHAR" />
+    <result column="ClassEquipment" property="classequipment" jdbcType="INTEGER" />
+    <result column="LabEquipment" property="labequipment" jdbcType="INTEGER" />
+    <result column="GXtime" property="gxtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.usoft.smartschool.pojo.CfDepartment" extends="BaseResultMap" >
+    <result column="RecordStatus" property="recordstatus" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DeptID, DeptCode, DeptName, DeptType, DeptTell, DeptAddress, DeptParentID, President, 
+    DeptDesc, CreateUserID, CreateDate, ModifyUserID, ModifyDate, CountyID, DeptStatusID, 
+    AuditStatusID, Longitude, Altitudes, ClassEquipment, LabEquipment, GXtime
+  </sql>
+  <sql id="Blob_Column_List" >
+    RecordStatus
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.usoft.smartschool.pojo.CfDepartmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cf_department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.CfDepartmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cf_department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cf_department
+    where DeptID = #{deptid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cf_department
+    where DeptID = #{deptid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.CfDepartmentExample" >
+    delete from cf_department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.CfDepartment" >
+    insert into cf_department (DeptID, DeptCode, DeptName, 
+      DeptType, DeptTell, DeptAddress, 
+      DeptParentID, President, DeptDesc, 
+      CreateUserID, CreateDate, ModifyUserID, 
+      ModifyDate, CountyID, DeptStatusID, 
+      AuditStatusID, Longitude, Altitudes, 
+      ClassEquipment, LabEquipment, GXtime, 
+      RecordStatus)
+    values (#{deptid,jdbcType=INTEGER}, #{deptcode,jdbcType=VARCHAR}, #{deptname,jdbcType=VARCHAR}, 
+      #{depttype,jdbcType=INTEGER}, #{depttell,jdbcType=VARCHAR}, #{deptaddress,jdbcType=VARCHAR}, 
+      #{deptparentid,jdbcType=INTEGER}, #{president,jdbcType=VARCHAR}, #{deptdesc,jdbcType=VARCHAR}, 
+      #{createuserid,jdbcType=INTEGER}, #{createdate,jdbcType=VARCHAR}, #{modifyuserid,jdbcType=INTEGER}, 
+      #{modifydate,jdbcType=TIMESTAMP}, #{countyid,jdbcType=INTEGER}, #{deptstatusid,jdbcType=INTEGER}, 
+      #{auditstatusid,jdbcType=INTEGER}, #{longitude,jdbcType=VARCHAR}, #{altitudes,jdbcType=VARCHAR}, 
+      #{classequipment,jdbcType=INTEGER}, #{labequipment,jdbcType=INTEGER}, #{gxtime,jdbcType=TIMESTAMP}, 
+      #{recordstatus,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.CfDepartment" >
+    insert into cf_department
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="deptid != null" >
+        DeptID,
+      </if>
+      <if test="deptcode != null" >
+        DeptCode,
+      </if>
+      <if test="deptname != null" >
+        DeptName,
+      </if>
+      <if test="depttype != null" >
+        DeptType,
+      </if>
+      <if test="depttell != null" >
+        DeptTell,
+      </if>
+      <if test="deptaddress != null" >
+        DeptAddress,
+      </if>
+      <if test="deptparentid != null" >
+        DeptParentID,
+      </if>
+      <if test="president != null" >
+        President,
+      </if>
+      <if test="deptdesc != null" >
+        DeptDesc,
+      </if>
+      <if test="createuserid != null" >
+        CreateUserID,
+      </if>
+      <if test="createdate != null" >
+        CreateDate,
+      </if>
+      <if test="modifyuserid != null" >
+        ModifyUserID,
+      </if>
+      <if test="modifydate != null" >
+        ModifyDate,
+      </if>
+      <if test="countyid != null" >
+        CountyID,
+      </if>
+      <if test="deptstatusid != null" >
+        DeptStatusID,
+      </if>
+      <if test="auditstatusid != null" >
+        AuditStatusID,
+      </if>
+      <if test="longitude != null" >
+        Longitude,
+      </if>
+      <if test="altitudes != null" >
+        Altitudes,
+      </if>
+      <if test="classequipment != null" >
+        ClassEquipment,
+      </if>
+      <if test="labequipment != null" >
+        LabEquipment,
+      </if>
+      <if test="gxtime != null" >
+        GXtime,
+      </if>
+      <if test="recordstatus != null" >
+        RecordStatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="deptid != null" >
+        #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="deptcode != null" >
+        #{deptcode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptname != null" >
+        #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="depttype != null" >
+        #{depttype,jdbcType=INTEGER},
+      </if>
+      <if test="depttell != null" >
+        #{depttell,jdbcType=VARCHAR},
+      </if>
+      <if test="deptaddress != null" >
+        #{deptaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="deptparentid != null" >
+        #{deptparentid,jdbcType=INTEGER},
+      </if>
+      <if test="president != null" >
+        #{president,jdbcType=VARCHAR},
+      </if>
+      <if test="deptdesc != null" >
+        #{deptdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyuserid != null" >
+        #{modifyuserid,jdbcType=INTEGER},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="countyid != null" >
+        #{countyid,jdbcType=INTEGER},
+      </if>
+      <if test="deptstatusid != null" >
+        #{deptstatusid,jdbcType=INTEGER},
+      </if>
+      <if test="auditstatusid != null" >
+        #{auditstatusid,jdbcType=INTEGER},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="altitudes != null" >
+        #{altitudes,jdbcType=VARCHAR},
+      </if>
+      <if test="classequipment != null" >
+        #{classequipment,jdbcType=INTEGER},
+      </if>
+      <if test="labequipment != null" >
+        #{labequipment,jdbcType=INTEGER},
+      </if>
+      <if test="gxtime != null" >
+        #{gxtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recordstatus != null" >
+        #{recordstatus,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.CfDepartmentExample" resultType="java.lang.Integer" >
+    select count(*) from cf_department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cf_department
+    <set >
+      <if test="record.deptid != null" >
+        DeptID = #{record.deptid,jdbcType=INTEGER},
+      </if>
+      <if test="record.deptcode != null" >
+        DeptCode = #{record.deptcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptname != null" >
+        DeptName = #{record.deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.depttype != null" >
+        DeptType = #{record.depttype,jdbcType=INTEGER},
+      </if>
+      <if test="record.depttell != null" >
+        DeptTell = #{record.depttell,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptaddress != null" >
+        DeptAddress = #{record.deptaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptparentid != null" >
+        DeptParentID = #{record.deptparentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.president != null" >
+        President = #{record.president,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptdesc != null" >
+        DeptDesc = #{record.deptdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createuserid != null" >
+        CreateUserID = #{record.createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdate != null" >
+        CreateDate = #{record.createdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifyuserid != null" >
+        ModifyUserID = #{record.modifyuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.modifydate != null" >
+        ModifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.countyid != null" >
+        CountyID = #{record.countyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.deptstatusid != null" >
+        DeptStatusID = #{record.deptstatusid,jdbcType=INTEGER},
+      </if>
+      <if test="record.auditstatusid != null" >
+        AuditStatusID = #{record.auditstatusid,jdbcType=INTEGER},
+      </if>
+      <if test="record.longitude != null" >
+        Longitude = #{record.longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.altitudes != null" >
+        Altitudes = #{record.altitudes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classequipment != null" >
+        ClassEquipment = #{record.classequipment,jdbcType=INTEGER},
+      </if>
+      <if test="record.labequipment != null" >
+        LabEquipment = #{record.labequipment,jdbcType=INTEGER},
+      </if>
+      <if test="record.gxtime != null" >
+        GXtime = #{record.gxtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.recordstatus != null" >
+        RecordStatus = #{record.recordstatus,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update cf_department
+    set DeptID = #{record.deptid,jdbcType=INTEGER},
+      DeptCode = #{record.deptcode,jdbcType=VARCHAR},
+      DeptName = #{record.deptname,jdbcType=VARCHAR},
+      DeptType = #{record.depttype,jdbcType=INTEGER},
+      DeptTell = #{record.depttell,jdbcType=VARCHAR},
+      DeptAddress = #{record.deptaddress,jdbcType=VARCHAR},
+      DeptParentID = #{record.deptparentid,jdbcType=INTEGER},
+      President = #{record.president,jdbcType=VARCHAR},
+      DeptDesc = #{record.deptdesc,jdbcType=VARCHAR},
+      CreateUserID = #{record.createuserid,jdbcType=INTEGER},
+      CreateDate = #{record.createdate,jdbcType=VARCHAR},
+      ModifyUserID = #{record.modifyuserid,jdbcType=INTEGER},
+      ModifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      CountyID = #{record.countyid,jdbcType=INTEGER},
+      DeptStatusID = #{record.deptstatusid,jdbcType=INTEGER},
+      AuditStatusID = #{record.auditstatusid,jdbcType=INTEGER},
+      Longitude = #{record.longitude,jdbcType=VARCHAR},
+      Altitudes = #{record.altitudes,jdbcType=VARCHAR},
+      ClassEquipment = #{record.classequipment,jdbcType=INTEGER},
+      LabEquipment = #{record.labequipment,jdbcType=INTEGER},
+      GXtime = #{record.gxtime,jdbcType=TIMESTAMP},
+      RecordStatus = #{record.recordstatus,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cf_department
+    set DeptID = #{record.deptid,jdbcType=INTEGER},
+      DeptCode = #{record.deptcode,jdbcType=VARCHAR},
+      DeptName = #{record.deptname,jdbcType=VARCHAR},
+      DeptType = #{record.depttype,jdbcType=INTEGER},
+      DeptTell = #{record.depttell,jdbcType=VARCHAR},
+      DeptAddress = #{record.deptaddress,jdbcType=VARCHAR},
+      DeptParentID = #{record.deptparentid,jdbcType=INTEGER},
+      President = #{record.president,jdbcType=VARCHAR},
+      DeptDesc = #{record.deptdesc,jdbcType=VARCHAR},
+      CreateUserID = #{record.createuserid,jdbcType=INTEGER},
+      CreateDate = #{record.createdate,jdbcType=VARCHAR},
+      ModifyUserID = #{record.modifyuserid,jdbcType=INTEGER},
+      ModifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      CountyID = #{record.countyid,jdbcType=INTEGER},
+      DeptStatusID = #{record.deptstatusid,jdbcType=INTEGER},
+      AuditStatusID = #{record.auditstatusid,jdbcType=INTEGER},
+      Longitude = #{record.longitude,jdbcType=VARCHAR},
+      Altitudes = #{record.altitudes,jdbcType=VARCHAR},
+      ClassEquipment = #{record.classequipment,jdbcType=INTEGER},
+      LabEquipment = #{record.labequipment,jdbcType=INTEGER},
+      GXtime = #{record.gxtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.CfDepartment" >
+    update cf_department
+    <set >
+      <if test="deptcode != null" >
+        DeptCode = #{deptcode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptname != null" >
+        DeptName = #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="depttype != null" >
+        DeptType = #{depttype,jdbcType=INTEGER},
+      </if>
+      <if test="depttell != null" >
+        DeptTell = #{depttell,jdbcType=VARCHAR},
+      </if>
+      <if test="deptaddress != null" >
+        DeptAddress = #{deptaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="deptparentid != null" >
+        DeptParentID = #{deptparentid,jdbcType=INTEGER},
+      </if>
+      <if test="president != null" >
+        President = #{president,jdbcType=VARCHAR},
+      </if>
+      <if test="deptdesc != null" >
+        DeptDesc = #{deptdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        CreateUserID = #{createuserid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        CreateDate = #{createdate,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyuserid != null" >
+        ModifyUserID = #{modifyuserid,jdbcType=INTEGER},
+      </if>
+      <if test="modifydate != null" >
+        ModifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="countyid != null" >
+        CountyID = #{countyid,jdbcType=INTEGER},
+      </if>
+      <if test="deptstatusid != null" >
+        DeptStatusID = #{deptstatusid,jdbcType=INTEGER},
+      </if>
+      <if test="auditstatusid != null" >
+        AuditStatusID = #{auditstatusid,jdbcType=INTEGER},
+      </if>
+      <if test="longitude != null" >
+        Longitude = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="altitudes != null" >
+        Altitudes = #{altitudes,jdbcType=VARCHAR},
+      </if>
+      <if test="classequipment != null" >
+        ClassEquipment = #{classequipment,jdbcType=INTEGER},
+      </if>
+      <if test="labequipment != null" >
+        LabEquipment = #{labequipment,jdbcType=INTEGER},
+      </if>
+      <if test="gxtime != null" >
+        GXtime = #{gxtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recordstatus != null" >
+        RecordStatus = #{recordstatus,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where DeptID = #{deptid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.usoft.smartschool.pojo.CfDepartment" >
+    update cf_department
+    set DeptCode = #{deptcode,jdbcType=VARCHAR},
+      DeptName = #{deptname,jdbcType=VARCHAR},
+      DeptType = #{depttype,jdbcType=INTEGER},
+      DeptTell = #{depttell,jdbcType=VARCHAR},
+      DeptAddress = #{deptaddress,jdbcType=VARCHAR},
+      DeptParentID = #{deptparentid,jdbcType=INTEGER},
+      President = #{president,jdbcType=VARCHAR},
+      DeptDesc = #{deptdesc,jdbcType=VARCHAR},
+      CreateUserID = #{createuserid,jdbcType=INTEGER},
+      CreateDate = #{createdate,jdbcType=VARCHAR},
+      ModifyUserID = #{modifyuserid,jdbcType=INTEGER},
+      ModifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      CountyID = #{countyid,jdbcType=INTEGER},
+      DeptStatusID = #{deptstatusid,jdbcType=INTEGER},
+      AuditStatusID = #{auditstatusid,jdbcType=INTEGER},
+      Longitude = #{longitude,jdbcType=VARCHAR},
+      Altitudes = #{altitudes,jdbcType=VARCHAR},
+      ClassEquipment = #{classequipment,jdbcType=INTEGER},
+      LabEquipment = #{labequipment,jdbcType=INTEGER},
+      GXtime = #{gxtime,jdbcType=TIMESTAMP},
+      RecordStatus = #{recordstatus,jdbcType=LONGVARCHAR}
+    where DeptID = #{deptid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.CfDepartment" >
+    update cf_department
+    set DeptCode = #{deptcode,jdbcType=VARCHAR},
+      DeptName = #{deptname,jdbcType=VARCHAR},
+      DeptType = #{depttype,jdbcType=INTEGER},
+      DeptTell = #{depttell,jdbcType=VARCHAR},
+      DeptAddress = #{deptaddress,jdbcType=VARCHAR},
+      DeptParentID = #{deptparentid,jdbcType=INTEGER},
+      President = #{president,jdbcType=VARCHAR},
+      DeptDesc = #{deptdesc,jdbcType=VARCHAR},
+      CreateUserID = #{createuserid,jdbcType=INTEGER},
+      CreateDate = #{createdate,jdbcType=VARCHAR},
+      ModifyUserID = #{modifyuserid,jdbcType=INTEGER},
+      ModifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      CountyID = #{countyid,jdbcType=INTEGER},
+      DeptStatusID = #{deptstatusid,jdbcType=INTEGER},
+      AuditStatusID = #{auditstatusid,jdbcType=INTEGER},
+      Longitude = #{longitude,jdbcType=VARCHAR},
+      Altitudes = #{altitudes,jdbcType=VARCHAR},
+      ClassEquipment = #{classequipment,jdbcType=INTEGER},
+      LabEquipment = #{labequipment,jdbcType=INTEGER},
+      GXtime = #{gxtime,jdbcType=TIMESTAMP}
+    where DeptID = #{deptid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.usoft.sschool_student.mapper.BDictionaryMapper" >
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.BDictionary" >
+    <id column="DictID" property="dictid" jdbcType="INTEGER" />
+    <result column="ParentID" property="parentid" jdbcType="INTEGER" />
+    <result column="ItemPath" property="itempath" jdbcType="VARCHAR" />
+    <result column="DictCode" property="dictcode" jdbcType="VARCHAR" />
+    <result column="DictName" property="dictname" jdbcType="VARCHAR" />
+    <result column="DictEName" property="dictename" jdbcType="VARCHAR" />
+    <result column="OrderID" property="orderid" jdbcType="INTEGER" />
+    <result column="ShortName" property="shortname" jdbcType="VARCHAR" />
+    <result column="IsRead" property="isread" jdbcType="INTEGER" />
+    <result column="IsShow" property="isshow" jdbcType="INTEGER" />
+    <result column="CreateUser" property="createuser" jdbcType="VARCHAR" />
+    <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="Ext1" property="ext1" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DictID, ParentID, ItemPath, DictCode, DictName, DictEName, OrderID, ShortName, IsRead, 
+    IsShow, CreateUser, CreateTime, Ext1
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.BDictionaryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from b_dictionary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from b_dictionary
+    where DictID = #{dictid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b_dictionary
+    where DictID = #{dictid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.BDictionaryExample" >
+    delete from b_dictionary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.BDictionary" >
+    insert into b_dictionary (DictID, ParentID, ItemPath, 
+      DictCode, DictName, DictEName, 
+      OrderID, ShortName, IsRead, 
+      IsShow, CreateUser, CreateTime, 
+      Ext1)
+    values (#{dictid,jdbcType=INTEGER}, #{parentid,jdbcType=INTEGER}, #{itempath,jdbcType=VARCHAR}, 
+      #{dictcode,jdbcType=VARCHAR}, #{dictname,jdbcType=VARCHAR}, #{dictename,jdbcType=VARCHAR}, 
+      #{orderid,jdbcType=INTEGER}, #{shortname,jdbcType=VARCHAR}, #{isread,jdbcType=INTEGER}, 
+      #{isshow,jdbcType=INTEGER}, #{createuser,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{ext1,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.BDictionary" >
+    insert into b_dictionary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dictid != null" >
+        DictID,
+      </if>
+      <if test="parentid != null" >
+        ParentID,
+      </if>
+      <if test="itempath != null" >
+        ItemPath,
+      </if>
+      <if test="dictcode != null" >
+        DictCode,
+      </if>
+      <if test="dictname != null" >
+        DictName,
+      </if>
+      <if test="dictename != null" >
+        DictEName,
+      </if>
+      <if test="orderid != null" >
+        OrderID,
+      </if>
+      <if test="shortname != null" >
+        ShortName,
+      </if>
+      <if test="isread != null" >
+        IsRead,
+      </if>
+      <if test="isshow != null" >
+        IsShow,
+      </if>
+      <if test="createuser != null" >
+        CreateUser,
+      </if>
+      <if test="createtime != null" >
+        CreateTime,
+      </if>
+      <if test="ext1 != null" >
+        Ext1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dictid != null" >
+        #{dictid,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="itempath != null" >
+        #{itempath,jdbcType=VARCHAR},
+      </if>
+      <if test="dictcode != null" >
+        #{dictcode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictname != null" >
+        #{dictname,jdbcType=VARCHAR},
+      </if>
+      <if test="dictename != null" >
+        #{dictename,jdbcType=VARCHAR},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="shortname != null" >
+        #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="isread != null" >
+        #{isread,jdbcType=INTEGER},
+      </if>
+      <if test="isshow != null" >
+        #{isshow,jdbcType=INTEGER},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext1 != null" >
+        #{ext1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.BDictionaryExample" resultType="java.lang.Integer" >
+    select count(*) from b_dictionary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update b_dictionary
+    <set >
+      <if test="record.dictid != null" >
+        DictID = #{record.dictid,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentid != null" >
+        ParentID = #{record.parentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.itempath != null" >
+        ItemPath = #{record.itempath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictcode != null" >
+        DictCode = #{record.dictcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictname != null" >
+        DictName = #{record.dictname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictename != null" >
+        DictEName = #{record.dictename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderid != null" >
+        OrderID = #{record.orderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.shortname != null" >
+        ShortName = #{record.shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isread != null" >
+        IsRead = #{record.isread,jdbcType=INTEGER},
+      </if>
+      <if test="record.isshow != null" >
+        IsShow = #{record.isshow,jdbcType=INTEGER},
+      </if>
+      <if test="record.createuser != null" >
+        CreateUser = #{record.createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ext1 != null" >
+        Ext1 = #{record.ext1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update b_dictionary
+    set DictID = #{record.dictid,jdbcType=INTEGER},
+      ParentID = #{record.parentid,jdbcType=INTEGER},
+      ItemPath = #{record.itempath,jdbcType=VARCHAR},
+      DictCode = #{record.dictcode,jdbcType=VARCHAR},
+      DictName = #{record.dictname,jdbcType=VARCHAR},
+      DictEName = #{record.dictename,jdbcType=VARCHAR},
+      OrderID = #{record.orderid,jdbcType=INTEGER},
+      ShortName = #{record.shortname,jdbcType=VARCHAR},
+      IsRead = #{record.isread,jdbcType=INTEGER},
+      IsShow = #{record.isshow,jdbcType=INTEGER},
+      CreateUser = #{record.createuser,jdbcType=VARCHAR},
+      CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      Ext1 = #{record.ext1,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.BDictionary" >
+    update b_dictionary
+    <set >
+      <if test="parentid != null" >
+        ParentID = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="itempath != null" >
+        ItemPath = #{itempath,jdbcType=VARCHAR},
+      </if>
+      <if test="dictcode != null" >
+        DictCode = #{dictcode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictname != null" >
+        DictName = #{dictname,jdbcType=VARCHAR},
+      </if>
+      <if test="dictename != null" >
+        DictEName = #{dictename,jdbcType=VARCHAR},
+      </if>
+      <if test="orderid != null" >
+        OrderID = #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="shortname != null" >
+        ShortName = #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="isread != null" >
+        IsRead = #{isread,jdbcType=INTEGER},
+      </if>
+      <if test="isshow != null" >
+        IsShow = #{isshow,jdbcType=INTEGER},
+      </if>
+      <if test="createuser != null" >
+        CreateUser = #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ext1 != null" >
+        Ext1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DictID = #{dictid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.BDictionary" >
+    update b_dictionary
+    set ParentID = #{parentid,jdbcType=INTEGER},
+      ItemPath = #{itempath,jdbcType=VARCHAR},
+      DictCode = #{dictcode,jdbcType=VARCHAR},
+      DictName = #{dictname,jdbcType=VARCHAR},
+      DictEName = #{dictename,jdbcType=VARCHAR},
+      OrderID = #{orderid,jdbcType=INTEGER},
+      ShortName = #{shortname,jdbcType=VARCHAR},
+      IsRead = #{isread,jdbcType=INTEGER},
+      IsShow = #{isshow,jdbcType=INTEGER},
+      CreateUser = #{createuser,jdbcType=VARCHAR},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      Ext1 = #{ext1,jdbcType=VARCHAR}
+    where DictID = #{dictid,jdbcType=INTEGER}
+  </update>
+</mapper>

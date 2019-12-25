@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.usoft.sschool_manage.mapper.base.PrgInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.PrgInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="prg_old_id" property="prgOldId" jdbcType="INTEGER" />
+    <result column="prg_name" property="prgName" jdbcType="VARCHAR" />
+    <result column="prg_protagonist" property="prgProtagonist" jdbcType="VARCHAR" />
+    <result column="prg_desc" property="prgDesc" jdbcType="VARCHAR" />
+    <result column="prg_username" property="prgUsername" jdbcType="VARCHAR" />
+    <result column="prg_datetime" property="prgDatetime" jdbcType="TIMESTAMP" />
+    <result column="prg_starttime" property="prgStarttime" jdbcType="TIMESTAMP" />
+    <result column="prg_endtime" property="prgEndtime" jdbcType="TIMESTAMP" />
+    <result column="prg_status" property="prgStatus" jdbcType="INTEGER" />
+    <result column="prg_course" property="prgCourse" jdbcType="INTEGER" />
+    <result column="prg_classroom_id" property="prgClassroomId" jdbcType="INTEGER" />
+    <result column="prg_hot" property="prgHot" jdbcType="INTEGER" />
+    <result column="prg_praise" property="prgPraise" jdbcType="INTEGER" />
+    <result column="prg_trample" property="prgTrample" jdbcType="INTEGER" />
+    <result column="prg_pass" property="prgPass" jdbcType="INTEGER" />
+    <result column="GXtime" property="gxtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, prg_old_id, prg_name, prg_protagonist, prg_desc, prg_username, prg_datetime, 
+    prg_starttime, prg_endtime, prg_status, prg_course, prg_classroom_id, prg_hot, prg_praise, 
+    prg_trample, prg_pass, GXtime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.PrgInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from prg_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from prg_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from prg_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.PrgInfoExample" >
+    delete from prg_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.PrgInfo" >
+    insert into prg_info (id, prg_old_id, prg_name, 
+      prg_protagonist, prg_desc, prg_username, 
+      prg_datetime, prg_starttime, prg_endtime, 
+      prg_status, prg_course, prg_classroom_id, 
+      prg_hot, prg_praise, prg_trample, 
+      prg_pass, GXtime)
+    values (#{id,jdbcType=INTEGER}, #{prgOldId,jdbcType=INTEGER}, #{prgName,jdbcType=VARCHAR}, 
+      #{prgProtagonist,jdbcType=VARCHAR}, #{prgDesc,jdbcType=VARCHAR}, #{prgUsername,jdbcType=VARCHAR}, 
+      #{prgDatetime,jdbcType=TIMESTAMP}, #{prgStarttime,jdbcType=TIMESTAMP}, #{prgEndtime,jdbcType=TIMESTAMP}, 
+      #{prgStatus,jdbcType=INTEGER}, #{prgCourse,jdbcType=INTEGER}, #{prgClassroomId,jdbcType=INTEGER}, 
+      #{prgHot,jdbcType=INTEGER}, #{prgPraise,jdbcType=INTEGER}, #{prgTrample,jdbcType=INTEGER}, 
+      #{prgPass,jdbcType=INTEGER}, #{gxtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.PrgInfo" >
+    insert into prg_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="prgOldId != null" >
+        prg_old_id,
+      </if>
+      <if test="prgName != null" >
+        prg_name,
+      </if>
+      <if test="prgProtagonist != null" >
+        prg_protagonist,
+      </if>
+      <if test="prgDesc != null" >
+        prg_desc,
+      </if>
+      <if test="prgUsername != null" >
+        prg_username,
+      </if>
+      <if test="prgDatetime != null" >
+        prg_datetime,
+      </if>
+      <if test="prgStarttime != null" >
+        prg_starttime,
+      </if>
+      <if test="prgEndtime != null" >
+        prg_endtime,
+      </if>
+      <if test="prgStatus != null" >
+        prg_status,
+      </if>
+      <if test="prgCourse != null" >
+        prg_course,
+      </if>
+      <if test="prgClassroomId != null" >
+        prg_classroom_id,
+      </if>
+      <if test="prgHot != null" >
+        prg_hot,
+      </if>
+      <if test="prgPraise != null" >
+        prg_praise,
+      </if>
+      <if test="prgTrample != null" >
+        prg_trample,
+      </if>
+      <if test="prgPass != null" >
+        prg_pass,
+      </if>
+      <if test="gxtime != null" >
+        GXtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="prgOldId != null" >
+        #{prgOldId,jdbcType=INTEGER},
+      </if>
+      <if test="prgName != null" >
+        #{prgName,jdbcType=VARCHAR},
+      </if>
+      <if test="prgProtagonist != null" >
+        #{prgProtagonist,jdbcType=VARCHAR},
+      </if>
+      <if test="prgDesc != null" >
+        #{prgDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="prgUsername != null" >
+        #{prgUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="prgDatetime != null" >
+        #{prgDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prgStarttime != null" >
+        #{prgStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prgEndtime != null" >
+        #{prgEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prgStatus != null" >
+        #{prgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="prgCourse != null" >
+        #{prgCourse,jdbcType=INTEGER},
+      </if>
+      <if test="prgClassroomId != null" >
+        #{prgClassroomId,jdbcType=INTEGER},
+      </if>
+      <if test="prgHot != null" >
+        #{prgHot,jdbcType=INTEGER},
+      </if>
+      <if test="prgPraise != null" >
+        #{prgPraise,jdbcType=INTEGER},
+      </if>
+      <if test="prgTrample != null" >
+        #{prgTrample,jdbcType=INTEGER},
+      </if>
+      <if test="prgPass != null" >
+        #{prgPass,jdbcType=INTEGER},
+      </if>
+      <if test="gxtime != null" >
+        #{gxtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.PrgInfoExample" resultType="java.lang.Integer" >
+    select count(*) from prg_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update prg_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.prgOldId != null" >
+        prg_old_id = #{record.prgOldId,jdbcType=INTEGER},
+      </if>
+      <if test="record.prgName != null" >
+        prg_name = #{record.prgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prgProtagonist != null" >
+        prg_protagonist = #{record.prgProtagonist,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prgDesc != null" >
+        prg_desc = #{record.prgDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prgUsername != null" >
+        prg_username = #{record.prgUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prgDatetime != null" >
+        prg_datetime = #{record.prgDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.prgStarttime != null" >
+        prg_starttime = #{record.prgStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.prgEndtime != null" >
+        prg_endtime = #{record.prgEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.prgStatus != null" >
+        prg_status = #{record.prgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.prgCourse != null" >
+        prg_course = #{record.prgCourse,jdbcType=INTEGER},
+      </if>
+      <if test="record.prgClassroomId != null" >
+        prg_classroom_id = #{record.prgClassroomId,jdbcType=INTEGER},
+      </if>
+      <if test="record.prgHot != null" >
+        prg_hot = #{record.prgHot,jdbcType=INTEGER},
+      </if>
+      <if test="record.prgPraise != null" >
+        prg_praise = #{record.prgPraise,jdbcType=INTEGER},
+      </if>
+      <if test="record.prgTrample != null" >
+        prg_trample = #{record.prgTrample,jdbcType=INTEGER},
+      </if>
+      <if test="record.prgPass != null" >
+        prg_pass = #{record.prgPass,jdbcType=INTEGER},
+      </if>
+      <if test="record.gxtime != null" >
+        GXtime = #{record.gxtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update prg_info
+    set id = #{record.id,jdbcType=INTEGER},
+      prg_old_id = #{record.prgOldId,jdbcType=INTEGER},
+      prg_name = #{record.prgName,jdbcType=VARCHAR},
+      prg_protagonist = #{record.prgProtagonist,jdbcType=VARCHAR},
+      prg_desc = #{record.prgDesc,jdbcType=VARCHAR},
+      prg_username = #{record.prgUsername,jdbcType=VARCHAR},
+      prg_datetime = #{record.prgDatetime,jdbcType=TIMESTAMP},
+      prg_starttime = #{record.prgStarttime,jdbcType=TIMESTAMP},
+      prg_endtime = #{record.prgEndtime,jdbcType=TIMESTAMP},
+      prg_status = #{record.prgStatus,jdbcType=INTEGER},
+      prg_course = #{record.prgCourse,jdbcType=INTEGER},
+      prg_classroom_id = #{record.prgClassroomId,jdbcType=INTEGER},
+      prg_hot = #{record.prgHot,jdbcType=INTEGER},
+      prg_praise = #{record.prgPraise,jdbcType=INTEGER},
+      prg_trample = #{record.prgTrample,jdbcType=INTEGER},
+      prg_pass = #{record.prgPass,jdbcType=INTEGER},
+      GXtime = #{record.gxtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.PrgInfo" >
+    update prg_info
+    <set >
+      <if test="prgOldId != null" >
+        prg_old_id = #{prgOldId,jdbcType=INTEGER},
+      </if>
+      <if test="prgName != null" >
+        prg_name = #{prgName,jdbcType=VARCHAR},
+      </if>
+      <if test="prgProtagonist != null" >
+        prg_protagonist = #{prgProtagonist,jdbcType=VARCHAR},
+      </if>
+      <if test="prgDesc != null" >
+        prg_desc = #{prgDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="prgUsername != null" >
+        prg_username = #{prgUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="prgDatetime != null" >
+        prg_datetime = #{prgDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prgStarttime != null" >
+        prg_starttime = #{prgStarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prgEndtime != null" >
+        prg_endtime = #{prgEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prgStatus != null" >
+        prg_status = #{prgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="prgCourse != null" >
+        prg_course = #{prgCourse,jdbcType=INTEGER},
+      </if>
+      <if test="prgClassroomId != null" >
+        prg_classroom_id = #{prgClassroomId,jdbcType=INTEGER},
+      </if>
+      <if test="prgHot != null" >
+        prg_hot = #{prgHot,jdbcType=INTEGER},
+      </if>
+      <if test="prgPraise != null" >
+        prg_praise = #{prgPraise,jdbcType=INTEGER},
+      </if>
+      <if test="prgTrample != null" >
+        prg_trample = #{prgTrample,jdbcType=INTEGER},
+      </if>
+      <if test="prgPass != null" >
+        prg_pass = #{prgPass,jdbcType=INTEGER},
+      </if>
+      <if test="gxtime != null" >
+        GXtime = #{gxtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.PrgInfo" >
+    update prg_info
+    set prg_old_id = #{prgOldId,jdbcType=INTEGER},
+      prg_name = #{prgName,jdbcType=VARCHAR},
+      prg_protagonist = #{prgProtagonist,jdbcType=VARCHAR},
+      prg_desc = #{prgDesc,jdbcType=VARCHAR},
+      prg_username = #{prgUsername,jdbcType=VARCHAR},
+      prg_datetime = #{prgDatetime,jdbcType=TIMESTAMP},
+      prg_starttime = #{prgStarttime,jdbcType=TIMESTAMP},
+      prg_endtime = #{prgEndtime,jdbcType=TIMESTAMP},
+      prg_status = #{prgStatus,jdbcType=INTEGER},
+      prg_course = #{prgCourse,jdbcType=INTEGER},
+      prg_classroom_id = #{prgClassroomId,jdbcType=INTEGER},
+      prg_hot = #{prgHot,jdbcType=INTEGER},
+      prg_praise = #{prgPraise,jdbcType=INTEGER},
+      prg_trample = #{prgTrample,jdbcType=INTEGER},
+      prg_pass = #{prgPass,jdbcType=INTEGER},
+      GXtime = #{gxtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

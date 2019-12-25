@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.usoft.sschool_manage.mapper.base.XnSetmealManageMapper">
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.XnSetmealManage">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="setMealName" jdbcType="VARCHAR" property="setmealname" />
+    <result column="setMealPrice" jdbcType="DECIMAL" property="setmealprice" />
+    <result column="beginDate" jdbcType="VARCHAR" property="begindate" />
+    <result column="endDate" jdbcType="VARCHAR" property="enddate" />
+    <result column="bindMan" jdbcType="INTEGER" property="bindman" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="UID" jdbcType="INTEGER" property="uid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, setMealName, setMealPrice, beginDate, endDate, bindMan, description, createTime, 
+    status, UID
+  </sql>
+  <select id="selectByExample" parameterType="com.usoft.smartschool.pojo.XnSetmealManageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from xn_setmeal_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from xn_setmeal_manage
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from xn_setmeal_manage
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.XnSetmealManageExample">
+    delete from xn_setmeal_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.XnSetmealManage">
+    insert into xn_setmeal_manage (ID, setMealName, setMealPrice, 
+      beginDate, endDate, bindMan, 
+      description, createTime, status, 
+      UID)
+    values (#{id,jdbcType=INTEGER}, #{setmealname,jdbcType=VARCHAR}, #{setmealprice,jdbcType=DECIMAL}, 
+      #{begindate,jdbcType=VARCHAR}, #{enddate,jdbcType=VARCHAR}, #{bindman,jdbcType=INTEGER}, 
+      #{description,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, 
+      #{uid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.XnSetmealManage">
+    insert into xn_setmeal_manage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="setmealname != null">
+        setMealName,
+      </if>
+      <if test="setmealprice != null">
+        setMealPrice,
+      </if>
+      <if test="begindate != null">
+        beginDate,
+      </if>
+      <if test="enddate != null">
+        endDate,
+      </if>
+      <if test="bindman != null">
+        bindMan,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="uid != null">
+        UID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="setmealname != null">
+        #{setmealname,jdbcType=VARCHAR},
+      </if>
+      <if test="setmealprice != null">
+        #{setmealprice,jdbcType=DECIMAL},
+      </if>
+      <if test="begindate != null">
+        #{begindate,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="bindman != null">
+        #{bindman,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.XnSetmealManageExample" resultType="java.lang.Integer">
+    select count(*) from xn_setmeal_manage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update xn_setmeal_manage
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.setmealname != null">
+        setMealName = #{record.setmealname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.setmealprice != null">
+        setMealPrice = #{record.setmealprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.begindate != null">
+        beginDate = #{record.begindate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enddate != null">
+        endDate = #{record.enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bindman != null">
+        bindMan = #{record.bindman,jdbcType=INTEGER},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.uid != null">
+        UID = #{record.uid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update xn_setmeal_manage
+    set ID = #{record.id,jdbcType=INTEGER},
+      setMealName = #{record.setmealname,jdbcType=VARCHAR},
+      setMealPrice = #{record.setmealprice,jdbcType=DECIMAL},
+      beginDate = #{record.begindate,jdbcType=VARCHAR},
+      endDate = #{record.enddate,jdbcType=VARCHAR},
+      bindMan = #{record.bindman,jdbcType=INTEGER},
+      description = #{record.description,jdbcType=VARCHAR},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=TINYINT},
+      UID = #{record.uid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.XnSetmealManage">
+    update xn_setmeal_manage
+    <set>
+      <if test="setmealname != null">
+        setMealName = #{setmealname,jdbcType=VARCHAR},
+      </if>
+      <if test="setmealprice != null">
+        setMealPrice = #{setmealprice,jdbcType=DECIMAL},
+      </if>
+      <if test="begindate != null">
+        beginDate = #{begindate,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null">
+        endDate = #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="bindman != null">
+        bindMan = #{bindman,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="uid != null">
+        UID = #{uid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.XnSetmealManage">
+    update xn_setmeal_manage
+    set setMealName = #{setmealname,jdbcType=VARCHAR},
+      setMealPrice = #{setmealprice,jdbcType=DECIMAL},
+      beginDate = #{begindate,jdbcType=VARCHAR},
+      endDate = #{enddate,jdbcType=VARCHAR},
+      bindMan = #{bindman,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      UID = #{uid,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

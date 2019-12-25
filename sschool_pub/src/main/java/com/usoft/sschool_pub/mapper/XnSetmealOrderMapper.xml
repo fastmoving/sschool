@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.usoft.sschool_pub.mapper.XnSetmealOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.XnSetmealOrder" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="SID" property="sid" jdbcType="INTEGER" />
+    <result column="studentName" property="studentname" jdbcType="VARCHAR" />
+    <result column="orderNumber" property="ordernumber" jdbcType="VARCHAR" />
+    <result column="buyTime" property="buytime" jdbcType="TIMESTAMP" />
+    <result column="orderState" property="orderstate" jdbcType="TINYINT" />
+    <result column="orderPrice" property="orderprice" jdbcType="DECIMAL" />
+    <result column="parentPhone" property="parentphone" jdbcType="VARCHAR" />
+    <result column="SETID" property="setid" jdbcType="INTEGER" />
+    <result column="payType" property="paytype" jdbcType="VARCHAR" />
+    <result column="setMealName" property="setmealname" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, SID, studentName, orderNumber, buyTime, orderState, orderPrice, parentPhone, 
+    SETID, payType, setMealName, createTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.XnSetmealOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from xn_setmeal_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from xn_setmeal_order
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from xn_setmeal_order
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.XnSetmealOrderExample" >
+    delete from xn_setmeal_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.XnSetmealOrder" >
+    insert into xn_setmeal_order (ID, SID, studentName, 
+      orderNumber, buyTime, orderState, 
+      orderPrice, parentPhone, SETID, 
+      payType, setMealName, createTime
+      )
+    values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, #{studentname,jdbcType=VARCHAR}, 
+      #{ordernumber,jdbcType=VARCHAR}, #{buytime,jdbcType=TIMESTAMP}, #{orderstate,jdbcType=TINYINT}, 
+      #{orderprice,jdbcType=DECIMAL}, #{parentphone,jdbcType=VARCHAR}, #{setid,jdbcType=INTEGER}, 
+      #{paytype,jdbcType=VARCHAR}, #{setmealname,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.XnSetmealOrder" >
+    insert into xn_setmeal_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="sid != null" >
+        SID,
+      </if>
+      <if test="studentname != null" >
+        studentName,
+      </if>
+      <if test="ordernumber != null" >
+        orderNumber,
+      </if>
+      <if test="buytime != null" >
+        buyTime,
+      </if>
+      <if test="orderstate != null" >
+        orderState,
+      </if>
+      <if test="orderprice != null" >
+        orderPrice,
+      </if>
+      <if test="parentphone != null" >
+        parentPhone,
+      </if>
+      <if test="setid != null" >
+        SETID,
+      </if>
+      <if test="paytype != null" >
+        payType,
+      </if>
+      <if test="setmealname != null" >
+        setMealName,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="studentname != null" >
+        #{studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="ordernumber != null" >
+        #{ordernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="buytime != null" >
+        #{buytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderstate != null" >
+        #{orderstate,jdbcType=TINYINT},
+      </if>
+      <if test="orderprice != null" >
+        #{orderprice,jdbcType=DECIMAL},
+      </if>
+      <if test="parentphone != null" >
+        #{parentphone,jdbcType=VARCHAR},
+      </if>
+      <if test="setid != null" >
+        #{setid,jdbcType=INTEGER},
+      </if>
+      <if test="paytype != null" >
+        #{paytype,jdbcType=VARCHAR},
+      </if>
+      <if test="setmealname != null" >
+        #{setmealname,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.XnSetmealOrderExample" resultType="java.lang.Integer" >
+    select count(*) from xn_setmeal_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update xn_setmeal_order
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.sid != null" >
+        SID = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.studentname != null" >
+        studentName = #{record.studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ordernumber != null" >
+        orderNumber = #{record.ordernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buytime != null" >
+        buyTime = #{record.buytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderstate != null" >
+        orderState = #{record.orderstate,jdbcType=TINYINT},
+      </if>
+      <if test="record.orderprice != null" >
+        orderPrice = #{record.orderprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.parentphone != null" >
+        parentPhone = #{record.parentphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.setid != null" >
+        SETID = #{record.setid,jdbcType=INTEGER},
+      </if>
+      <if test="record.paytype != null" >
+        payType = #{record.paytype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.setmealname != null" >
+        setMealName = #{record.setmealname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update xn_setmeal_order
+    set ID = #{record.id,jdbcType=INTEGER},
+      SID = #{record.sid,jdbcType=INTEGER},
+      studentName = #{record.studentname,jdbcType=VARCHAR},
+      orderNumber = #{record.ordernumber,jdbcType=VARCHAR},
+      buyTime = #{record.buytime,jdbcType=TIMESTAMP},
+      orderState = #{record.orderstate,jdbcType=TINYINT},
+      orderPrice = #{record.orderprice,jdbcType=DECIMAL},
+      parentPhone = #{record.parentphone,jdbcType=VARCHAR},
+      SETID = #{record.setid,jdbcType=INTEGER},
+      payType = #{record.paytype,jdbcType=VARCHAR},
+      setMealName = #{record.setmealname,jdbcType=VARCHAR},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.XnSetmealOrder" >
+    update xn_setmeal_order
+    <set >
+      <if test="sid != null" >
+        SID = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="studentname != null" >
+        studentName = #{studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="ordernumber != null" >
+        orderNumber = #{ordernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="buytime != null" >
+        buyTime = #{buytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderstate != null" >
+        orderState = #{orderstate,jdbcType=TINYINT},
+      </if>
+      <if test="orderprice != null" >
+        orderPrice = #{orderprice,jdbcType=DECIMAL},
+      </if>
+      <if test="parentphone != null" >
+        parentPhone = #{parentphone,jdbcType=VARCHAR},
+      </if>
+      <if test="setid != null" >
+        SETID = #{setid,jdbcType=INTEGER},
+      </if>
+      <if test="paytype != null" >
+        payType = #{paytype,jdbcType=VARCHAR},
+      </if>
+      <if test="setmealname != null" >
+        setMealName = #{setmealname,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.XnSetmealOrder" >
+    update xn_setmeal_order
+    set SID = #{sid,jdbcType=INTEGER},
+      studentName = #{studentname,jdbcType=VARCHAR},
+      orderNumber = #{ordernumber,jdbcType=VARCHAR},
+      buyTime = #{buytime,jdbcType=TIMESTAMP},
+      orderState = #{orderstate,jdbcType=TINYINT},
+      orderPrice = #{orderprice,jdbcType=DECIMAL},
+      parentPhone = #{parentphone,jdbcType=VARCHAR},
+      SETID = #{setid,jdbcType=INTEGER},
+      payType = #{paytype,jdbcType=VARCHAR},
+      setMealName = #{setmealname,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

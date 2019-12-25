@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.usoft.sschool_manage.mapper.base.BuildingInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.BuildingInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="build_No" property="buildNo" jdbcType="VARCHAR" />
+    <result column="build_name" property="buildName" jdbcType="VARCHAR" />
+    <result column="build_site" property="buildSite" jdbcType="VARCHAR" />
+    <result column="build_remark" property="buildRemark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, build_No, build_name, build_site, build_remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.BuildingInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from building_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from building_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from building_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.BuildingInfoExample" >
+    delete from building_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.BuildingInfo" >
+    insert into building_info (id, build_No, build_name, 
+      build_site, build_remark)
+    values (#{id,jdbcType=INTEGER}, #{buildNo,jdbcType=VARCHAR}, #{buildName,jdbcType=VARCHAR}, 
+      #{buildSite,jdbcType=VARCHAR}, #{buildRemark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.BuildingInfo" >
+    insert into building_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="buildNo != null" >
+        build_No,
+      </if>
+      <if test="buildName != null" >
+        build_name,
+      </if>
+      <if test="buildSite != null" >
+        build_site,
+      </if>
+      <if test="buildRemark != null" >
+        build_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="buildNo != null" >
+        #{buildNo,jdbcType=VARCHAR},
+      </if>
+      <if test="buildName != null" >
+        #{buildName,jdbcType=VARCHAR},
+      </if>
+      <if test="buildSite != null" >
+        #{buildSite,jdbcType=VARCHAR},
+      </if>
+      <if test="buildRemark != null" >
+        #{buildRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.BuildingInfoExample" resultType="java.lang.Integer" >
+    select count(*) from building_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update building_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.buildNo != null" >
+        build_No = #{record.buildNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buildName != null" >
+        build_name = #{record.buildName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buildSite != null" >
+        build_site = #{record.buildSite,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buildRemark != null" >
+        build_remark = #{record.buildRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update building_info
+    set id = #{record.id,jdbcType=INTEGER},
+      build_No = #{record.buildNo,jdbcType=VARCHAR},
+      build_name = #{record.buildName,jdbcType=VARCHAR},
+      build_site = #{record.buildSite,jdbcType=VARCHAR},
+      build_remark = #{record.buildRemark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.BuildingInfo" >
+    update building_info
+    <set >
+      <if test="buildNo != null" >
+        build_No = #{buildNo,jdbcType=VARCHAR},
+      </if>
+      <if test="buildName != null" >
+        build_name = #{buildName,jdbcType=VARCHAR},
+      </if>
+      <if test="buildSite != null" >
+        build_site = #{buildSite,jdbcType=VARCHAR},
+      </if>
+      <if test="buildRemark != null" >
+        build_remark = #{buildRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.BuildingInfo" >
+    update building_info
+    set build_No = #{buildNo,jdbcType=VARCHAR},
+      build_name = #{buildName,jdbcType=VARCHAR},
+      build_site = #{buildSite,jdbcType=VARCHAR},
+      build_remark = #{buildRemark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

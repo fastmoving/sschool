@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.usoft.sschool_teacher.mapper.HlCurriculumMapper" >
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.HlCurriculum" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <id column="SchoolId" property="schoolid" jdbcType="INTEGER" />
+    <result column="ClassId" property="classid" jdbcType="INTEGER" />
+    <result column="Cycle" property="cycle" jdbcType="INTEGER" />
+    <result column="CurrStart" property="currstart" jdbcType="VARCHAR" />
+    <result column="CurrEnd" property="currend" jdbcType="VARCHAR" />
+    <result column="Discipline" property="discipline" jdbcType="INTEGER" />
+    <result column="ClassTeacher" property="classteacher" jdbcType="INTEGER" />
+    <result column="RoomId" property="roomid" jdbcType="INTEGER" />
+    <result column="YearId" property="yearid" jdbcType="INTEGER" />
+    <result column="LessonId" property="lessonid" jdbcType="INTEGER" />
+    <result column="week" property="week" jdbcType="INTEGER" />
+    <result column="_MASK_FROM_V2" property="maskFromV2" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, SchoolId, ClassId, Cycle, CurrStart, CurrEnd, Discipline, ClassTeacher, RoomId, 
+    YearId, LessonId, week, _MASK_FROM_V2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.HlCurriculumExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hl_curriculum
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.HlCurriculumKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from hl_curriculum
+    where ID = #{id,jdbcType=INTEGER}
+      and SchoolId = #{schoolid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.usoft.smartschool.pojo.HlCurriculumKey" >
+    delete from hl_curriculum
+    where ID = #{id,jdbcType=INTEGER}
+      and SchoolId = #{schoolid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.HlCurriculumExample" >
+    delete from hl_curriculum
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.HlCurriculum" >
+    insert into hl_curriculum (ID, SchoolId, ClassId, 
+      Cycle, CurrStart, CurrEnd, 
+      Discipline, ClassTeacher, RoomId, 
+      YearId, LessonId, week, 
+      _MASK_FROM_V2)
+    values (#{id,jdbcType=INTEGER}, #{schoolid,jdbcType=INTEGER}, #{classid,jdbcType=INTEGER}, 
+      #{cycle,jdbcType=INTEGER}, #{currstart,jdbcType=VARCHAR}, #{currend,jdbcType=VARCHAR}, 
+      #{discipline,jdbcType=INTEGER}, #{classteacher,jdbcType=INTEGER}, #{roomid,jdbcType=INTEGER}, 
+      #{yearid,jdbcType=INTEGER}, #{lessonid,jdbcType=INTEGER}, #{week,jdbcType=INTEGER}, 
+      #{maskFromV2,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.HlCurriculum" >
+    insert into hl_curriculum
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="schoolid != null" >
+        SchoolId,
+      </if>
+      <if test="classid != null" >
+        ClassId,
+      </if>
+      <if test="cycle != null" >
+        Cycle,
+      </if>
+      <if test="currstart != null" >
+        CurrStart,
+      </if>
+      <if test="currend != null" >
+        CurrEnd,
+      </if>
+      <if test="discipline != null" >
+        Discipline,
+      </if>
+      <if test="classteacher != null" >
+        ClassTeacher,
+      </if>
+      <if test="roomid != null" >
+        RoomId,
+      </if>
+      <if test="yearid != null" >
+        YearId,
+      </if>
+      <if test="lessonid != null" >
+        LessonId,
+      </if>
+      <if test="week != null" >
+        week,
+      </if>
+      <if test="maskFromV2 != null" >
+        _MASK_FROM_V2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="schoolid != null" >
+        #{schoolid,jdbcType=INTEGER},
+      </if>
+      <if test="classid != null" >
+        #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="cycle != null" >
+        #{cycle,jdbcType=INTEGER},
+      </if>
+      <if test="currstart != null" >
+        #{currstart,jdbcType=VARCHAR},
+      </if>
+      <if test="currend != null" >
+        #{currend,jdbcType=VARCHAR},
+      </if>
+      <if test="discipline != null" >
+        #{discipline,jdbcType=INTEGER},
+      </if>
+      <if test="classteacher != null" >
+        #{classteacher,jdbcType=INTEGER},
+      </if>
+      <if test="roomid != null" >
+        #{roomid,jdbcType=INTEGER},
+      </if>
+      <if test="yearid != null" >
+        #{yearid,jdbcType=INTEGER},
+      </if>
+      <if test="lessonid != null" >
+        #{lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="week != null" >
+        #{week,jdbcType=INTEGER},
+      </if>
+      <if test="maskFromV2 != null" >
+        #{maskFromV2,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.HlCurriculumExample" resultType="java.lang.Integer" >
+    select count(*) from hl_curriculum
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hl_curriculum
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.schoolid != null" >
+        SchoolId = #{record.schoolid,jdbcType=INTEGER},
+      </if>
+      <if test="record.classid != null" >
+        ClassId = #{record.classid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cycle != null" >
+        Cycle = #{record.cycle,jdbcType=INTEGER},
+      </if>
+      <if test="record.currstart != null" >
+        CurrStart = #{record.currstart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currend != null" >
+        CurrEnd = #{record.currend,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discipline != null" >
+        Discipline = #{record.discipline,jdbcType=INTEGER},
+      </if>
+      <if test="record.classteacher != null" >
+        ClassTeacher = #{record.classteacher,jdbcType=INTEGER},
+      </if>
+      <if test="record.roomid != null" >
+        RoomId = #{record.roomid,jdbcType=INTEGER},
+      </if>
+      <if test="record.yearid != null" >
+        YearId = #{record.yearid,jdbcType=INTEGER},
+      </if>
+      <if test="record.lessonid != null" >
+        LessonId = #{record.lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="record.week != null" >
+        week = #{record.week,jdbcType=INTEGER},
+      </if>
+      <if test="record.maskFromV2 != null" >
+        _MASK_FROM_V2 = #{record.maskFromV2,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hl_curriculum
+    set ID = #{record.id,jdbcType=INTEGER},
+      SchoolId = #{record.schoolid,jdbcType=INTEGER},
+      ClassId = #{record.classid,jdbcType=INTEGER},
+      Cycle = #{record.cycle,jdbcType=INTEGER},
+      CurrStart = #{record.currstart,jdbcType=VARCHAR},
+      CurrEnd = #{record.currend,jdbcType=VARCHAR},
+      Discipline = #{record.discipline,jdbcType=INTEGER},
+      ClassTeacher = #{record.classteacher,jdbcType=INTEGER},
+      RoomId = #{record.roomid,jdbcType=INTEGER},
+      YearId = #{record.yearid,jdbcType=INTEGER},
+      LessonId = #{record.lessonid,jdbcType=INTEGER},
+      week = #{record.week,jdbcType=INTEGER},
+      _MASK_FROM_V2 = #{record.maskFromV2,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.HlCurriculum" >
+    update hl_curriculum
+    <set >
+      <if test="classid != null" >
+        ClassId = #{classid,jdbcType=INTEGER},
+      </if>
+      <if test="cycle != null" >
+        Cycle = #{cycle,jdbcType=INTEGER},
+      </if>
+      <if test="currstart != null" >
+        CurrStart = #{currstart,jdbcType=VARCHAR},
+      </if>
+      <if test="currend != null" >
+        CurrEnd = #{currend,jdbcType=VARCHAR},
+      </if>
+      <if test="discipline != null" >
+        Discipline = #{discipline,jdbcType=INTEGER},
+      </if>
+      <if test="classteacher != null" >
+        ClassTeacher = #{classteacher,jdbcType=INTEGER},
+      </if>
+      <if test="roomid != null" >
+        RoomId = #{roomid,jdbcType=INTEGER},
+      </if>
+      <if test="yearid != null" >
+        YearId = #{yearid,jdbcType=INTEGER},
+      </if>
+      <if test="lessonid != null" >
+        LessonId = #{lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="week != null" >
+        week = #{week,jdbcType=INTEGER},
+      </if>
+      <if test="maskFromV2 != null" >
+        _MASK_FROM_V2 = #{maskFromV2,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+      and SchoolId = #{schoolid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.HlCurriculum" >
+    update hl_curriculum
+    set ClassId = #{classid,jdbcType=INTEGER},
+      Cycle = #{cycle,jdbcType=INTEGER},
+      CurrStart = #{currstart,jdbcType=VARCHAR},
+      CurrEnd = #{currend,jdbcType=VARCHAR},
+      Discipline = #{discipline,jdbcType=INTEGER},
+      ClassTeacher = #{classteacher,jdbcType=INTEGER},
+      RoomId = #{roomid,jdbcType=INTEGER},
+      YearId = #{yearid,jdbcType=INTEGER},
+      LessonId = #{lessonid,jdbcType=INTEGER},
+      week = #{week,jdbcType=INTEGER},
+      _MASK_FROM_V2 = #{maskFromV2,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+      and SchoolId = #{schoolid,jdbcType=INTEGER}
+  </update>
+
+  <select id="getClassCurriculum" resultType="java.util.Map" parameterType="java.util.Map">
+    SELECT
+        hle.EnumItemName,
+        hct.notes,
+        hct.Lesson,
+        ht.Tname,
+        hs.ClassName,
+        hc.ID,
+        hc.`week`
+        from hl_curriculum hc
+        LEFT JOIN hl_schoolyear hsy on hc.YearId = hsy.id
+        LEFT JOIN hl_enumitem hle on hle.ID = hc.Discipline
+        LEFT JOIN hl_curriculumset hct on hc.LessonId = hct.id
+        LEFT JOIN hl_teacher ht on ht.ID = hc.ClassTeacher
+        LEFT JOIN hl_schclass hs on hs.ID = hc.ClassId
+        <where>
+           hsy.isNowYear = 192 and hc.ClassId in(
+          <if test="classId == null">
+              SELECT hc1.ClassId
+              from hl_teacher ht1
+              LEFT JOIN hl_curriculum hc1 on hc1.ClassTeacher = ht1.ID
+              LEFT JOIN hl_schoolyear hsy1 on hsy1.id = hc1.YearId
+              <where>
+                hsy1.isNowYear = 192
+                <if test="teacherId != null">
+                  and  ht1.Id = ${teacherId}
+                </if>
+              </where>
+          </if>
+          <if test="classId != null">
+            ${classId}
+          </if>
+          )
+          <if test="teacherId!=null">
+            and hc.ClassTeacher = ${teacherId}
+          </if>
+        </where>
+  </select>
+
+  <select id="getClasses" resultType="java.util.Map" parameterType="java.util.Map">
+    SELECT DISTINCT
+        hs.ClassName,
+        hs.ID,
+        hem.EnumItemName
+        FROM hl_curriculum hcc
+            LEFT JOIN hl_enumitem hem on hem.ID = hcc.Discipline
+            LEFT JOIN hl_schclass hs on hcc.ClassId = hs.ID
+        <where>
+          <trim prefixOverrides="and">
+            <if test="teacherId !=null">
+              hcc.ClassTeacher = ${teacherId} and
+            </if>
+            <if test="subject!=null">
+              hem.EnumItemName = #{subject} and
+            </if>
+            <if test="schoolId!=null">
+              hcc.SchoolId = ${schoolId}
+            </if>
+          </trim>
+        </where>
+  </select>
+</mapper>

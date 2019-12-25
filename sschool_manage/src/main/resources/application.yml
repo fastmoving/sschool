@@ -1,0 +1,54 @@
+
+
+server:
+  port: 8880
+spring:
+  application:
+    name: sschool-manage
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://47.94.243.54:3306/smart_school?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: jjh1993
+
+
+  redis:
+    host: 47.94.243.54
+    database: 0
+    password: su284315
+    port: 6379
+    jedis:
+      pool:
+        max-active: 20
+        max-wait: -1ms
+        max-idle: 10
+        min-idle: 2
+#  resources:
+#    static-locations: classpath:static/,file:static/
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 1100MB
+  jmx:
+    default-domain: sschool_manage
+eureka:
+ client:
+   service-url:
+     defaultZone: http://47.94.243.54:8080/eureka/
+ instance:
+   prefer-ip-address: true
+
+
+
+mybatis:
+  mapper-locations: mapper/**/*.xml
+logging:
+  level:
+    com.usoft.sschool_manage.mapper.base: debug
+  #config: classpath:logging-config.xml
+management:
+  health:
+    refresh:
+      enabled:
+  #,classpath:mapper/personal/*.xml
+  #type-aliases-package: com.usoft.smartschool.pojo

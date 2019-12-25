@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.usoft.sschool_teacher.mapper.TerminalInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.TerminalInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="SID" property="sid" jdbcType="INTEGER" />
+    <result column="terminal_classroom_id" property="terminalClassroomId" jdbcType="INTEGER" />
+    <result column="terminal_name" property="terminalName" jdbcType="VARCHAR" />
+    <result column="terminal_IP" property="terminalIp" jdbcType="VARCHAR" />
+    <result column="terminal_serv_IP" property="terminalServIp" jdbcType="VARCHAR" />
+    <result column="terminal_mask" property="terminalMask" jdbcType="VARCHAR" />
+    <result column="terminal_gateway" property="terminalGateway" jdbcType="VARCHAR" />
+    <result column="terminal_dns" property="terminalDns" jdbcType="VARCHAR" />
+    <result column="terminal_mac" property="terminalMac" jdbcType="VARCHAR" />
+    <result column="terminal_port" property="terminalPort" jdbcType="VARCHAR" />
+    <result column="terminal_serv_port" property="terminalServPort" jdbcType="VARCHAR" />
+    <result column="terminal_rtsp_port" property="terminalRtspPort" jdbcType="VARCHAR" />
+    <result column="terminal_rtmp_port" property="terminalRtmpPort" jdbcType="VARCHAR" />
+    <result column="terminal_http_port" property="terminalHttpPort" jdbcType="VARCHAR" />
+    <result column="terminal_request" property="terminalRequest" jdbcType="VARCHAR" />
+    <result column="terminal_license" property="terminalLicense" jdbcType="VARCHAR" />
+    <result column="terminal_cam_count" property="terminalCamCount" jdbcType="INTEGER" />
+    <result column="terminal_desc" property="terminalDesc" jdbcType="VARCHAR" />
+    <result column="terminal_update_time" property="terminalUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="_MASK_FROM_V2" property="maskFromV2" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, SID, terminal_classroom_id, terminal_name, terminal_IP, terminal_serv_IP, terminal_mask, 
+    terminal_gateway, terminal_dns, terminal_mac, terminal_port, terminal_serv_port, 
+    terminal_rtsp_port, terminal_rtmp_port, terminal_http_port, terminal_request, terminal_license, 
+    terminal_cam_count, terminal_desc, terminal_update_time, _MASK_FROM_V2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.TerminalInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from terminal_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.TerminalInfoKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from terminal_info
+    where id = #{id,jdbcType=INTEGER}
+      and SID = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.usoft.smartschool.pojo.TerminalInfoKey" >
+    delete from terminal_info
+    where id = #{id,jdbcType=INTEGER}
+      and SID = #{sid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.TerminalInfoExample" >
+    delete from terminal_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.TerminalInfo" >
+    insert into terminal_info (id, SID, terminal_classroom_id, 
+      terminal_name, terminal_IP, terminal_serv_IP, 
+      terminal_mask, terminal_gateway, terminal_dns, 
+      terminal_mac, terminal_port, terminal_serv_port, 
+      terminal_rtsp_port, terminal_rtmp_port, terminal_http_port, 
+      terminal_request, terminal_license, terminal_cam_count, 
+      terminal_desc, terminal_update_time, _MASK_FROM_V2
+      )
+    values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, #{terminalClassroomId,jdbcType=INTEGER}, 
+      #{terminalName,jdbcType=VARCHAR}, #{terminalIp,jdbcType=VARCHAR}, #{terminalServIp,jdbcType=VARCHAR}, 
+      #{terminalMask,jdbcType=VARCHAR}, #{terminalGateway,jdbcType=VARCHAR}, #{terminalDns,jdbcType=VARCHAR}, 
+      #{terminalMac,jdbcType=VARCHAR}, #{terminalPort,jdbcType=VARCHAR}, #{terminalServPort,jdbcType=VARCHAR}, 
+      #{terminalRtspPort,jdbcType=VARCHAR}, #{terminalRtmpPort,jdbcType=VARCHAR}, #{terminalHttpPort,jdbcType=VARCHAR}, 
+      #{terminalRequest,jdbcType=VARCHAR}, #{terminalLicense,jdbcType=VARCHAR}, #{terminalCamCount,jdbcType=INTEGER}, 
+      #{terminalDesc,jdbcType=VARCHAR}, #{terminalUpdateTime,jdbcType=TIMESTAMP}, #{maskFromV2,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.TerminalInfo" >
+    insert into terminal_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sid != null" >
+        SID,
+      </if>
+      <if test="terminalClassroomId != null" >
+        terminal_classroom_id,
+      </if>
+      <if test="terminalName != null" >
+        terminal_name,
+      </if>
+      <if test="terminalIp != null" >
+        terminal_IP,
+      </if>
+      <if test="terminalServIp != null" >
+        terminal_serv_IP,
+      </if>
+      <if test="terminalMask != null" >
+        terminal_mask,
+      </if>
+      <if test="terminalGateway != null" >
+        terminal_gateway,
+      </if>
+      <if test="terminalDns != null" >
+        terminal_dns,
+      </if>
+      <if test="terminalMac != null" >
+        terminal_mac,
+      </if>
+      <if test="terminalPort != null" >
+        terminal_port,
+      </if>
+      <if test="terminalServPort != null" >
+        terminal_serv_port,
+      </if>
+      <if test="terminalRtspPort != null" >
+        terminal_rtsp_port,
+      </if>
+      <if test="terminalRtmpPort != null" >
+        terminal_rtmp_port,
+      </if>
+      <if test="terminalHttpPort != null" >
+        terminal_http_port,
+      </if>
+      <if test="terminalRequest != null" >
+        terminal_request,
+      </if>
+      <if test="terminalLicense != null" >
+        terminal_license,
+      </if>
+      <if test="terminalCamCount != null" >
+        terminal_cam_count,
+      </if>
+      <if test="terminalDesc != null" >
+        terminal_desc,
+      </if>
+      <if test="terminalUpdateTime != null" >
+        terminal_update_time,
+      </if>
+      <if test="maskFromV2 != null" >
+        _MASK_FROM_V2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="terminalClassroomId != null" >
+        #{terminalClassroomId,jdbcType=INTEGER},
+      </if>
+      <if test="terminalName != null" >
+        #{terminalName,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalIp != null" >
+        #{terminalIp,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalServIp != null" >
+        #{terminalServIp,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalMask != null" >
+        #{terminalMask,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalGateway != null" >
+        #{terminalGateway,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalDns != null" >
+        #{terminalDns,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalMac != null" >
+        #{terminalMac,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalPort != null" >
+        #{terminalPort,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalServPort != null" >
+        #{terminalServPort,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalRtspPort != null" >
+        #{terminalRtspPort,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalRtmpPort != null" >
+        #{terminalRtmpPort,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalHttpPort != null" >
+        #{terminalHttpPort,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalRequest != null" >
+        #{terminalRequest,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalLicense != null" >
+        #{terminalLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalCamCount != null" >
+        #{terminalCamCount,jdbcType=INTEGER},
+      </if>
+      <if test="terminalDesc != null" >
+        #{terminalDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalUpdateTime != null" >
+        #{terminalUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="maskFromV2 != null" >
+        #{maskFromV2,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.TerminalInfoExample" resultType="java.lang.Integer" >
+    select count(*) from terminal_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update terminal_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.sid != null" >
+        SID = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.terminalClassroomId != null" >
+        terminal_classroom_id = #{record.terminalClassroomId,jdbcType=INTEGER},
+      </if>
+      <if test="record.terminalName != null" >
+        terminal_name = #{record.terminalName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalIp != null" >
+        terminal_IP = #{record.terminalIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalServIp != null" >
+        terminal_serv_IP = #{record.terminalServIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalMask != null" >
+        terminal_mask = #{record.terminalMask,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalGateway != null" >
+        terminal_gateway = #{record.terminalGateway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalDns != null" >
+        terminal_dns = #{record.terminalDns,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalMac != null" >
+        terminal_mac = #{record.terminalMac,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalPort != null" >
+        terminal_port = #{record.terminalPort,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalServPort != null" >
+        terminal_serv_port = #{record.terminalServPort,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalRtspPort != null" >
+        terminal_rtsp_port = #{record.terminalRtspPort,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalRtmpPort != null" >
+        terminal_rtmp_port = #{record.terminalRtmpPort,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalHttpPort != null" >
+        terminal_http_port = #{record.terminalHttpPort,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalRequest != null" >
+        terminal_request = #{record.terminalRequest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalLicense != null" >
+        terminal_license = #{record.terminalLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalCamCount != null" >
+        terminal_cam_count = #{record.terminalCamCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.terminalDesc != null" >
+        terminal_desc = #{record.terminalDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.terminalUpdateTime != null" >
+        terminal_update_time = #{record.terminalUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.maskFromV2 != null" >
+        _MASK_FROM_V2 = #{record.maskFromV2,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update terminal_info
+    set id = #{record.id,jdbcType=INTEGER},
+      SID = #{record.sid,jdbcType=INTEGER},
+      terminal_classroom_id = #{record.terminalClassroomId,jdbcType=INTEGER},
+      terminal_name = #{record.terminalName,jdbcType=VARCHAR},
+      terminal_IP = #{record.terminalIp,jdbcType=VARCHAR},
+      terminal_serv_IP = #{record.terminalServIp,jdbcType=VARCHAR},
+      terminal_mask = #{record.terminalMask,jdbcType=VARCHAR},
+      terminal_gateway = #{record.terminalGateway,jdbcType=VARCHAR},
+      terminal_dns = #{record.terminalDns,jdbcType=VARCHAR},
+      terminal_mac = #{record.terminalMac,jdbcType=VARCHAR},
+      terminal_port = #{record.terminalPort,jdbcType=VARCHAR},
+      terminal_serv_port = #{record.terminalServPort,jdbcType=VARCHAR},
+      terminal_rtsp_port = #{record.terminalRtspPort,jdbcType=VARCHAR},
+      terminal_rtmp_port = #{record.terminalRtmpPort,jdbcType=VARCHAR},
+      terminal_http_port = #{record.terminalHttpPort,jdbcType=VARCHAR},
+      terminal_request = #{record.terminalRequest,jdbcType=VARCHAR},
+      terminal_license = #{record.terminalLicense,jdbcType=VARCHAR},
+      terminal_cam_count = #{record.terminalCamCount,jdbcType=INTEGER},
+      terminal_desc = #{record.terminalDesc,jdbcType=VARCHAR},
+      terminal_update_time = #{record.terminalUpdateTime,jdbcType=TIMESTAMP},
+      _MASK_FROM_V2 = #{record.maskFromV2,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.TerminalInfo" >
+    update terminal_info
+    <set >
+      <if test="terminalClassroomId != null" >
+        terminal_classroom_id = #{terminalClassroomId,jdbcType=INTEGER},
+      </if>
+      <if test="terminalName != null" >
+        terminal_name = #{terminalName,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalIp != null" >
+        terminal_IP = #{terminalIp,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalServIp != null" >
+        terminal_serv_IP = #{terminalServIp,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalMask != null" >
+        terminal_mask = #{terminalMask,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalGateway != null" >
+        terminal_gateway = #{terminalGateway,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalDns != null" >
+        terminal_dns = #{terminalDns,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalMac != null" >
+        terminal_mac = #{terminalMac,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalPort != null" >
+        terminal_port = #{terminalPort,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalServPort != null" >
+        terminal_serv_port = #{terminalServPort,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalRtspPort != null" >
+        terminal_rtsp_port = #{terminalRtspPort,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalRtmpPort != null" >
+        terminal_rtmp_port = #{terminalRtmpPort,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalHttpPort != null" >
+        terminal_http_port = #{terminalHttpPort,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalRequest != null" >
+        terminal_request = #{terminalRequest,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalLicense != null" >
+        terminal_license = #{terminalLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalCamCount != null" >
+        terminal_cam_count = #{terminalCamCount,jdbcType=INTEGER},
+      </if>
+      <if test="terminalDesc != null" >
+        terminal_desc = #{terminalDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalUpdateTime != null" >
+        terminal_update_time = #{terminalUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="maskFromV2 != null" >
+        _MASK_FROM_V2 = #{maskFromV2,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+      and SID = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.TerminalInfo" >
+    update terminal_info
+    set terminal_classroom_id = #{terminalClassroomId,jdbcType=INTEGER},
+      terminal_name = #{terminalName,jdbcType=VARCHAR},
+      terminal_IP = #{terminalIp,jdbcType=VARCHAR},
+      terminal_serv_IP = #{terminalServIp,jdbcType=VARCHAR},
+      terminal_mask = #{terminalMask,jdbcType=VARCHAR},
+      terminal_gateway = #{terminalGateway,jdbcType=VARCHAR},
+      terminal_dns = #{terminalDns,jdbcType=VARCHAR},
+      terminal_mac = #{terminalMac,jdbcType=VARCHAR},
+      terminal_port = #{terminalPort,jdbcType=VARCHAR},
+      terminal_serv_port = #{terminalServPort,jdbcType=VARCHAR},
+      terminal_rtsp_port = #{terminalRtspPort,jdbcType=VARCHAR},
+      terminal_rtmp_port = #{terminalRtmpPort,jdbcType=VARCHAR},
+      terminal_http_port = #{terminalHttpPort,jdbcType=VARCHAR},
+      terminal_request = #{terminalRequest,jdbcType=VARCHAR},
+      terminal_license = #{terminalLicense,jdbcType=VARCHAR},
+      terminal_cam_count = #{terminalCamCount,jdbcType=INTEGER},
+      terminal_desc = #{terminalDesc,jdbcType=VARCHAR},
+      terminal_update_time = #{terminalUpdateTime,jdbcType=TIMESTAMP},
+      _MASK_FROM_V2 = #{maskFromV2,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+      and SID = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

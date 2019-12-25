@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.usoft.sschool_student.mapper.BAttachfileMapper" >
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.BAttachfile" >
+    <id column="AttFile_ID" property="attfileId" jdbcType="INTEGER" />
+    <result column="Data_Table" property="dataTable" jdbcType="INTEGER" />
+    <result column="Data_ID" property="dataId" jdbcType="INTEGER" />
+    <result column="FileCategory" property="filecategory" jdbcType="VARCHAR" />
+    <result column="Attach_Name" property="attachName" jdbcType="VARCHAR" />
+    <result column="Attach_Path" property="attachPath" jdbcType="VARCHAR" />
+    <result column="FilePath" property="filepath" jdbcType="VARCHAR" />
+    <result column="FilePath_s" property="filepathS" jdbcType="VARCHAR" />
+    <result column="FileName" property="filename" jdbcType="VARCHAR" />
+    <result column="FileOriginalName" property="fileoriginalname" jdbcType="VARCHAR" />
+    <result column="FileType" property="filetype" jdbcType="INTEGER" />
+    <result column="FileSize" property="filesize" jdbcType="VARCHAR" />
+    <result column="FileExt" property="fileext" jdbcType="VARCHAR" />
+    <result column="IsPreview" property="ispreview" jdbcType="INTEGER" />
+    <result column="FileVType" property="filevtype" jdbcType="VARCHAR" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+    <result column="UploadTime" property="uploadtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    AttFile_ID, Data_Table, Data_ID, FileCategory, Attach_Name, Attach_Path, FilePath, 
+    FilePath_s, FileName, FileOriginalName, FileType, FileSize, FileExt, IsPreview, FileVType, 
+    Remark, UploadTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.BAttachfileExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from b_attachfile
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from b_attachfile
+    where AttFile_ID = #{attfileId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b_attachfile
+    where AttFile_ID = #{attfileId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.BAttachfileExample" >
+    delete from b_attachfile
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.BAttachfile" >
+    insert into b_attachfile (AttFile_ID, Data_Table, Data_ID, 
+      FileCategory, Attach_Name, Attach_Path, 
+      FilePath, FilePath_s, FileName, 
+      FileOriginalName, FileType, FileSize, 
+      FileExt, IsPreview, FileVType, 
+      Remark, UploadTime)
+    values (#{attfileId,jdbcType=INTEGER}, #{dataTable,jdbcType=INTEGER}, #{dataId,jdbcType=INTEGER}, 
+      #{filecategory,jdbcType=VARCHAR}, #{attachName,jdbcType=VARCHAR}, #{attachPath,jdbcType=VARCHAR}, 
+      #{filepath,jdbcType=VARCHAR}, #{filepathS,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR}, 
+      #{fileoriginalname,jdbcType=VARCHAR}, #{filetype,jdbcType=INTEGER}, #{filesize,jdbcType=VARCHAR}, 
+      #{fileext,jdbcType=VARCHAR}, #{ispreview,jdbcType=INTEGER}, #{filevtype,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{uploadtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.BAttachfile" >
+    insert into b_attachfile
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="attfileId != null" >
+        AttFile_ID,
+      </if>
+      <if test="dataTable != null" >
+        Data_Table,
+      </if>
+      <if test="dataId != null" >
+        Data_ID,
+      </if>
+      <if test="filecategory != null" >
+        FileCategory,
+      </if>
+      <if test="attachName != null" >
+        Attach_Name,
+      </if>
+      <if test="attachPath != null" >
+        Attach_Path,
+      </if>
+      <if test="filepath != null" >
+        FilePath,
+      </if>
+      <if test="filepathS != null" >
+        FilePath_s,
+      </if>
+      <if test="filename != null" >
+        FileName,
+      </if>
+      <if test="fileoriginalname != null" >
+        FileOriginalName,
+      </if>
+      <if test="filetype != null" >
+        FileType,
+      </if>
+      <if test="filesize != null" >
+        FileSize,
+      </if>
+      <if test="fileext != null" >
+        FileExt,
+      </if>
+      <if test="ispreview != null" >
+        IsPreview,
+      </if>
+      <if test="filevtype != null" >
+        FileVType,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="uploadtime != null" >
+        UploadTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="attfileId != null" >
+        #{attfileId,jdbcType=INTEGER},
+      </if>
+      <if test="dataTable != null" >
+        #{dataTable,jdbcType=INTEGER},
+      </if>
+      <if test="dataId != null" >
+        #{dataId,jdbcType=INTEGER},
+      </if>
+      <if test="filecategory != null" >
+        #{filecategory,jdbcType=VARCHAR},
+      </if>
+      <if test="attachName != null" >
+        #{attachName,jdbcType=VARCHAR},
+      </if>
+      <if test="attachPath != null" >
+        #{attachPath,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null" >
+        #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="filepathS != null" >
+        #{filepathS,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="fileoriginalname != null" >
+        #{fileoriginalname,jdbcType=VARCHAR},
+      </if>
+      <if test="filetype != null" >
+        #{filetype,jdbcType=INTEGER},
+      </if>
+      <if test="filesize != null" >
+        #{filesize,jdbcType=VARCHAR},
+      </if>
+      <if test="fileext != null" >
+        #{fileext,jdbcType=VARCHAR},
+      </if>
+      <if test="ispreview != null" >
+        #{ispreview,jdbcType=INTEGER},
+      </if>
+      <if test="filevtype != null" >
+        #{filevtype,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null" >
+        #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.BAttachfileExample" resultType="java.lang.Integer" >
+    select count(*) from b_attachfile
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update b_attachfile
+    <set >
+      <if test="record.attfileId != null" >
+        AttFile_ID = #{record.attfileId,jdbcType=INTEGER},
+      </if>
+      <if test="record.dataTable != null" >
+        Data_Table = #{record.dataTable,jdbcType=INTEGER},
+      </if>
+      <if test="record.dataId != null" >
+        Data_ID = #{record.dataId,jdbcType=INTEGER},
+      </if>
+      <if test="record.filecategory != null" >
+        FileCategory = #{record.filecategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachName != null" >
+        Attach_Name = #{record.attachName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachPath != null" >
+        Attach_Path = #{record.attachPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filepath != null" >
+        FilePath = #{record.filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filepathS != null" >
+        FilePath_s = #{record.filepathS,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filename != null" >
+        FileName = #{record.filename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileoriginalname != null" >
+        FileOriginalName = #{record.fileoriginalname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filetype != null" >
+        FileType = #{record.filetype,jdbcType=INTEGER},
+      </if>
+      <if test="record.filesize != null" >
+        FileSize = #{record.filesize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileext != null" >
+        FileExt = #{record.fileext,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ispreview != null" >
+        IsPreview = #{record.ispreview,jdbcType=INTEGER},
+      </if>
+      <if test="record.filevtype != null" >
+        FileVType = #{record.filevtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uploadtime != null" >
+        UploadTime = #{record.uploadtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update b_attachfile
+    set AttFile_ID = #{record.attfileId,jdbcType=INTEGER},
+      Data_Table = #{record.dataTable,jdbcType=INTEGER},
+      Data_ID = #{record.dataId,jdbcType=INTEGER},
+      FileCategory = #{record.filecategory,jdbcType=VARCHAR},
+      Attach_Name = #{record.attachName,jdbcType=VARCHAR},
+      Attach_Path = #{record.attachPath,jdbcType=VARCHAR},
+      FilePath = #{record.filepath,jdbcType=VARCHAR},
+      FilePath_s = #{record.filepathS,jdbcType=VARCHAR},
+      FileName = #{record.filename,jdbcType=VARCHAR},
+      FileOriginalName = #{record.fileoriginalname,jdbcType=VARCHAR},
+      FileType = #{record.filetype,jdbcType=INTEGER},
+      FileSize = #{record.filesize,jdbcType=VARCHAR},
+      FileExt = #{record.fileext,jdbcType=VARCHAR},
+      IsPreview = #{record.ispreview,jdbcType=INTEGER},
+      FileVType = #{record.filevtype,jdbcType=VARCHAR},
+      Remark = #{record.remark,jdbcType=VARCHAR},
+      UploadTime = #{record.uploadtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.BAttachfile" >
+    update b_attachfile
+    <set >
+      <if test="dataTable != null" >
+        Data_Table = #{dataTable,jdbcType=INTEGER},
+      </if>
+      <if test="dataId != null" >
+        Data_ID = #{dataId,jdbcType=INTEGER},
+      </if>
+      <if test="filecategory != null" >
+        FileCategory = #{filecategory,jdbcType=VARCHAR},
+      </if>
+      <if test="attachName != null" >
+        Attach_Name = #{attachName,jdbcType=VARCHAR},
+      </if>
+      <if test="attachPath != null" >
+        Attach_Path = #{attachPath,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null" >
+        FilePath = #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="filepathS != null" >
+        FilePath_s = #{filepathS,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null" >
+        FileName = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="fileoriginalname != null" >
+        FileOriginalName = #{fileoriginalname,jdbcType=VARCHAR},
+      </if>
+      <if test="filetype != null" >
+        FileType = #{filetype,jdbcType=INTEGER},
+      </if>
+      <if test="filesize != null" >
+        FileSize = #{filesize,jdbcType=VARCHAR},
+      </if>
+      <if test="fileext != null" >
+        FileExt = #{fileext,jdbcType=VARCHAR},
+      </if>
+      <if test="ispreview != null" >
+        IsPreview = #{ispreview,jdbcType=INTEGER},
+      </if>
+      <if test="filevtype != null" >
+        FileVType = #{filevtype,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null" >
+        UploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where AttFile_ID = #{attfileId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.BAttachfile" >
+    update b_attachfile
+    set Data_Table = #{dataTable,jdbcType=INTEGER},
+      Data_ID = #{dataId,jdbcType=INTEGER},
+      FileCategory = #{filecategory,jdbcType=VARCHAR},
+      Attach_Name = #{attachName,jdbcType=VARCHAR},
+      Attach_Path = #{attachPath,jdbcType=VARCHAR},
+      FilePath = #{filepath,jdbcType=VARCHAR},
+      FilePath_s = #{filepathS,jdbcType=VARCHAR},
+      FileName = #{filename,jdbcType=VARCHAR},
+      FileOriginalName = #{fileoriginalname,jdbcType=VARCHAR},
+      FileType = #{filetype,jdbcType=INTEGER},
+      FileSize = #{filesize,jdbcType=VARCHAR},
+      FileExt = #{fileext,jdbcType=VARCHAR},
+      IsPreview = #{ispreview,jdbcType=INTEGER},
+      FileVType = #{filevtype,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=VARCHAR},
+      UploadTime = #{uploadtime,jdbcType=TIMESTAMP}
+    where AttFile_ID = #{attfileId,jdbcType=INTEGER}
+  </update>
+</mapper>

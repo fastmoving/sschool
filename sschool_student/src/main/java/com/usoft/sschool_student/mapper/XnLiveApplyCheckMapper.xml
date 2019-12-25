@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.usoft.sschool_student.mapper.XnLiveApplyCheckMapper" >
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.XnLiveApplyCheck" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="SID" property="sid" jdbcType="VARCHAR" />
+    <result column="CID" property="cid" jdbcType="VARCHAR" />
+    <result column="subject" property="subject" jdbcType="VARCHAR" />
+    <result column="TID" property="tid" jdbcType="INTEGER" />
+    <result column="liveId" property="liveid" jdbcType="INTEGER" />
+    <result column="liveName" property="livename" jdbcType="VARCHAR" />
+    <result column="applyUserId" property="applyuserid" jdbcType="INTEGER" />
+    <result column="applyTime" property="applytime" jdbcType="TIMESTAMP" />
+    <result column="checkStatus" property="checkstatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, SID, CID, subject, TID, liveId, liveName, applyUserId, applyTime, checkStatus
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.XnLiveApplyCheckExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from xn_live_apply_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from xn_live_apply_check
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from xn_live_apply_check
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.XnLiveApplyCheckExample" >
+    delete from xn_live_apply_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.XnLiveApplyCheck" >
+    insert into xn_live_apply_check (ID, SID, CID, 
+      subject, TID, liveId, 
+      liveName, applyUserId, applyTime, 
+      checkStatus)
+    values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=VARCHAR}, #{cid,jdbcType=VARCHAR}, 
+      #{subject,jdbcType=VARCHAR}, #{tid,jdbcType=INTEGER}, #{liveid,jdbcType=INTEGER}, 
+      #{livename,jdbcType=VARCHAR}, #{applyuserid,jdbcType=INTEGER}, #{applytime,jdbcType=TIMESTAMP}, 
+      #{checkstatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.XnLiveApplyCheck" >
+    insert into xn_live_apply_check
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="sid != null" >
+        SID,
+      </if>
+      <if test="cid != null" >
+        CID,
+      </if>
+      <if test="subject != null" >
+        subject,
+      </if>
+      <if test="tid != null" >
+        TID,
+      </if>
+      <if test="liveid != null" >
+        liveId,
+      </if>
+      <if test="livename != null" >
+        liveName,
+      </if>
+      <if test="applyuserid != null" >
+        applyUserId,
+      </if>
+      <if test="applytime != null" >
+        applyTime,
+      </if>
+      <if test="checkstatus != null" >
+        checkStatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="liveid != null" >
+        #{liveid,jdbcType=INTEGER},
+      </if>
+      <if test="livename != null" >
+        #{livename,jdbcType=VARCHAR},
+      </if>
+      <if test="applyuserid != null" >
+        #{applyuserid,jdbcType=INTEGER},
+      </if>
+      <if test="applytime != null" >
+        #{applytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkstatus != null" >
+        #{checkstatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.XnLiveApplyCheckExample" resultType="java.lang.Integer" >
+    select count(*) from xn_live_apply_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update xn_live_apply_check
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.sid != null" >
+        SID = #{record.sid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cid != null" >
+        CID = #{record.cid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subject != null" >
+        subject = #{record.subject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tid != null" >
+        TID = #{record.tid,jdbcType=INTEGER},
+      </if>
+      <if test="record.liveid != null" >
+        liveId = #{record.liveid,jdbcType=INTEGER},
+      </if>
+      <if test="record.livename != null" >
+        liveName = #{record.livename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyuserid != null" >
+        applyUserId = #{record.applyuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.applytime != null" >
+        applyTime = #{record.applytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.checkstatus != null" >
+        checkStatus = #{record.checkstatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update xn_live_apply_check
+    set ID = #{record.id,jdbcType=INTEGER},
+      SID = #{record.sid,jdbcType=VARCHAR},
+      CID = #{record.cid,jdbcType=VARCHAR},
+      subject = #{record.subject,jdbcType=VARCHAR},
+      TID = #{record.tid,jdbcType=INTEGER},
+      liveId = #{record.liveid,jdbcType=INTEGER},
+      liveName = #{record.livename,jdbcType=VARCHAR},
+      applyUserId = #{record.applyuserid,jdbcType=INTEGER},
+      applyTime = #{record.applytime,jdbcType=TIMESTAMP},
+      checkStatus = #{record.checkstatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.XnLiveApplyCheck" >
+    update xn_live_apply_check
+    <set >
+      <if test="sid != null" >
+        SID = #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        CID = #{cid,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="tid != null" >
+        TID = #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="liveid != null" >
+        liveId = #{liveid,jdbcType=INTEGER},
+      </if>
+      <if test="livename != null" >
+        liveName = #{livename,jdbcType=VARCHAR},
+      </if>
+      <if test="applyuserid != null" >
+        applyUserId = #{applyuserid,jdbcType=INTEGER},
+      </if>
+      <if test="applytime != null" >
+        applyTime = #{applytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkstatus != null" >
+        checkStatus = #{checkstatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.XnLiveApplyCheck" >
+    update xn_live_apply_check
+    set SID = #{sid,jdbcType=VARCHAR},
+      CID = #{cid,jdbcType=VARCHAR},
+      subject = #{subject,jdbcType=VARCHAR},
+      TID = #{tid,jdbcType=INTEGER},
+      liveId = #{liveid,jdbcType=INTEGER},
+      liveName = #{livename,jdbcType=VARCHAR},
+      applyUserId = #{applyuserid,jdbcType=INTEGER},
+      applyTime = #{applytime,jdbcType=TIMESTAMP},
+      checkStatus = #{checkstatus,jdbcType=TINYINT}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

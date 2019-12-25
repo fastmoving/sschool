@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.usoft.sschool_teacher.mapper.XnIntegralRuleMapper" >
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.XnIntegralRule" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="schoolId" property="schoolid" jdbcType="INTEGER" />
+    <result column="function" property="function" jdbcType="INTEGER" />
+    <result column="integralNumer" property="integralnumer" jdbcType="INTEGER" />
+    <result column="isOpen" property="isopen" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, schoolId, function, integralNumer, isOpen, createTime, userId
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.XnIntegralRuleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from xn_integral_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from xn_integral_rule
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from xn_integral_rule
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.XnIntegralRuleExample" >
+    delete from xn_integral_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.XnIntegralRule" >
+    insert into xn_integral_rule (id, schoolId, function, 
+      integralNumer, isOpen, createTime, 
+      userId)
+    values (#{id,jdbcType=INTEGER}, #{schoolid,jdbcType=INTEGER}, #{function,jdbcType=INTEGER}, 
+      #{integralnumer,jdbcType=INTEGER}, #{isopen,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{userid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.XnIntegralRule" >
+    insert into xn_integral_rule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="schoolid != null" >
+        schoolId,
+      </if>
+      <if test="function != null" >
+        function,
+      </if>
+      <if test="integralnumer != null" >
+        integralNumer,
+      </if>
+      <if test="isopen != null" >
+        isOpen,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="schoolid != null" >
+        #{schoolid,jdbcType=INTEGER},
+      </if>
+      <if test="function != null" >
+        #{function,jdbcType=INTEGER},
+      </if>
+      <if test="integralnumer != null" >
+        #{integralnumer,jdbcType=INTEGER},
+      </if>
+      <if test="isopen != null" >
+        #{isopen,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.XnIntegralRuleExample" resultType="java.lang.Integer" >
+    select count(*) from xn_integral_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update xn_integral_rule
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.schoolid != null" >
+        schoolId = #{record.schoolid,jdbcType=INTEGER},
+      </if>
+      <if test="record.function != null" >
+        function = #{record.function,jdbcType=INTEGER},
+      </if>
+      <if test="record.integralnumer != null" >
+        integralNumer = #{record.integralnumer,jdbcType=INTEGER},
+      </if>
+      <if test="record.isopen != null" >
+        isOpen = #{record.isopen,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userid != null" >
+        userId = #{record.userid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update xn_integral_rule
+    set id = #{record.id,jdbcType=INTEGER},
+      schoolId = #{record.schoolid,jdbcType=INTEGER},
+      function = #{record.function,jdbcType=INTEGER},
+      integralNumer = #{record.integralnumer,jdbcType=INTEGER},
+      isOpen = #{record.isopen,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      userId = #{record.userid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.XnIntegralRule" >
+    update xn_integral_rule
+    <set >
+      <if test="schoolid != null" >
+        schoolId = #{schoolid,jdbcType=INTEGER},
+      </if>
+      <if test="function != null" >
+        function = #{function,jdbcType=INTEGER},
+      </if>
+      <if test="integralnumer != null" >
+        integralNumer = #{integralnumer,jdbcType=INTEGER},
+      </if>
+      <if test="isopen != null" >
+        isOpen = #{isopen,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.XnIntegralRule" >
+    update xn_integral_rule
+    set schoolId = #{schoolid,jdbcType=INTEGER},
+      function = #{function,jdbcType=INTEGER},
+      integralNumer = #{integralnumer,jdbcType=INTEGER},
+      isOpen = #{isopen,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      userId = #{userid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="queryIntegral" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from xn_integral_rule
+    <where>
+      <trim suffixOverrides="and">
+        <if test="schoolId!=null">
+          schoolId = ${schoolId} and
+        </if>
+        <if test="function!=null">
+          function = ${function} and
+        </if>
+      </trim>
+    </where>
+  </select>
+</mapper>

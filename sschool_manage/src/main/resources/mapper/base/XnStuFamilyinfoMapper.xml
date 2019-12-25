@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.usoft.sschool_manage.mapper.base.XnStuFamilyinfoMapper">
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.XnStuFamilyinfo">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="familyRelate" jdbcType="VARCHAR" property="familyrelate" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="STUID" jdbcType="INTEGER" property="stuid" />
+    <result column="OID" jdbcType="INTEGER" property="oid" />
+    <result column="expireTime" jdbcType="TIMESTAMP" property="expiretime" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, familyRelate, phone, password, STUID, OID, expireTime, createTime
+  </sql>
+  <select id="selectByExample" parameterType="com.usoft.smartschool.pojo.XnStuFamilyinfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from xn_stu_familyinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from xn_stu_familyinfo
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from xn_stu_familyinfo
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.XnStuFamilyinfoExample">
+    delete from xn_stu_familyinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.XnStuFamilyinfo">
+    insert into xn_stu_familyinfo (ID, familyRelate, phone, 
+      password, STUID, OID, 
+      expireTime, createTime)
+    values (#{id,jdbcType=INTEGER}, #{familyrelate,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{stuid,jdbcType=INTEGER}, #{oid,jdbcType=INTEGER}, 
+      #{expiretime,jdbcType=TIMESTAMP}, #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.XnStuFamilyinfo">
+    insert into xn_stu_familyinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="familyrelate != null">
+        familyRelate,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="stuid != null">
+        STUID,
+      </if>
+      <if test="oid != null">
+        OID,
+      </if>
+      <if test="expiretime != null">
+        expireTime,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="familyrelate != null">
+        #{familyrelate,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="stuid != null">
+        #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="oid != null">
+        #{oid,jdbcType=INTEGER},
+      </if>
+      <if test="expiretime != null">
+        #{expiretime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.XnStuFamilyinfoExample" resultType="java.lang.Integer">
+    select count(*) from xn_stu_familyinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update xn_stu_familyinfo
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.familyrelate != null">
+        familyRelate = #{record.familyrelate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stuid != null">
+        STUID = #{record.stuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.oid != null">
+        OID = #{record.oid,jdbcType=INTEGER},
+      </if>
+      <if test="record.expiretime != null">
+        expireTime = #{record.expiretime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createtime != null">
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update xn_stu_familyinfo
+    set ID = #{record.id,jdbcType=INTEGER},
+      familyRelate = #{record.familyrelate,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      STUID = #{record.stuid,jdbcType=INTEGER},
+      OID = #{record.oid,jdbcType=INTEGER},
+      expireTime = #{record.expiretime,jdbcType=TIMESTAMP},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.XnStuFamilyinfo">
+    update xn_stu_familyinfo
+    <set>
+      <if test="familyrelate != null">
+        familyRelate = #{familyrelate,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="stuid != null">
+        STUID = #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="oid != null">
+        OID = #{oid,jdbcType=INTEGER},
+      </if>
+      <if test="expiretime != null">
+        expireTime = #{expiretime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.XnStuFamilyinfo">
+    update xn_stu_familyinfo
+    set familyRelate = #{familyrelate,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      STUID = #{stuid,jdbcType=INTEGER},
+      OID = #{oid,jdbcType=INTEGER},
+      expireTime = #{expiretime,jdbcType=TIMESTAMP},
+      createTime = #{createtime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <!--*******************************************************************************************-->
+  <!--总的绑定人数-->
+  <select id="getTotalPerson" parameterType="int" resultType="int">
+    select count(*) from xn_stu_familyinfo a, hl_studentinfo b
+    where a.stuid = b.id
+    and b.schoolId = #{schoolId}
+  </select>
+
+  <!--不同角色绑定人数-->
+  <select id="getBindRole" parameterType="int" resultType="map">
+    select distinct a.familyRelate,count(*) number from xn_stu_familyinfo a, hl_studentinfo b
+    where a.stuid = b.id
+    and b.schoolId = #{schoolId}
+    group by a.familyRelate
+  </select>
+</mapper>

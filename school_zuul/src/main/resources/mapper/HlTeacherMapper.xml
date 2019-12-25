@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.usoft.sschool_zuul.dao.HlTeacherMapper">
+  <resultMap id="BaseResultMap" type="com.usoft.sschool_zuul.entity.HlTeacher">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <id column="SchoolID" jdbcType="INTEGER" property="schoolid" />
+    <result column="Tname" jdbcType="VARCHAR" property="tname" />
+    <result column="TsName" jdbcType="VARCHAR" property="tsname" />
+    <result column="TCode" jdbcType="VARCHAR" property="tcode" />
+    <result column="Sex" jdbcType="INTEGER" property="sex" />
+    <result column="IdCard" jdbcType="VARCHAR" property="idcard" />
+    <result column="Nation" jdbcType="INTEGER" property="nation" />
+    <result column="Hometown" jdbcType="VARCHAR" property="hometown" />
+    <result column="Birthday" jdbcType="VARCHAR" property="birthday" />
+    <result column="HealthStatusint" jdbcType="INTEGER" property="healthstatusint" />
+    <result column="Ttype" jdbcType="INTEGER" property="ttype" />
+    <result column="EmpForms" jdbcType="INTEGER" property="empforms" />
+    <result column="PoliticalAff" jdbcType="INTEGER" property="politicalaff" />
+    <result column="PartyTime" jdbcType="VARCHAR" property="partytime" />
+    <result column="Address" jdbcType="VARCHAR" property="address" />
+    <result column="HomePhone" jdbcType="VARCHAR" property="homephone" />
+    <result column="Mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="Email" jdbcType="VARCHAR" property="email" />
+    <result column="MaxEducation" jdbcType="VARCHAR" property="maxeducation" />
+    <result column="MaxSpecialty" jdbcType="VARCHAR" property="maxspecialty" />
+    <result column="MaxDegree" jdbcType="VARCHAR" property="maxdegree" />
+    <result column="MandarinLe" jdbcType="INTEGER" property="mandarinle" />
+    <result column="EnglishPro" jdbcType="INTEGER" property="englishpro" />
+    <result column="WorkTime" jdbcType="DATE" property="worktime" />
+    <result column="TSubject" jdbcType="VARCHAR" property="tsubject" />
+    <result column="TPostStatue" jdbcType="VARCHAR" property="tpoststatue" />
+    <result column="TLevel" jdbcType="INTEGER" property="tlevel" />
+    <result column="ImageSrc" jdbcType="VARCHAR" property="imagesrc" />
+    <result column="CreateUser" jdbcType="INTEGER" property="createuser" />
+    <result column="CreateTime" jdbcType="DATE" property="createtime" />
+    <result column="IsAuditing" jdbcType="INTEGER" property="isauditing" />
+    <result column="IsNormal" jdbcType="INTEGER" property="isnormal" />
+    <result column="GXtime" jdbcType="DATE" property="gxtime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, SchoolID, Tname, TsName, TCode, Sex, IdCard, Nation, Hometown, Birthday, HealthStatusint, 
+    Ttype, EmpForms, PoliticalAff, PartyTime, Address, HomePhone, Mobile, Email, MaxEducation, 
+    MaxSpecialty, MaxDegree, MandarinLe, EnglishPro, WorkTime, TSubject, TPostStatue, 
+    TLevel, ImageSrc, CreateUser, CreateTime, IsAuditing, IsNormal, GXtime
+  </sql>
+  <select id="selectByExample" parameterType="com.usoft.smartschool.pojo.HlTeacherExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hl_teacher
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.usoft.sschool_zuul.entity.HlTeacherKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hl_teacher
+    where ID = #{id,jdbcType=INTEGER}
+      and SchoolID = #{schoolid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.usoft.smartschool.pojo.HlTeacherKey">
+    delete from hl_teacher
+    where ID = #{id,jdbcType=INTEGER}
+      and SchoolID = #{schoolid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.HlTeacherExample">
+    delete from hl_teacher
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.HlTeacher">
+    insert into hl_teacher (ID, SchoolID, Tname, 
+      TsName, TCode, Sex, 
+      IdCard, Nation, Hometown, 
+      Birthday, HealthStatusint, Ttype, 
+      EmpForms, PoliticalAff, PartyTime, 
+      Address, HomePhone, Mobile, 
+      Email, MaxEducation, MaxSpecialty, 
+      MaxDegree, MandarinLe, EnglishPro, 
+      WorkTime, TSubject, TPostStatue, 
+      TLevel, ImageSrc, CreateUser, 
+      CreateTime, IsAuditing, IsNormal, 
+      GXtime)
+    values (#{id,jdbcType=INTEGER}, #{schoolid,jdbcType=INTEGER}, #{tname,jdbcType=VARCHAR}, 
+      #{tsname,jdbcType=VARCHAR}, #{tcode,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
+      #{idcard,jdbcType=VARCHAR}, #{nation,jdbcType=INTEGER}, #{hometown,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=VARCHAR}, #{healthstatusint,jdbcType=INTEGER}, #{ttype,jdbcType=INTEGER}, 
+      #{empforms,jdbcType=INTEGER}, #{politicalaff,jdbcType=INTEGER}, #{partytime,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{homephone,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{maxeducation,jdbcType=VARCHAR}, #{maxspecialty,jdbcType=VARCHAR}, 
+      #{maxdegree,jdbcType=VARCHAR}, #{mandarinle,jdbcType=INTEGER}, #{englishpro,jdbcType=INTEGER}, 
+      #{worktime,jdbcType=DATE}, #{tsubject,jdbcType=VARCHAR}, #{tpoststatue,jdbcType=VARCHAR}, 
+      #{tlevel,jdbcType=INTEGER}, #{imagesrc,jdbcType=VARCHAR}, #{createuser,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=DATE}, #{isauditing,jdbcType=INTEGER}, #{isnormal,jdbcType=INTEGER}, 
+      #{gxtime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.HlTeacher">
+    insert into hl_teacher
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="schoolid != null">
+        SchoolID,
+      </if>
+      <if test="tname != null">
+        Tname,
+      </if>
+      <if test="tsname != null">
+        TsName,
+      </if>
+      <if test="tcode != null">
+        TCode,
+      </if>
+      <if test="sex != null">
+        Sex,
+      </if>
+      <if test="idcard != null">
+        IdCard,
+      </if>
+      <if test="nation != null">
+        Nation,
+      </if>
+      <if test="hometown != null">
+        Hometown,
+      </if>
+      <if test="birthday != null">
+        Birthday,
+      </if>
+      <if test="healthstatusint != null">
+        HealthStatusint,
+      </if>
+      <if test="ttype != null">
+        Ttype,
+      </if>
+      <if test="empforms != null">
+        EmpForms,
+      </if>
+      <if test="politicalaff != null">
+        PoliticalAff,
+      </if>
+      <if test="partytime != null">
+        PartyTime,
+      </if>
+      <if test="address != null">
+        Address,
+      </if>
+      <if test="homephone != null">
+        HomePhone,
+      </if>
+      <if test="mobile != null">
+        Mobile,
+      </if>
+      <if test="email != null">
+        Email,
+      </if>
+      <if test="maxeducation != null">
+        MaxEducation,
+      </if>
+      <if test="maxspecialty != null">
+        MaxSpecialty,
+      </if>
+      <if test="maxdegree != null">
+        MaxDegree,
+      </if>
+      <if test="mandarinle != null">
+        MandarinLe,
+      </if>
+      <if test="englishpro != null">
+        EnglishPro,
+      </if>
+      <if test="worktime != null">
+        WorkTime,
+      </if>
+      <if test="tsubject != null">
+        TSubject,
+      </if>
+      <if test="tpoststatue != null">
+        TPostStatue,
+      </if>
+      <if test="tlevel != null">
+        TLevel,
+      </if>
+      <if test="imagesrc != null">
+        ImageSrc,
+      </if>
+      <if test="createuser != null">
+        CreateUser,
+      </if>
+      <if test="createtime != null">
+        CreateTime,
+      </if>
+      <if test="isauditing != null">
+        IsAuditing,
+      </if>
+      <if test="isnormal != null">
+        IsNormal,
+      </if>
+      <if test="gxtime != null">
+        GXtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="schoolid != null">
+        #{schoolid,jdbcType=INTEGER},
+      </if>
+      <if test="tname != null">
+        #{tname,jdbcType=VARCHAR},
+      </if>
+      <if test="tsname != null">
+        #{tsname,jdbcType=VARCHAR},
+      </if>
+      <if test="tcode != null">
+        #{tcode,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null">
+        #{nation,jdbcType=INTEGER},
+      </if>
+      <if test="hometown != null">
+        #{hometown,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="healthstatusint != null">
+        #{healthstatusint,jdbcType=INTEGER},
+      </if>
+      <if test="ttype != null">
+        #{ttype,jdbcType=INTEGER},
+      </if>
+      <if test="empforms != null">
+        #{empforms,jdbcType=INTEGER},
+      </if>
+      <if test="politicalaff != null">
+        #{politicalaff,jdbcType=INTEGER},
+      </if>
+      <if test="partytime != null">
+        #{partytime,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="homephone != null">
+        #{homephone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="maxeducation != null">
+        #{maxeducation,jdbcType=VARCHAR},
+      </if>
+      <if test="maxspecialty != null">
+        #{maxspecialty,jdbcType=VARCHAR},
+      </if>
+      <if test="maxdegree != null">
+        #{maxdegree,jdbcType=VARCHAR},
+      </if>
+      <if test="mandarinle != null">
+        #{mandarinle,jdbcType=INTEGER},
+      </if>
+      <if test="englishpro != null">
+        #{englishpro,jdbcType=INTEGER},
+      </if>
+      <if test="worktime != null">
+        #{worktime,jdbcType=DATE},
+      </if>
+      <if test="tsubject != null">
+        #{tsubject,jdbcType=VARCHAR},
+      </if>
+      <if test="tpoststatue != null">
+        #{tpoststatue,jdbcType=VARCHAR},
+      </if>
+      <if test="tlevel != null">
+        #{tlevel,jdbcType=INTEGER},
+      </if>
+      <if test="imagesrc != null">
+        #{imagesrc,jdbcType=VARCHAR},
+      </if>
+      <if test="createuser != null">
+        #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="isauditing != null">
+        #{isauditing,jdbcType=INTEGER},
+      </if>
+      <if test="isnormal != null">
+        #{isnormal,jdbcType=INTEGER},
+      </if>
+      <if test="gxtime != null">
+        #{gxtime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.HlTeacherExample" resultType="java.lang.Integer">
+    select count(*) from hl_teacher
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update hl_teacher
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.schoolid != null">
+        SchoolID = #{record.schoolid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tname != null">
+        Tname = #{record.tname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tsname != null">
+        TsName = #{record.tsname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tcode != null">
+        TCode = #{record.tcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        Sex = #{record.sex,jdbcType=INTEGER},
+      </if>
+      <if test="record.idcard != null">
+        IdCard = #{record.idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nation != null">
+        Nation = #{record.nation,jdbcType=INTEGER},
+      </if>
+      <if test="record.hometown != null">
+        Hometown = #{record.hometown,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null">
+        Birthday = #{record.birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.healthstatusint != null">
+        HealthStatusint = #{record.healthstatusint,jdbcType=INTEGER},
+      </if>
+      <if test="record.ttype != null">
+        Ttype = #{record.ttype,jdbcType=INTEGER},
+      </if>
+      <if test="record.empforms != null">
+        EmpForms = #{record.empforms,jdbcType=INTEGER},
+      </if>
+      <if test="record.politicalaff != null">
+        PoliticalAff = #{record.politicalaff,jdbcType=INTEGER},
+      </if>
+      <if test="record.partytime != null">
+        PartyTime = #{record.partytime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        Address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homephone != null">
+        HomePhone = #{record.homephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null">
+        Mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        Email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maxeducation != null">
+        MaxEducation = #{record.maxeducation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maxspecialty != null">
+        MaxSpecialty = #{record.maxspecialty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maxdegree != null">
+        MaxDegree = #{record.maxdegree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mandarinle != null">
+        MandarinLe = #{record.mandarinle,jdbcType=INTEGER},
+      </if>
+      <if test="record.englishpro != null">
+        EnglishPro = #{record.englishpro,jdbcType=INTEGER},
+      </if>
+      <if test="record.worktime != null">
+        WorkTime = #{record.worktime,jdbcType=DATE},
+      </if>
+      <if test="record.tsubject != null">
+        TSubject = #{record.tsubject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tpoststatue != null">
+        TPostStatue = #{record.tpoststatue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tlevel != null">
+        TLevel = #{record.tlevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.imagesrc != null">
+        ImageSrc = #{record.imagesrc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createuser != null">
+        CreateUser = #{record.createuser,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null">
+        CreateTime = #{record.createtime,jdbcType=DATE},
+      </if>
+      <if test="record.isauditing != null">
+        IsAuditing = #{record.isauditing,jdbcType=INTEGER},
+      </if>
+      <if test="record.isnormal != null">
+        IsNormal = #{record.isnormal,jdbcType=INTEGER},
+      </if>
+      <if test="record.gxtime != null">
+        GXtime = #{record.gxtime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update hl_teacher
+    set ID = #{record.id,jdbcType=INTEGER},
+      SchoolID = #{record.schoolid,jdbcType=INTEGER},
+      Tname = #{record.tname,jdbcType=VARCHAR},
+      TsName = #{record.tsname,jdbcType=VARCHAR},
+      TCode = #{record.tcode,jdbcType=VARCHAR},
+      Sex = #{record.sex,jdbcType=INTEGER},
+      IdCard = #{record.idcard,jdbcType=VARCHAR},
+      Nation = #{record.nation,jdbcType=INTEGER},
+      Hometown = #{record.hometown,jdbcType=VARCHAR},
+      Birthday = #{record.birthday,jdbcType=VARCHAR},
+      HealthStatusint = #{record.healthstatusint,jdbcType=INTEGER},
+      Ttype = #{record.ttype,jdbcType=INTEGER},
+      EmpForms = #{record.empforms,jdbcType=INTEGER},
+      PoliticalAff = #{record.politicalaff,jdbcType=INTEGER},
+      PartyTime = #{record.partytime,jdbcType=VARCHAR},
+      Address = #{record.address,jdbcType=VARCHAR},
+      HomePhone = #{record.homephone,jdbcType=VARCHAR},
+      Mobile = #{record.mobile,jdbcType=VARCHAR},
+      Email = #{record.email,jdbcType=VARCHAR},
+      MaxEducation = #{record.maxeducation,jdbcType=VARCHAR},
+      MaxSpecialty = #{record.maxspecialty,jdbcType=VARCHAR},
+      MaxDegree = #{record.maxdegree,jdbcType=VARCHAR},
+      MandarinLe = #{record.mandarinle,jdbcType=INTEGER},
+      EnglishPro = #{record.englishpro,jdbcType=INTEGER},
+      WorkTime = #{record.worktime,jdbcType=DATE},
+      TSubject = #{record.tsubject,jdbcType=VARCHAR},
+      TPostStatue = #{record.tpoststatue,jdbcType=VARCHAR},
+      TLevel = #{record.tlevel,jdbcType=INTEGER},
+      ImageSrc = #{record.imagesrc,jdbcType=VARCHAR},
+      CreateUser = #{record.createuser,jdbcType=INTEGER},
+      CreateTime = #{record.createtime,jdbcType=DATE},
+      IsAuditing = #{record.isauditing,jdbcType=INTEGER},
+      IsNormal = #{record.isnormal,jdbcType=INTEGER},
+      GXtime = #{record.gxtime,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.HlTeacher">
+    update hl_teacher
+    <set>
+      <if test="tname != null">
+        Tname = #{tname,jdbcType=VARCHAR},
+      </if>
+      <if test="tsname != null">
+        TsName = #{tsname,jdbcType=VARCHAR},
+      </if>
+      <if test="tcode != null">
+        TCode = #{tcode,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        Sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="idcard != null">
+        IdCard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null">
+        Nation = #{nation,jdbcType=INTEGER},
+      </if>
+      <if test="hometown != null">
+        Hometown = #{hometown,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        Birthday = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="healthstatusint != null">
+        HealthStatusint = #{healthstatusint,jdbcType=INTEGER},
+      </if>
+      <if test="ttype != null">
+        Ttype = #{ttype,jdbcType=INTEGER},
+      </if>
+      <if test="empforms != null">
+        EmpForms = #{empforms,jdbcType=INTEGER},
+      </if>
+      <if test="politicalaff != null">
+        PoliticalAff = #{politicalaff,jdbcType=INTEGER},
+      </if>
+      <if test="partytime != null">
+        PartyTime = #{partytime,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        Address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="homephone != null">
+        HomePhone = #{homephone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        Mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        Email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="maxeducation != null">
+        MaxEducation = #{maxeducation,jdbcType=VARCHAR},
+      </if>
+      <if test="maxspecialty != null">
+        MaxSpecialty = #{maxspecialty,jdbcType=VARCHAR},
+      </if>
+      <if test="maxdegree != null">
+        MaxDegree = #{maxdegree,jdbcType=VARCHAR},
+      </if>
+      <if test="mandarinle != null">
+        MandarinLe = #{mandarinle,jdbcType=INTEGER},
+      </if>
+      <if test="englishpro != null">
+        EnglishPro = #{englishpro,jdbcType=INTEGER},
+      </if>
+      <if test="worktime != null">
+        WorkTime = #{worktime,jdbcType=DATE},
+      </if>
+      <if test="tsubject != null">
+        TSubject = #{tsubject,jdbcType=VARCHAR},
+      </if>
+      <if test="tpoststatue != null">
+        TPostStatue = #{tpoststatue,jdbcType=VARCHAR},
+      </if>
+      <if test="tlevel != null">
+        TLevel = #{tlevel,jdbcType=INTEGER},
+      </if>
+      <if test="imagesrc != null">
+        ImageSrc = #{imagesrc,jdbcType=VARCHAR},
+      </if>
+      <if test="createuser != null">
+        CreateUser = #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        CreateTime = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="isauditing != null">
+        IsAuditing = #{isauditing,jdbcType=INTEGER},
+      </if>
+      <if test="isnormal != null">
+        IsNormal = #{isnormal,jdbcType=INTEGER},
+      </if>
+      <if test="gxtime != null">
+        GXtime = #{gxtime,jdbcType=DATE},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+      and SchoolID = #{schoolid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.HlTeacher">
+    update hl_teacher
+    set Tname = #{tname,jdbcType=VARCHAR},
+      TsName = #{tsname,jdbcType=VARCHAR},
+      TCode = #{tcode,jdbcType=VARCHAR},
+      Sex = #{sex,jdbcType=INTEGER},
+      IdCard = #{idcard,jdbcType=VARCHAR},
+      Nation = #{nation,jdbcType=INTEGER},
+      Hometown = #{hometown,jdbcType=VARCHAR},
+      Birthday = #{birthday,jdbcType=VARCHAR},
+      HealthStatusint = #{healthstatusint,jdbcType=INTEGER},
+      Ttype = #{ttype,jdbcType=INTEGER},
+      EmpForms = #{empforms,jdbcType=INTEGER},
+      PoliticalAff = #{politicalaff,jdbcType=INTEGER},
+      PartyTime = #{partytime,jdbcType=VARCHAR},
+      Address = #{address,jdbcType=VARCHAR},
+      HomePhone = #{homephone,jdbcType=VARCHAR},
+      Mobile = #{mobile,jdbcType=VARCHAR},
+      Email = #{email,jdbcType=VARCHAR},
+      MaxEducation = #{maxeducation,jdbcType=VARCHAR},
+      MaxSpecialty = #{maxspecialty,jdbcType=VARCHAR},
+      MaxDegree = #{maxdegree,jdbcType=VARCHAR},
+      MandarinLe = #{mandarinle,jdbcType=INTEGER},
+      EnglishPro = #{englishpro,jdbcType=INTEGER},
+      WorkTime = #{worktime,jdbcType=DATE},
+      TSubject = #{tsubject,jdbcType=VARCHAR},
+      TPostStatue = #{tpoststatue,jdbcType=VARCHAR},
+      TLevel = #{tlevel,jdbcType=INTEGER},
+      ImageSrc = #{imagesrc,jdbcType=VARCHAR},
+      CreateUser = #{createuser,jdbcType=INTEGER},
+      CreateTime = #{createtime,jdbcType=DATE},
+      IsAuditing = #{isauditing,jdbcType=INTEGER},
+      IsNormal = #{isnormal,jdbcType=INTEGER},
+      GXtime = #{gxtime,jdbcType=DATE}
+    where ID = #{id,jdbcType=INTEGER}
+      and SchoolID = #{schoolid,jdbcType=INTEGER}
+  </update>
+
+  <select id="getMyselfManager" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from hl_teacher
+    <where>
+      Ttype = 47
+      <if test="schoolId !=null">
+        and SchoolID = ${schoolId}
+      </if>
+      <if test=" teacherId !=null">
+        and ID = ${teacherId}
+      </if>
+    </where>
+  </select>
+</mapper>

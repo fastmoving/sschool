@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.usoft.sschool_pub.mapper.HlCountyMapper" >
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.HlCounty" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="Code" property="code" jdbcType="VARCHAR" />
+    <result column="Name" property="name" jdbcType="VARCHAR" />
+    <result column="CTypeID" property="ctypeid" jdbcType="INTEGER" />
+    <result column="ParentID" property="parentid" jdbcType="INTEGER" />
+    <result column="StatusID" property="statusid" jdbcType="INTEGER" />
+    <result column="_MASK_TO_V2" property="maskToV2" jdbcType="TIMESTAMP" />
+    <result column="_MUSID_SYNC_V2" property="musidSyncV2" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, Code, Name, CTypeID, ParentID, StatusID, _MASK_TO_V2, _MUSID_SYNC_V2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.HlCountyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hl_county
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from hl_county
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from hl_county
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.HlCountyExample" >
+    delete from hl_county
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.HlCounty" >
+    insert into hl_county (ID, Code, Name, 
+      CTypeID, ParentID, StatusID, 
+      _MASK_TO_V2, _MUSID_SYNC_V2)
+    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{ctypeid,jdbcType=INTEGER}, #{parentid,jdbcType=INTEGER}, #{statusid,jdbcType=INTEGER}, 
+      #{maskToV2,jdbcType=TIMESTAMP}, #{musidSyncV2,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.HlCounty" >
+    insert into hl_county
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="code != null" >
+        Code,
+      </if>
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="ctypeid != null" >
+        CTypeID,
+      </if>
+      <if test="parentid != null" >
+        ParentID,
+      </if>
+      <if test="statusid != null" >
+        StatusID,
+      </if>
+      <if test="maskToV2 != null" >
+        _MASK_TO_V2,
+      </if>
+      <if test="musidSyncV2 != null" >
+        _MUSID_SYNC_V2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="ctypeid != null" >
+        #{ctypeid,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="statusid != null" >
+        #{statusid,jdbcType=INTEGER},
+      </if>
+      <if test="maskToV2 != null" >
+        #{maskToV2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="musidSyncV2 != null" >
+        #{musidSyncV2,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.HlCountyExample" resultType="java.lang.Integer" >
+    select count(*) from hl_county
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hl_county
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.code != null" >
+        Code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        Name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctypeid != null" >
+        CTypeID = #{record.ctypeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentid != null" >
+        ParentID = #{record.parentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.statusid != null" >
+        StatusID = #{record.statusid,jdbcType=INTEGER},
+      </if>
+      <if test="record.maskToV2 != null" >
+        _MASK_TO_V2 = #{record.maskToV2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.musidSyncV2 != null" >
+        _MUSID_SYNC_V2 = #{record.musidSyncV2,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hl_county
+    set ID = #{record.id,jdbcType=INTEGER},
+      Code = #{record.code,jdbcType=VARCHAR},
+      Name = #{record.name,jdbcType=VARCHAR},
+      CTypeID = #{record.ctypeid,jdbcType=INTEGER},
+      ParentID = #{record.parentid,jdbcType=INTEGER},
+      StatusID = #{record.statusid,jdbcType=INTEGER},
+      _MASK_TO_V2 = #{record.maskToV2,jdbcType=TIMESTAMP},
+      _MUSID_SYNC_V2 = #{record.musidSyncV2,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.HlCounty" >
+    update hl_county
+    <set >
+      <if test="code != null" >
+        Code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="ctypeid != null" >
+        CTypeID = #{ctypeid,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null" >
+        ParentID = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="statusid != null" >
+        StatusID = #{statusid,jdbcType=INTEGER},
+      </if>
+      <if test="maskToV2 != null" >
+        _MASK_TO_V2 = #{maskToV2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="musidSyncV2 != null" >
+        _MUSID_SYNC_V2 = #{musidSyncV2,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.HlCounty" >
+    update hl_county
+    set Code = #{code,jdbcType=VARCHAR},
+      Name = #{name,jdbcType=VARCHAR},
+      CTypeID = #{ctypeid,jdbcType=INTEGER},
+      ParentID = #{parentid,jdbcType=INTEGER},
+      StatusID = #{statusid,jdbcType=INTEGER},
+      _MASK_TO_V2 = #{maskToV2,jdbcType=TIMESTAMP},
+      _MUSID_SYNC_V2 = #{musidSyncV2,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

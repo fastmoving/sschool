@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.usoft.sschool_teacher.mapper.XnAnnounceMapper">
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.XnAnnounce">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="SID" jdbcType="INTEGER" property="sid" />
+    <result column="AnnounceTitle" jdbcType="VARCHAR" property="announcetitle" />
+    <result column="AnnounceContent" jdbcType="VARCHAR" property="announcecontent" />
+    <result column="announceImg" jdbcType="VARCHAR" property="announceimg" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="UID" jdbcType="INTEGER" property="uid" />
+    <result column="CreateUser" jdbcType="VARCHAR" property="createuser" />
+    <result column="attr1" jdbcType="VARCHAR" property="attr1" />
+    <result column="attr2" jdbcType="VARCHAR" property="attr2" />
+    <result column="attr3" jdbcType="VARCHAR" property="attr3" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, SID, AnnounceTitle, AnnounceContent, announceImg, state, CreateTime, UID, CreateUser, 
+    attr1, attr2, attr3
+  </sql>
+  <select id="selectByExample" parameterType="com.usoft.smartschool.pojo.XnAnnounceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from xn_announce
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from xn_announce
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from xn_announce
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.XnAnnounceExample">
+    delete from xn_announce
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.XnAnnounce">
+    insert into xn_announce (ID, SID, AnnounceTitle, 
+      AnnounceContent, announceImg, state, 
+      CreateTime, UID, CreateUser, 
+      attr1, attr2, attr3
+      )
+    values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, #{announcetitle,jdbcType=VARCHAR}, 
+      #{announcecontent,jdbcType=VARCHAR}, #{announceimg,jdbcType=VARCHAR}, #{state,jdbcType=TINYINT}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{uid,jdbcType=INTEGER}, #{createuser,jdbcType=VARCHAR}, 
+      #{attr1,jdbcType=VARCHAR}, #{attr2,jdbcType=VARCHAR}, #{attr3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.XnAnnounce">
+    insert into xn_announce
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="sid != null">
+        SID,
+      </if>
+      <if test="announcetitle != null">
+        AnnounceTitle,
+      </if>
+      <if test="announcecontent != null">
+        AnnounceContent,
+      </if>
+      <if test="announceimg != null">
+        announceImg,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="createtime != null">
+        CreateTime,
+      </if>
+      <if test="uid != null">
+        UID,
+      </if>
+      <if test="createuser != null">
+        CreateUser,
+      </if>
+      <if test="attr1 != null">
+        attr1,
+      </if>
+      <if test="attr2 != null">
+        attr2,
+      </if>
+      <if test="attr3 != null">
+        attr3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="announcetitle != null">
+        #{announcetitle,jdbcType=VARCHAR},
+      </if>
+      <if test="announcecontent != null">
+        #{announcecontent,jdbcType=VARCHAR},
+      </if>
+      <if test="announceimg != null">
+        #{announceimg,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="createuser != null">
+        #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="attr1 != null">
+        #{attr1,jdbcType=VARCHAR},
+      </if>
+      <if test="attr2 != null">
+        #{attr2,jdbcType=VARCHAR},
+      </if>
+      <if test="attr3 != null">
+        #{attr3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.XnAnnounceExample" resultType="java.lang.Integer">
+    select count(*) from xn_announce
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update xn_announce
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.sid != null">
+        SID = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.announcetitle != null">
+        AnnounceTitle = #{record.announcetitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.announcecontent != null">
+        AnnounceContent = #{record.announcecontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.announceimg != null">
+        announceImg = #{record.announceimg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null">
+        CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.uid != null">
+        UID = #{record.uid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createuser != null">
+        CreateUser = #{record.createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attr1 != null">
+        attr1 = #{record.attr1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attr2 != null">
+        attr2 = #{record.attr2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attr3 != null">
+        attr3 = #{record.attr3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update xn_announce
+    set ID = #{record.id,jdbcType=INTEGER},
+      SID = #{record.sid,jdbcType=INTEGER},
+      AnnounceTitle = #{record.announcetitle,jdbcType=VARCHAR},
+      AnnounceContent = #{record.announcecontent,jdbcType=VARCHAR},
+      announceImg = #{record.announceimg,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=TINYINT},
+      CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      UID = #{record.uid,jdbcType=INTEGER},
+      CreateUser = #{record.createuser,jdbcType=VARCHAR},
+      attr1 = #{record.attr1,jdbcType=VARCHAR},
+      attr2 = #{record.attr2,jdbcType=VARCHAR},
+      attr3 = #{record.attr3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.XnAnnounce">
+    update xn_announce
+    <set>
+      <if test="sid != null">
+        SID = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="announcetitle != null">
+        AnnounceTitle = #{announcetitle,jdbcType=VARCHAR},
+      </if>
+      <if test="announcecontent != null">
+        AnnounceContent = #{announcecontent,jdbcType=VARCHAR},
+      </if>
+      <if test="announceimg != null">
+        announceImg = #{announceimg,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uid != null">
+        UID = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="createuser != null">
+        CreateUser = #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="attr1 != null">
+        attr1 = #{attr1,jdbcType=VARCHAR},
+      </if>
+      <if test="attr2 != null">
+        attr2 = #{attr2,jdbcType=VARCHAR},
+      </if>
+      <if test="attr3 != null">
+        attr3 = #{attr3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.XnAnnounce">
+    update xn_announce
+    set SID = #{sid,jdbcType=INTEGER},
+      AnnounceTitle = #{announcetitle,jdbcType=VARCHAR},
+      AnnounceContent = #{announcecontent,jdbcType=VARCHAR},
+      announceImg = #{announceimg,jdbcType=VARCHAR},
+      state = #{state,jdbcType=TINYINT},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      UID = #{uid,jdbcType=INTEGER},
+      CreateUser = #{createuser,jdbcType=VARCHAR},
+      attr1 = #{attr1,jdbcType=VARCHAR},
+      attr2 = #{attr2,jdbcType=VARCHAR},
+      attr3 = #{attr3,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

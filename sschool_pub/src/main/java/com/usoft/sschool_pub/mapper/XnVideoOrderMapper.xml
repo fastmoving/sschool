@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.usoft.sschool_pub.mapper.XnVideoOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.XnVideoOrder" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="orderNumber" property="ordernumber" jdbcType="VARCHAR" />
+    <result column="buyTime" property="buytime" jdbcType="TIMESTAMP" />
+    <result column="userType" property="usertype" jdbcType="INTEGER" />
+    <result column="uId" property="uid" jdbcType="INTEGER" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="buyType" property="buytype" jdbcType="INTEGER" />
+    <result column="buyUserType" property="buyusertype" jdbcType="INTEGER" />
+    <result column="buyUserId" property="buyuserid" jdbcType="INTEGER" />
+    <result column="targetSid" property="targetsid" jdbcType="INTEGER" />
+    <result column="targetSubject" property="targetsubject" jdbcType="VARCHAR" />
+    <result column="targetTid" property="targettid" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="attr1" property="attr1" jdbcType="VARCHAR" />
+    <result column="attr2" property="attr2" jdbcType="VARCHAR" />
+    <result column="attr3" property="attr3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, sid, cid, orderNumber, buyTime, userType, uId, phone, buyType, buyUserType, buyUserId, 
+    targetSid, targetSubject, targetTid, createTime, attr1, attr2, attr3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.XnVideoOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from xn_video_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from xn_video_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from xn_video_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.XnVideoOrderExample" >
+    delete from xn_video_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.XnVideoOrder" >
+    insert into xn_video_order (id, sid, cid, 
+      orderNumber, buyTime, userType, 
+      uId, phone, buyType, 
+      buyUserType, buyUserId, targetSid, 
+      targetSubject, targetTid, createTime, 
+      attr1, attr2, attr3
+      )
+    values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, 
+      #{ordernumber,jdbcType=VARCHAR}, #{buytime,jdbcType=TIMESTAMP}, #{usertype,jdbcType=INTEGER}, 
+      #{uid,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{buytype,jdbcType=INTEGER}, 
+      #{buyusertype,jdbcType=INTEGER}, #{buyuserid,jdbcType=INTEGER}, #{targetsid,jdbcType=INTEGER}, 
+      #{targetsubject,jdbcType=VARCHAR}, #{targettid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{attr1,jdbcType=VARCHAR}, #{attr2,jdbcType=VARCHAR}, #{attr3,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.XnVideoOrder" >
+    insert into xn_video_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="cid != null" >
+        cid,
+      </if>
+      <if test="ordernumber != null" >
+        orderNumber,
+      </if>
+      <if test="buytime != null" >
+        buyTime,
+      </if>
+      <if test="usertype != null" >
+        userType,
+      </if>
+      <if test="uid != null" >
+        uId,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="buytype != null" >
+        buyType,
+      </if>
+      <if test="buyusertype != null" >
+        buyUserType,
+      </if>
+      <if test="buyuserid != null" >
+        buyUserId,
+      </if>
+      <if test="targetsid != null" >
+        targetSid,
+      </if>
+      <if test="targetsubject != null" >
+        targetSubject,
+      </if>
+      <if test="targettid != null" >
+        targetTid,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="attr1 != null" >
+        attr1,
+      </if>
+      <if test="attr2 != null" >
+        attr2,
+      </if>
+      <if test="attr3 != null" >
+        attr3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="ordernumber != null" >
+        #{ordernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="buytime != null" >
+        #{buytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="buytype != null" >
+        #{buytype,jdbcType=INTEGER},
+      </if>
+      <if test="buyusertype != null" >
+        #{buyusertype,jdbcType=INTEGER},
+      </if>
+      <if test="buyuserid != null" >
+        #{buyuserid,jdbcType=INTEGER},
+      </if>
+      <if test="targetsid != null" >
+        #{targetsid,jdbcType=INTEGER},
+      </if>
+      <if test="targetsubject != null" >
+        #{targetsubject,jdbcType=VARCHAR},
+      </if>
+      <if test="targettid != null" >
+        #{targettid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attr1 != null" >
+        #{attr1,jdbcType=VARCHAR},
+      </if>
+      <if test="attr2 != null" >
+        #{attr2,jdbcType=VARCHAR},
+      </if>
+      <if test="attr3 != null" >
+        #{attr3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.XnVideoOrderExample" resultType="java.lang.Integer" >
+    select count(*) from xn_video_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update xn_video_order
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.sid != null" >
+        sid = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cid != null" >
+        cid = #{record.cid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ordernumber != null" >
+        orderNumber = #{record.ordernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buytime != null" >
+        buyTime = #{record.buytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.usertype != null" >
+        userType = #{record.usertype,jdbcType=INTEGER},
+      </if>
+      <if test="record.uid != null" >
+        uId = #{record.uid,jdbcType=INTEGER},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buytype != null" >
+        buyType = #{record.buytype,jdbcType=INTEGER},
+      </if>
+      <if test="record.buyusertype != null" >
+        buyUserType = #{record.buyusertype,jdbcType=INTEGER},
+      </if>
+      <if test="record.buyuserid != null" >
+        buyUserId = #{record.buyuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.targetsid != null" >
+        targetSid = #{record.targetsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.targetsubject != null" >
+        targetSubject = #{record.targetsubject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.targettid != null" >
+        targetTid = #{record.targettid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.attr1 != null" >
+        attr1 = #{record.attr1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attr2 != null" >
+        attr2 = #{record.attr2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attr3 != null" >
+        attr3 = #{record.attr3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update xn_video_order
+    set id = #{record.id,jdbcType=INTEGER},
+      sid = #{record.sid,jdbcType=INTEGER},
+      cid = #{record.cid,jdbcType=INTEGER},
+      orderNumber = #{record.ordernumber,jdbcType=VARCHAR},
+      buyTime = #{record.buytime,jdbcType=TIMESTAMP},
+      userType = #{record.usertype,jdbcType=INTEGER},
+      uId = #{record.uid,jdbcType=INTEGER},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      buyType = #{record.buytype,jdbcType=INTEGER},
+      buyUserType = #{record.buyusertype,jdbcType=INTEGER},
+      buyUserId = #{record.buyuserid,jdbcType=INTEGER},
+      targetSid = #{record.targetsid,jdbcType=INTEGER},
+      targetSubject = #{record.targetsubject,jdbcType=VARCHAR},
+      targetTid = #{record.targettid,jdbcType=INTEGER},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      attr1 = #{record.attr1,jdbcType=VARCHAR},
+      attr2 = #{record.attr2,jdbcType=VARCHAR},
+      attr3 = #{record.attr3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.XnVideoOrder" >
+    update xn_video_order
+    <set >
+      <if test="sid != null" >
+        sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null" >
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="ordernumber != null" >
+        orderNumber = #{ordernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="buytime != null" >
+        buyTime = #{buytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="usertype != null" >
+        userType = #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        uId = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="buytype != null" >
+        buyType = #{buytype,jdbcType=INTEGER},
+      </if>
+      <if test="buyusertype != null" >
+        buyUserType = #{buyusertype,jdbcType=INTEGER},
+      </if>
+      <if test="buyuserid != null" >
+        buyUserId = #{buyuserid,jdbcType=INTEGER},
+      </if>
+      <if test="targetsid != null" >
+        targetSid = #{targetsid,jdbcType=INTEGER},
+      </if>
+      <if test="targetsubject != null" >
+        targetSubject = #{targetsubject,jdbcType=VARCHAR},
+      </if>
+      <if test="targettid != null" >
+        targetTid = #{targettid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="attr1 != null" >
+        attr1 = #{attr1,jdbcType=VARCHAR},
+      </if>
+      <if test="attr2 != null" >
+        attr2 = #{attr2,jdbcType=VARCHAR},
+      </if>
+      <if test="attr3 != null" >
+        attr3 = #{attr3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.XnVideoOrder" >
+    update xn_video_order
+    set sid = #{sid,jdbcType=INTEGER},
+      cid = #{cid,jdbcType=INTEGER},
+      orderNumber = #{ordernumber,jdbcType=VARCHAR},
+      buyTime = #{buytime,jdbcType=TIMESTAMP},
+      userType = #{usertype,jdbcType=INTEGER},
+      uId = #{uid,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      buyType = #{buytype,jdbcType=INTEGER},
+      buyUserType = #{buyusertype,jdbcType=INTEGER},
+      buyUserId = #{buyuserid,jdbcType=INTEGER},
+      targetSid = #{targetsid,jdbcType=INTEGER},
+      targetSubject = #{targetsubject,jdbcType=VARCHAR},
+      targetTid = #{targettid,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      attr1 = #{attr1,jdbcType=VARCHAR},
+      attr2 = #{attr2,jdbcType=VARCHAR},
+      attr3 = #{attr3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

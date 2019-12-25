@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.usoft.sschool_manage.mapper.base.PrgFileMapper" >
+  <resultMap id="BaseResultMap" type="com.usoft.smartschool.pojo.PrgFile" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="old_id" property="oldId" jdbcType="INTEGER" />
+    <result column="file_owner_prg_id" property="fileOwnerPrgId" jdbcType="INTEGER" />
+    <result column="file_owner_prg_old_id" property="fileOwnerPrgOldId" jdbcType="INTEGER" />
+    <result column="file_unit_id" property="fileUnitId" jdbcType="INTEGER" />
+    <result column="file_owner_prg_index" property="fileOwnerPrgIndex" jdbcType="INTEGER" />
+    <result column="file_owner_prg_signal_index" property="fileOwnerPrgSignalIndex" jdbcType="INTEGER" />
+    <result column="file_name" property="fileName" jdbcType="VARCHAR" />
+    <result column="file_path" property="filePath" jdbcType="VARCHAR" />
+    <result column="file_absolute_path" property="fileAbsolutePath" jdbcType="VARCHAR" />
+    <result column="file_size" property="fileSize" jdbcType="VARCHAR" />
+    <result column="file_create_time" property="fileCreateTime" jdbcType="TIMESTAMP" />
+    <result column="file_thumbnails_path" property="fileThumbnailsPath" jdbcType="VARCHAR" />
+    <result column="file_thumbnail_absolute_path" property="fileThumbnailAbsolutePath" jdbcType="VARCHAR" />
+    <result column="GXtime" property="gxtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, old_id, file_owner_prg_id, file_owner_prg_old_id, file_unit_id, file_owner_prg_index, 
+    file_owner_prg_signal_index, file_name, file_path, file_absolute_path, file_size, 
+    file_create_time, file_thumbnails_path, file_thumbnail_absolute_path, GXtime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.PrgFileExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from prg_file
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from prg_file
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from prg_file
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.usoft.smartschool.pojo.PrgFileExample" >
+    delete from prg_file
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.usoft.smartschool.pojo.PrgFile" >
+    insert into prg_file (id, old_id, file_owner_prg_id, 
+      file_owner_prg_old_id, file_unit_id, file_owner_prg_index, 
+      file_owner_prg_signal_index, file_name, file_path, 
+      file_absolute_path, file_size, file_create_time, 
+      file_thumbnails_path, file_thumbnail_absolute_path, 
+      GXtime)
+    values (#{id,jdbcType=INTEGER}, #{oldId,jdbcType=INTEGER}, #{fileOwnerPrgId,jdbcType=INTEGER}, 
+      #{fileOwnerPrgOldId,jdbcType=INTEGER}, #{fileUnitId,jdbcType=INTEGER}, #{fileOwnerPrgIndex,jdbcType=INTEGER}, 
+      #{fileOwnerPrgSignalIndex,jdbcType=INTEGER}, #{fileName,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR}, 
+      #{fileAbsolutePath,jdbcType=VARCHAR}, #{fileSize,jdbcType=VARCHAR}, #{fileCreateTime,jdbcType=TIMESTAMP}, 
+      #{fileThumbnailsPath,jdbcType=VARCHAR}, #{fileThumbnailAbsolutePath,jdbcType=VARCHAR}, 
+      #{gxtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.usoft.smartschool.pojo.PrgFile" >
+    insert into prg_file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="oldId != null" >
+        old_id,
+      </if>
+      <if test="fileOwnerPrgId != null" >
+        file_owner_prg_id,
+      </if>
+      <if test="fileOwnerPrgOldId != null" >
+        file_owner_prg_old_id,
+      </if>
+      <if test="fileUnitId != null" >
+        file_unit_id,
+      </if>
+      <if test="fileOwnerPrgIndex != null" >
+        file_owner_prg_index,
+      </if>
+      <if test="fileOwnerPrgSignalIndex != null" >
+        file_owner_prg_signal_index,
+      </if>
+      <if test="fileName != null" >
+        file_name,
+      </if>
+      <if test="filePath != null" >
+        file_path,
+      </if>
+      <if test="fileAbsolutePath != null" >
+        file_absolute_path,
+      </if>
+      <if test="fileSize != null" >
+        file_size,
+      </if>
+      <if test="fileCreateTime != null" >
+        file_create_time,
+      </if>
+      <if test="fileThumbnailsPath != null" >
+        file_thumbnails_path,
+      </if>
+      <if test="fileThumbnailAbsolutePath != null" >
+        file_thumbnail_absolute_path,
+      </if>
+      <if test="gxtime != null" >
+        GXtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="oldId != null" >
+        #{oldId,jdbcType=INTEGER},
+      </if>
+      <if test="fileOwnerPrgId != null" >
+        #{fileOwnerPrgId,jdbcType=INTEGER},
+      </if>
+      <if test="fileOwnerPrgOldId != null" >
+        #{fileOwnerPrgOldId,jdbcType=INTEGER},
+      </if>
+      <if test="fileUnitId != null" >
+        #{fileUnitId,jdbcType=INTEGER},
+      </if>
+      <if test="fileOwnerPrgIndex != null" >
+        #{fileOwnerPrgIndex,jdbcType=INTEGER},
+      </if>
+      <if test="fileOwnerPrgSignalIndex != null" >
+        #{fileOwnerPrgSignalIndex,jdbcType=INTEGER},
+      </if>
+      <if test="fileName != null" >
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileAbsolutePath != null" >
+        #{fileAbsolutePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null" >
+        #{fileSize,jdbcType=VARCHAR},
+      </if>
+      <if test="fileCreateTime != null" >
+        #{fileCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileThumbnailsPath != null" >
+        #{fileThumbnailsPath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileThumbnailAbsolutePath != null" >
+        #{fileThumbnailAbsolutePath,jdbcType=VARCHAR},
+      </if>
+      <if test="gxtime != null" >
+        #{gxtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.usoft.smartschool.pojo.PrgFileExample" resultType="java.lang.Integer" >
+    select count(*) from prg_file
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update prg_file
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.oldId != null" >
+        old_id = #{record.oldId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileOwnerPrgId != null" >
+        file_owner_prg_id = #{record.fileOwnerPrgId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileOwnerPrgOldId != null" >
+        file_owner_prg_old_id = #{record.fileOwnerPrgOldId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileUnitId != null" >
+        file_unit_id = #{record.fileUnitId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileOwnerPrgIndex != null" >
+        file_owner_prg_index = #{record.fileOwnerPrgIndex,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileOwnerPrgSignalIndex != null" >
+        file_owner_prg_signal_index = #{record.fileOwnerPrgSignalIndex,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileName != null" >
+        file_name = #{record.fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filePath != null" >
+        file_path = #{record.filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileAbsolutePath != null" >
+        file_absolute_path = #{record.fileAbsolutePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileSize != null" >
+        file_size = #{record.fileSize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileCreateTime != null" >
+        file_create_time = #{record.fileCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fileThumbnailsPath != null" >
+        file_thumbnails_path = #{record.fileThumbnailsPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileThumbnailAbsolutePath != null" >
+        file_thumbnail_absolute_path = #{record.fileThumbnailAbsolutePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gxtime != null" >
+        GXtime = #{record.gxtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update prg_file
+    set id = #{record.id,jdbcType=INTEGER},
+      old_id = #{record.oldId,jdbcType=INTEGER},
+      file_owner_prg_id = #{record.fileOwnerPrgId,jdbcType=INTEGER},
+      file_owner_prg_old_id = #{record.fileOwnerPrgOldId,jdbcType=INTEGER},
+      file_unit_id = #{record.fileUnitId,jdbcType=INTEGER},
+      file_owner_prg_index = #{record.fileOwnerPrgIndex,jdbcType=INTEGER},
+      file_owner_prg_signal_index = #{record.fileOwnerPrgSignalIndex,jdbcType=INTEGER},
+      file_name = #{record.fileName,jdbcType=VARCHAR},
+      file_path = #{record.filePath,jdbcType=VARCHAR},
+      file_absolute_path = #{record.fileAbsolutePath,jdbcType=VARCHAR},
+      file_size = #{record.fileSize,jdbcType=VARCHAR},
+      file_create_time = #{record.fileCreateTime,jdbcType=TIMESTAMP},
+      file_thumbnails_path = #{record.fileThumbnailsPath,jdbcType=VARCHAR},
+      file_thumbnail_absolute_path = #{record.fileThumbnailAbsolutePath,jdbcType=VARCHAR},
+      GXtime = #{record.gxtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.usoft.smartschool.pojo.PrgFile" >
+    update prg_file
+    <set >
+      <if test="oldId != null" >
+        old_id = #{oldId,jdbcType=INTEGER},
+      </if>
+      <if test="fileOwnerPrgId != null" >
+        file_owner_prg_id = #{fileOwnerPrgId,jdbcType=INTEGER},
+      </if>
+      <if test="fileOwnerPrgOldId != null" >
+        file_owner_prg_old_id = #{fileOwnerPrgOldId,jdbcType=INTEGER},
+      </if>
+      <if test="fileUnitId != null" >
+        file_unit_id = #{fileUnitId,jdbcType=INTEGER},
+      </if>
+      <if test="fileOwnerPrgIndex != null" >
+        file_owner_prg_index = #{fileOwnerPrgIndex,jdbcType=INTEGER},
+      </if>
+      <if test="fileOwnerPrgSignalIndex != null" >
+        file_owner_prg_signal_index = #{fileOwnerPrgSignalIndex,jdbcType=INTEGER},
+      </if>
+      <if test="fileName != null" >
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        file_path = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileAbsolutePath != null" >
+        file_absolute_path = #{fileAbsolutePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null" >
+        file_size = #{fileSize,jdbcType=VARCHAR},
+      </if>
+      <if test="fileCreateTime != null" >
+        file_create_time = #{fileCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileThumbnailsPath != null" >
+        file_thumbnails_path = #{fileThumbnailsPath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileThumbnailAbsolutePath != null" >
+        file_thumbnail_absolute_path = #{fileThumbnailAbsolutePath,jdbcType=VARCHAR},
+      </if>
+      <if test="gxtime != null" >
+        GXtime = #{gxtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.usoft.smartschool.pojo.PrgFile" >
+    update prg_file
+    set old_id = #{oldId,jdbcType=INTEGER},
+      file_owner_prg_id = #{fileOwnerPrgId,jdbcType=INTEGER},
+      file_owner_prg_old_id = #{fileOwnerPrgOldId,jdbcType=INTEGER},
+      file_unit_id = #{fileUnitId,jdbcType=INTEGER},
+      file_owner_prg_index = #{fileOwnerPrgIndex,jdbcType=INTEGER},
+      file_owner_prg_signal_index = #{fileOwnerPrgSignalIndex,jdbcType=INTEGER},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      file_path = #{filePath,jdbcType=VARCHAR},
+      file_absolute_path = #{fileAbsolutePath,jdbcType=VARCHAR},
+      file_size = #{fileSize,jdbcType=VARCHAR},
+      file_create_time = #{fileCreateTime,jdbcType=TIMESTAMP},
+      file_thumbnails_path = #{fileThumbnailsPath,jdbcType=VARCHAR},
+      file_thumbnail_absolute_path = #{fileThumbnailAbsolutePath,jdbcType=VARCHAR},
+      GXtime = #{gxtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
