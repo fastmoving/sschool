@@ -1,6 +1,7 @@
 package com.usoft.sschool_teacher.service.imp;
 
 import com.usoft.smartschool.pojo.XnScore;
+import com.usoft.smartschool.util.ObjectUtil;
 import com.usoft.sschool_teacher.common.SystemParam;
 import com.usoft.sschool_teacher.mapper.XnResourceRelationMapper;
 import com.usoft.sschool_teacher.mapper.XnScoreMapper;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @Author: 陈秋
@@ -82,8 +84,8 @@ public class GradeManageServiceImp implements IGradeManageService {
         data.put("xn_score",scores);
         Double[] scoreNum = new Double[scores.size()];
         for (XnScore score:scores){
-           scoreNum[i] = Double.parseDouble(score.getScore());
-           i++;
+            scoreNum[i] = Double.parseDouble(score.getScore());
+            i++;
         }
         //班级成绩区间段
         Map score_section = new HashMap();
@@ -145,27 +147,50 @@ public class GradeManageServiceImp implements IGradeManageService {
             return null;
         }
         Set<String> class_shu = new HashSet();
-        for (Map map:class_score){
-            class_shu.add(map.get("TSubject").toString());
+        Map<String,List<Map>> TSubject = class_score.stream().collect(Collectors.groupingBy(m->m.get("TSubject").toString()));
+//        for (Map map:class_score){
+//            class_shu.add(map.get("TSubject").toString());
+//        }
+        if(!ObjectUtil.isEmpty(TSubject)){
+            class_shu = TSubject.keySet();
         }
+        //按班级分组
         Set<String> class_name = new HashSet();
-        for (Map map:class_score){
-            class_name.add(map.get("ClassName").toString());
-        }
+//        for (Map map:class_score){
+//            class_name.add(map.get("ClassName").toString());
+//        }
+        //按科目分班级
         Map mapData = new HashMap();
         List<Map> subject_data_list = new ArrayList<>();
-        for (String string:class_shu){
+        for(String classShu:class_shu){
+            List<Map> tSubject = TSubject.get(classShu);
+            Map<String,List<Map>> classData = tSubject.stream().collect(Collectors.groupingBy(m->m.get("TSubject").toString()));
+            class_name = classData.keySet();
+            //根据班级获取成绩数据
             List<String> class_score_list = new ArrayList<>();
-            for (Map map:class_score){
-                if (string.equals(map.get("TSubject").toString())){
-                    class_score_list.add(map.get("avges").toString());
-                }
+            for (String className:class_name){
+                List<Map> classScoreTsubject = classData.get(className);
+                class_score_list.add(classScoreTsubject.get(0).get("avges").toString());
             }
             Map subject_data = new HashMap();
-            subject_data.put("subject",string);
+            subject_data.put("subject",classShu);
             subject_data.put("data",class_score_list);
             subject_data_list.add(subject_data);
         }
+//        Map mapData = new HashMap();
+//        List<Map> subject_data_list = new ArrayList<>();
+//        for (String string:class_shu){
+//            List<String> class_score_list = new ArrayList<>();
+//            for (Map map:class_score){
+//                if (string.equals(map.get("TSubject").toString())){
+//                    class_score_list.add(map.get("avges").toString());
+//                }
+//            }
+//            Map subject_data = new HashMap();
+//            subject_data.put("subject",string);
+//            subject_data.put("data",class_score_list);
+//            subject_data_list.add(subject_data);
+//        }
         mapData.put("subject_data",subject_data_list);
         mapData.put("class_name",class_name);
         data.put("class_score",mapData);
