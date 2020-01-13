@@ -82,9 +82,20 @@ public class TeacherMyselfServiceImp implements ITeacherMyselfService {
                 map.put("sex", CommonEnums.getMessage(Integer.parseInt(map.get("Sex").toString())));
             }
             if (map.get("Ttype")!=null && !"".equals(map.get("Ttype"))){
-                map.put("role",CommonEnums.getMessage(Integer.parseInt(map.get("Ttype").toString())));
-            }
+                Integer tType = Integer.parseInt(map.get("Ttype").toString());
+                String role = "";
+                switch (tType){
+                    case 1: role = "系统管理员";break;
+                    case 9: role = "学校管理员";break;
+                    case 10: role = "学校教师";break;
+                    case 11: role = "中心校用户";break;
+                    case 12: role = "教育局用户";break;
+                    case 13: role = "校长";break;
+                    case 14: role = "班主任";break;
 
+                }
+                map.put("role",role);
+            }
             if (map.containsKey("ImageSrc")&&map.get("ImageSrc").toString().contains("idImg")) {
                 Map data = JSONObject.fromObject(map.get("ImageSrc"));
                 if (!data.containsKey("faceImg")) {
