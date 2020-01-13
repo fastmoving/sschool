@@ -673,7 +673,7 @@
     ht.ID,ht.Tname,ht.TsName,ht.TCode,ht.Sex,ht.IdCard,ht.Nation,ht.Hometown,ht.Birthday,ht.HealthStatusint,ht.Ttype,
     ht.EmpForms,ht.PoliticalAff,ht.PartyTime,ht.Address,ht.HomePhone,ht.Mobile,ht.Email,ht.MaxEducation,ht.MaxSpecialty,
     ht.MaxDegree,ht.MandarinLe,ht.EnglishPro,ht.WorkTime,ht.TSubject,ht.TPostStatue,ht.TLevel,
-    ht.ImageSrc,ht.SchoolID,ht.CreateUser,ht.CreateTime,ht.IsAuditing,ht.IsNormal,ht.GXtime,he.EnumItemName role
+    ht.ImageSrc,ht.SchoolID,ht.CreateUser,ht.CreateTime,ht.IsAuditing,ht.IsNormal,ht.GXtime
   </sql>
 
   <!--教师个人信息查询-->
@@ -683,7 +683,6 @@
     cd.DeptName
     from hl_teacher ht
     LEFT join cf_department cd on cd.DeptID = ht.SchoolID
-    left join hl_enumitem he on ht.Ttype = he.ID
     <where>
     <!--<if test=" test !=null">
       ht.IsNormal = 1

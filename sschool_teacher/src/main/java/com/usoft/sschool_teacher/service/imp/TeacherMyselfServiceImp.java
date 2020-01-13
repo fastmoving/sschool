@@ -81,9 +81,9 @@ public class TeacherMyselfServiceImp implements ITeacherMyselfService {
             if ( map.get("Sex")!=null && !"".equals(map.get("Sex"))){
                 map.put("sex", CommonEnums.getMessage(Integer.parseInt(map.get("Sex").toString())));
             }
-//            if (map.get("Ttype")!=null && !"".equals(map.get("Ttype"))){
-//                map.put("role",CommonEnums.getMessage(Integer.parseInt(map.get("Ttype").toString())));
-//            }
+            if (map.get("Ttype")!=null && !"".equals(map.get("Ttype"))){
+                map.put("role",CommonEnums.getMessage(Integer.parseInt(map.get("Ttype").toString())));
+            }
 
             if (map.containsKey("ImageSrc")&&map.get("ImageSrc").toString().contains("idImg")) {
                 Map data = JSONObject.fromObject(map.get("ImageSrc"));
