@@ -164,7 +164,7 @@ public class GradeManageServiceImp implements IGradeManageService {
         List<Map> subject_data_list = new ArrayList<>();
         for(String classShu:class_shu){
             List<Map> tSubject = TSubject.get(classShu);
-            Map<String,List<Map>> classData = tSubject.stream().collect(Collectors.groupingBy(m->m.get("TSubject").toString()));
+            Map<String,List<Map>> classData = tSubject.stream().collect(Collectors.groupingBy(m->m.get("ClassName").toString()));
             class_name = classData.keySet();
             //根据班级获取成绩数据
             List<String> class_score_list = new ArrayList<>();
