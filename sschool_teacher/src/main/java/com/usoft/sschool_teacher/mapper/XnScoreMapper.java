@@ -36,14 +36,14 @@ public interface XnScoreMapper {
      * @param classId
      * @return
      */
-    List getExamType(@Param("classId")int classId);
+    List getExamType(@Param("classId")Integer classId);
 
     /**
      * 获取学期
      * @param classId
      * @return
      */
-    List getSemester(@Param("classId")int classId);
+    List getSemester(@Param("classId")Integer classId);
 
     /**
      * 教师单科成绩

@@ -321,18 +321,18 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="getSemester" parameterType="java.lang.Integer" resultType="java.util.Map">
+  <select id="getSemester" parameterType="java.lang.Integer" resultType="java.util.List">
     SELECT DISTINCT
       xs.Term
       from xn_score xs
-      WHERE xs.CID = ${classId}
+      WHERE xs.CID = #{classId}
   </select>
 
-  <select id="getExamType" parameterType="java.lang.Integer" resultType="java.util.Map">
+  <select id="getExamType" parameterType="java.lang.Integer" resultType="java.util.List">
     SELECT DISTINCT
       xs.TestName
       from xn_score xs
-      WHERE xs.CID = ${classId}
+      WHERE xs.CID = #{classId}
   </select>
 
     <sql id="Base_score_list">
