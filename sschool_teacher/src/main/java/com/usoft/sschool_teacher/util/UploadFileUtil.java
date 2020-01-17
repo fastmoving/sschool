@@ -17,6 +17,7 @@ import com.usoft.sschool_teacher.SschoolTeacherApplication;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,7 +31,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
  *@author jijh
  */
 @SuppressWarnings("all")
-@Configuration
+@Component
 //@PropertySource("classpath:filebasedir.properties")
 @PropertySource("classpath:file_base.properties")
 public class UploadFileUtil {
