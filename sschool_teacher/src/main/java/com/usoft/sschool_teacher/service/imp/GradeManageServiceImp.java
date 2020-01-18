@@ -36,8 +36,8 @@ public class GradeManageServiceImp implements IGradeManageService {
      * @return
      */
     @Override
-    public Map getGrade(int classId, int teacherId,String term,
-                        String testName,String subject,int start,int page) {
+    public Map getGrade(Integer classId, Integer teacherId,String term,
+                        String testName,String subject,Integer start,Integer page) {
         Map data = new HashMap();
         Map key1 = new HashMap();
         //默认考试类型和时间
@@ -227,8 +227,8 @@ public class GradeManageServiceImp implements IGradeManageService {
      * @return
      */
     @Override
-    public Integer getCont(int classId, int teacherId,String term,
-                           String testName,String subject,int start,int page){
+    public Integer getCont(Integer classId, Integer teacherId,String term,
+                           String testName,String subject,Integer start,Integer page){
         Map key = new HashMap();
         if (subject != null && !"".equals(subject)){
             key.put("subject",subject);

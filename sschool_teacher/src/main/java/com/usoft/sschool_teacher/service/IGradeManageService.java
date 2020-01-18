@@ -12,10 +12,10 @@ public interface IGradeManageService {
     /**
      * 成绩管理
      */
-    Map getGrade(int classId, int teacherId,String term,
-                 String testName,String subject,int start,int page);
-    Integer getCont(int classId, int teacherId,String term,
-                    String testName,String subject,int start,int page);
+    Map getGrade(Integer classId, Integer teacherId,String term,
+                 String testName,String subject,Integer start,Integer page);
+    Integer getCont(Integer classId, Integer teacherId,String term,
+                    String testName,String subject,Integer start,Integer page);
 
     /**
      * 获取学期

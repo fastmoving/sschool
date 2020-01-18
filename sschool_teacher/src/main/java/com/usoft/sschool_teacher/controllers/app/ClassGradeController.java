@@ -34,10 +34,10 @@ public class ClassGradeController {
     @GetMapping("/getGrade")
     public MyResult getGrade(String classId,String teacherId,String term,
                              String testName,String subject,String currentPage,String pageSize){
-        int thId = SystemParam.getUserId();
-        int clsId = 0;
-        int start = 0;
-        int page = 0;
+        Integer thId = SystemParam.getUserId();
+        Integer clsId = 0;
+        Integer start = 0;
+        Integer page = 0;
         if (currentPage!=null && !"".equals(currentPage) && pageSize!=null && !"".equals(pageSize)){
             page = Integer.parseInt(pageSize.trim());
             start = Integer.parseInt(currentPage.trim());
