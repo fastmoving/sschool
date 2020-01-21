@@ -127,7 +127,7 @@ public class TeacherMyselfServiceImp implements ITeacherMyselfService {
      */
     @Override
     @Transactional
-    public int updateMyself(int teacherId,String faceImg,String idImg,String code){
+    public int updateMyself(Integer teacherId,String faceImg,String idImg,String code){
         HlTeacher teacher = new HlTeacher();
         teacher.setId(teacherId);
         teacher.setSchoolid(SystemParam.getSchoolId());
@@ -146,9 +146,7 @@ public class TeacherMyselfServiceImp implements ITeacherMyselfService {
             String idImgLocal = (String)map.get("idImg");
             String faceImgLocal = (String)map.get("faceImg");
             //Map<String,Object> m = new HashMap<>();
-            if(faceImg!=null && !"".equals(faceImg)){
-                map.put("faceImg",faceImg);
-            }
+            map.put("faceImg",faceImg == null?"":faceImg);
             if(idImg!=null && !"".equals(idImg)){
                 map.put("idImg",idImg);
             }

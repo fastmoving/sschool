@@ -125,7 +125,7 @@ public class HlStudentInfoServiceImpl  implements HlStudentInfoService {
             hlSchclassKey.setSchoolid(schoolId);
             HlSchclass hlSchclass = hlSchclassMapper.selectByPrimaryKey(hlSchclassKey);
             if(hlSchclass==null)hlSchclass = new HlSchclass();
-            map.put("className",hlSchclass.getClassname());
+            map.put("className",hlSchclass.getClassname()==null?"":hlSchclass.getClassname());
             map.put("birthday",hlStudentInfo.getBirthday());
             Integer sexId = hlStudentInfo.getSexid();
             map.put("sex",sexId);

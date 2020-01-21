@@ -26,7 +26,7 @@ public interface ITeacherMyselfService {
      * @param idImg
      * @return
      */
-    int updateMyself(int teacherId,String faceImg,String idImg,String code);
+    int updateMyself(Integer teacherId,String faceImg,String idImg,String code);
     /**
      * 添加地址
      */

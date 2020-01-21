@@ -54,7 +54,7 @@ public class MyselfController {
      */
     @PostMapping("/updateMyself")
     public MyResult updateMyself(String faceImg,String idImg,String code){
-        int teacherId = 0;
+        Integer teacherId = 0;
         try {
             teacherId = SystemParam.getUserId();
         }catch (Exception e){
