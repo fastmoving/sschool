@@ -499,10 +499,10 @@ public class VoUtil {
                     map.put("idImg",null);
                     map.put("ImageSrc",map2.get("faceImg"));
                 }else {
-                    String[] s=map2.get("faceImg").toString().split(",");
+                    String[] s=map2.get("idImg").toString().split(",");
                     map.put("ImageSrc",map2.get("faceImg"));
                     map.put("idImg",s);
-                }
+            }
             }
             map.put("phone",studentinfo.getPhone());
         }
