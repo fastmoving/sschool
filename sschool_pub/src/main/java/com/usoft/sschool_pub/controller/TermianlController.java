@@ -191,8 +191,8 @@ public class TermianlController {
      * @return
      */
     @GetMapping("screenPrg")
-    public MyResult screenPrg(String classId, String schoolId, String conutyId,String teaId,String subId,String timeId, Integer pageNo, Integer pageSize){
-        return termianlService.screenPrg(classId,schoolId,conutyId,teaId,subId,timeId,pageNo,pageSize);
+    public MyResult screenPrg(String classId, String schoolId, String conutyId,String teaId,String subId,String timeId, String prgDatetime, Integer pageNo, Integer pageSize){
+        return termianlService.screenPrg(classId,schoolId,conutyId,teaId,subId,timeId,prgDatetime,pageNo,pageSize);
     }
 
     /**

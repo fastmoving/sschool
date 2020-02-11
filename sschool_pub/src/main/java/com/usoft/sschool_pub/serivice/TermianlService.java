@@ -37,7 +37,7 @@ public interface TermianlService {
     //查询所有的点播播视频信息
     MyResult allPrg(Integer schoolId,Integer pageNo,Integer pageSize);
     //筛选点播视频
-    MyResult screenPrg(String classId, String schoolId, String conutyId,String teaId,String subId,String timeId, Integer pageNo, Integer pageSize);
+    MyResult screenPrg(String classId, String schoolId, String conutyId,String teaId,String subId,String timeId, String prgDatetime, Integer pageNo, Integer pageSize);
     //直播、点播视频权限判断
     MyResult isRule(Integer videoId,Integer videoType,Integer videoSchoolId,Integer videoClassId);
     //名师讲堂筛选条件

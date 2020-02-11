@@ -893,7 +893,7 @@ public class TerminalServiceImpl implements TermianlService {
      * @return
      */
     @Override
-    public MyResult screenPrg(String classId, String schoolId, String conutyId,String teaId,String subId,String timeId, Integer pageNo, Integer pageSize) {
+    public MyResult screenPrg(String classId, String schoolId, String conutyId,String teaId,String subId,String timeId, String prgDatetime, Integer pageNo, Integer pageSize) {
         if (pageSize==null){
             pageSize=6;
         }
@@ -916,6 +916,10 @@ public class TerminalServiceImpl implements TermianlService {
         }
         if (timeId!=null&& !"null".equals(timeId)){
             criteria.andLessonEqualTo(Integer.valueOf(timeId));
+        }
+//        prgDatetime
+        if (prgDatetime!=null&& !"null".equals(prgDatetime)){
+            criteria.andPrgDatetimeEqualTo(prgDatetime);
         }
         criteria.andSchoolidEqualTo(Integer.valueOf(schoolId));
         criteria.andPrgStatusEqualTo(2);
