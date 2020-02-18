@@ -314,6 +314,7 @@ public class TerminalServiceImpl implements TermianlService {
                     stringObjectMap.put("YearName",hlVideoinfonews.get(0).getYearname());
                     stringObjectMap.put("Lesson",hlVideoinfonews.get(0).getLesson());
                     stringObjectMap.put("videoState",0);
+                    stringObjectMap.put("prg_datetime",hlVideoinfonews.get(0).getPrgDatetime());
                     list.add(stringObjectMap);
                 }
 

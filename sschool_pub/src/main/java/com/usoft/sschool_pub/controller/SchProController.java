@@ -37,7 +37,7 @@ public class SchProController {
 //        }
         if (schoolId==null) {
             if (SystemParam.getSchoolId() == null) {
-                schoolId = 1;
+                schoolId = 102;
             }else {
                 schoolId = SystemParam.getSchoolId();
             }
