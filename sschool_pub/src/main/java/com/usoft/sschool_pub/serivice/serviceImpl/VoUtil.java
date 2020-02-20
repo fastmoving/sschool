@@ -746,7 +746,7 @@ public class VoUtil {
         example1.createCriteria().andEnumidEqualTo(101).andIdEqualTo(xks.getGoodstype());
         List<HlEnumitem> hlEnumitems = hlEnumitemMapper.selectByExample(example1);
         String goodsType = "";
-        if(hlEnumitems!=null && hlEnumitems.size()>1){
+        if(hlEnumitems!=null && hlEnumitems.size()>0){
             goodsType = hlEnumitems.get(0).getEnumitemname();
         }else{
             goodsType = "其他";
