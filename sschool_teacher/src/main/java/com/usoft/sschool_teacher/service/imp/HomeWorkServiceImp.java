@@ -827,7 +827,7 @@ public class HomeWorkServiceImp extends QueryAndInsertImp implements IHomeWorkSe
         for (String info : classId) {
             List<HlStudentinfo> students = studentinfoMapper.getStudentInformation(Integer.parseInt(info));
             if(students.size()<1)return -3;
-            stuHomeworks = getListData(students,homeworkManage.getId(),hwType);
+            stuHomeworks.addAll(getListData(students,homeworkManage.getId(),hwType));
         }
         int j = stuHomeworkMapper.insertStuHomeworkEs(stuHomeworks);
         try{
