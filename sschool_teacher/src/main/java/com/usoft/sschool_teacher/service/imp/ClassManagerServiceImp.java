@@ -502,7 +502,9 @@ public class ClassManagerServiceImp extends QueryAndInsertImp implements IClassM
             map.put("time",map.get("createTime").toString().substring(0,16));
             Map mapData = JSONObject.fromObject(map.get("SPhoto"));
             String nnnnn = "{\"faceImg\":\"sschoolManageFile/201906//bfb0501c-480e-42cd-8528-89ed5bc1bb69.JPG\",\"idImg\":\"sschoolManageFile/201906//e985d12e-c4ba-4164-b539-4f651b578842.JPG\"}";
-            if (map.containsKey("faceImg"))map.put("img",mapData.get("faceImg"));
+            if (map.containsKey("faceImg")){
+                map.put("img",mapData.get("faceImg"));
+            }
             if(!map.containsKey("fileUrl")){
                 map.put("fileUrl","");
             }

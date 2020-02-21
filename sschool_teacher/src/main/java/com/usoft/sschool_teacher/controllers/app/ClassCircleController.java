@@ -28,8 +28,8 @@ public class ClassCircleController {
     @GetMapping("/getClassCircle")
     public MyResult getClassCircle(String classId,String currentPage,String pageSize,Integer code,Integer status){
         Integer clId = 0;
-        int page = 0;
-        int start = 0;
+        Integer page = 0;
+        Integer start = 0;
         try {
             if (classId !=null && !"".equals(classId)) clId = Integer.parseInt(classId.trim());
             if (classId ==null || "".equals(classId)) clId = null;
