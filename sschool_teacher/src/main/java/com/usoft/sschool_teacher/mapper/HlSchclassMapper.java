@@ -42,4 +42,11 @@ public interface HlSchclassMapper {
      * 管理班级
      */
     List<HlSchclass> getClassChecking(Map key);
+
+    /**
+     * 获取全校班级id
+     * @param schoolId
+     * @return
+     */
+    List<String> getSchoolClassId(@Param("schoolId")Integer schoolId);
 }

@@ -650,6 +650,19 @@ public class ClassManagerServiceImp extends QueryAndInsertImp implements IClassM
     }
 
     /**
+     * 获取全校班级id
+     * @param schoolId
+     * @return
+     */
+    @Override
+    public String[] getSchoolClassId(Integer schoolId) {
+        List<String> classIds = schclassMapper.getSchoolClassId(schoolId);
+        String[] stringLength = new String[classIds.size()];
+        classIds.toArray(stringLength);
+        return stringLength;
+    }
+
+    /**
      * 班级通知
      * @param classIds
      * @return

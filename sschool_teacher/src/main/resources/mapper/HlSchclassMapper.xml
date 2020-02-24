@@ -388,4 +388,13 @@ hs.ClassImg,hs.IndexNum,hs.IP,
       </if>
     </where>
   </select>
+
+  <!--获取全校班级id-->
+    <select id="getSchoolClassId" resultType="java.lang.String">
+      select ID
+      from hl_schclass
+        <where>
+          SchoolId = #{schoolId}
+        </where>
+    </select>
 </mapper>

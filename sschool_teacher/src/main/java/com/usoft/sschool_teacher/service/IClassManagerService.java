@@ -79,6 +79,11 @@ public interface IClassManagerService {
     List getManagerClass2(String currentPage,String pageSize);
 
     /**
+     * 获取全校班级id
+     */
+    String[] getSchoolClassId(Integer schoolId);
+
+    /**
      * 班级通知
      */
     int insertClassInform(String[] classIds,String message);
