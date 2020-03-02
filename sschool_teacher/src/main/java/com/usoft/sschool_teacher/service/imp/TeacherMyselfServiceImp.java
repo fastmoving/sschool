@@ -146,7 +146,9 @@ public class TeacherMyselfServiceImp implements ITeacherMyselfService {
             String idImgLocal = (String)map.get("idImg");
             String faceImgLocal = (String)map.get("faceImg");
             //Map<String,Object> m = new HashMap<>();
-            map.put("faceImg",faceImg == null?"":faceImg);
+            if("1".equals(code)) {
+                map.put("faceImg", faceImg == null ? "" : faceImg);
+            }
             if(idImg!=null && !"".equals(idImg)){
                 map.put("idImg",idImg);
             }
