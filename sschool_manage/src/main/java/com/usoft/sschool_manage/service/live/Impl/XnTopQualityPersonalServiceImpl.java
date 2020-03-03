@@ -59,7 +59,7 @@ public class XnTopQualityPersonalServiceImpl implements XnTopQualityPersonalServ
             map.put("schoolName", cfDepartment.getDeptname());
             HlTeacherKey hlTeacherKey = new HlTeacherKey();
             hlTeacherKey.setSchoolid(schoolId);
-            hlTeacherKey.setId(xnTopqualityPersonalRule.getUid());
+            hlTeacherKey.setId(xnTopqualityPersonalRule.getTid());
             HlTeacher hlTeacher = hlTeacherMapper.selectByPrimaryKey(hlTeacherKey);
             map.put("teacherId",hlTeacher.getId());
             map.put("teacherName",hlTeacher.getTname());

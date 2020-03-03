@@ -459,7 +459,9 @@ public class TeacherMyselfServiceImp implements ITeacherMyselfService {
             }
             map.put("status", OrderEnums.getMessage(Integer.parseInt(map.get("orderState").toString())));
             map.put("phone",map.containsKey("phone")?map.get("phone"):"");
+            map.put("thumbnail",map.containsKey("thumbnail")? map.get("thumbnail"):"");
             dataMap.add(map);
+
         }
         return dataMap;
     }
