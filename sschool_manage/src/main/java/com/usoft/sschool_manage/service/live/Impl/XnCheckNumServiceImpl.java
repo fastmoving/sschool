@@ -295,7 +295,7 @@ public class XnCheckNumServiceImpl implements XnCheckNumService {
     public MyResult RankByWeek(String start, String end, Integer videoType) {
         Integer schoolId = SystemParam.getSchoolId();
         List<Map<String, Object>> maps = xnCheckNumMapper.RankByWeek(start,end,videoType,schoolId);
-        if (ObjectUtil.isEmpty(maps))return null;
+        if (ObjectUtil.isEmpty(maps))return MyResult.failure("暂无数据");
         List<Map> list=new ArrayList<>();
         for (Map m:maps){
             Map map=new HashMap();

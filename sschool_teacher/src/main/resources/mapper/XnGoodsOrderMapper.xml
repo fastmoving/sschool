@@ -417,18 +417,19 @@
 
   <select id="getMyOrder" resultType="map" parameterType="java.util.Map">
     SELECT
-    <include refid="Base_Column_List"/>
-    from xn_goods_order
+    a.ID, a.userName, a.UID, a.goodsId, a.goodsName, a.addressId, a.number, a.orderNumber, a.buyTime, a.orderState,
+    a.price, a.totalPrice, a.type, a.phone, a.createTime, a.attr1, a.attr2, a.attr3, b.thumbnail
+    from xn_goods_order a left join xn_goods_manage b on a.goodsId = b.id
     <where>
-        attr1 = 2
+        a.attr1 = 2
       <if test="teacherId!=null">
-        and  UID = #{teacherId}
+        and  a.UID = #{teacherId}
       </if>
       <if test="schoolId!=null">
-        and attr2 =#{schoolId}
+        and a.attr2 =#{schoolId}
       </if>
     </where>
-    order by createTime DESC
+    order by a.createTime DESC
     Limit ${start},${page}
   </select>
 
