@@ -141,15 +141,11 @@ public class TeacherMyselfServiceImp implements ITeacherMyselfService {
         if(map == null){
             map.put("faceImg",faceImg);
             map.put("idImg",idImg);
-            //teacher.setImagesrc(com.alibaba.fastjson.JSONObject.toJSONString(map));
         }else{
-            String idImgLocal = (String)map.get("idImg");
-            String faceImgLocal = (String)map.get("faceImg");
-            //Map<String,Object> m = new HashMap<>();
             if("1".equals(code)) {
                 map.put("faceImg", faceImg == null ? "" : faceImg);
             }
-            if(idImg!=null && !"".equals(idImg)){
+            if("2".equals(code) && idImg!=null && !"".equals(idImg)){
                 map.put("idImg",idImg);
             }
 
