@@ -228,7 +228,7 @@ public class PayServiceImpl implements PayService {
         signMap.put("spbill_create_ip",  WXConstants.ip);
         signMap.put("product_id", String.valueOf(stringObjectMap.get("id")));
         signMap.put("out_trade_no", tradeNo);
-        signMap.put("total_fee", "1");// 测试
+        signMap.put("total_fee", String.valueOf(money*100));// 测试
         signMap.put("body", WXConstants.User_BODY);
         signMap.put("attach",attach);
         // 得到微信sign签名
@@ -285,7 +285,7 @@ public class PayServiceImpl implements PayService {
         signMap.put("notify_url", payPojo.getWechatNotify_url());
         signMap.put("spbill_create_ip", WXConstants.ip);
         signMap.put("out_trade_no", tradeNo);
-        signMap.put("total_fee", "1");// 测试
+        signMap.put("total_fee", String.valueOf(money*100));// 测试
         signMap.put("body", WXConstants.User_BODY);
         signMap.put("attach",attach);
         String s1=null;
@@ -365,7 +365,7 @@ public class PayServiceImpl implements PayService {
         signMap.put("notify_url", payPojo.getWechatNotify_url());
         signMap.put("spbill_create_ip", WXConstants.ip);
         signMap.put("out_trade_no", tradeNo);
-        signMap.put("total_fee", "1");// 测试
+        signMap.put("total_fee", String.valueOf(money*100));// 测试
         signMap.put("body", WXConstants.User_BODY);
         signMap.put("attach",attach);
         String s1=null;
@@ -589,7 +589,7 @@ public class PayServiceImpl implements PayService {
             model.setSubject(attach);
             model.setOutTradeNo(tradeNo);
             model.setTimeoutExpress("30m");
-            model.setTotalAmount("0.01");
+            model.setTotalAmount(String.valueOf(money));
             model.setProductCode("QUICK_MSECURITY_PAY");
             alipayRequest.setBizModel(model);
             alipayRequest.setReturnUrl("www.baidu.com");
@@ -665,7 +665,7 @@ public class PayServiceImpl implements PayService {
         model.setSubject(attach);
         model.setOutTradeNo(tradeNo);
         model.setTimeoutExpress("30m");
-        model.setTotalAmount("0.01");
+        model.setTotalAmount(String.valueOf(money));
         model.setProductCode("QUICK_MSECURITY_PAY");
         alipayRequest.setBizModel(model);
         alipayRequest.setReturnUrl("www.baidu.com");
