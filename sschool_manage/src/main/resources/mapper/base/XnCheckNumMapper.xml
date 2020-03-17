@@ -285,7 +285,6 @@
     and attr1 like #{time,jdbcType=VARCHAR}
 	GROUP BY cid
 	ORDER BY num desc
-	LIMIT 6
   </select>
   <!--按周排序-->
   <select id="RankByWeek" resultType="map">
@@ -294,6 +293,5 @@
     and attr1 between #{start,jdbcType=INTEGER} and #{end ,jdbcType=INTEGER}
     GROUP BY cid
 	ORDER BY num desc
-	LIMIT 6
   </select>
 </mapper>
