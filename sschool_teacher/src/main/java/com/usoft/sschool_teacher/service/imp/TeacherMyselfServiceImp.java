@@ -1,6 +1,7 @@
 package com.usoft.sschool_teacher.service.imp;
 
 import com.usoft.smartschool.pojo.*;
+import com.usoft.smartschool.util.MyResult;
 import com.usoft.sschool_teacher.common.SystemParam;
 import com.usoft.sschool_teacher.enums.*;
 import com.usoft.sschool_teacher.exception.CustomException;
@@ -181,6 +182,37 @@ public class TeacherMyselfServiceImp implements ITeacherMyselfService {
             return -1;
         }
         return i;
+    }
+
+    /**
+     * 修改个人照片(app)
+     * @param faceImg
+     * @param idImg
+     * @return
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public MyResult updateMyselfApp(String faceImg, String idImg) {
+        HlTeacher teacher = new HlTeacher();
+        teacher.setId(SystemParam.getUserId());
+        teacher.setSchoolid(SystemParam.getSchoolId());
+        List<Map> teacherIfo = teacherMapper.getTeacherIfo(SystemParam.getUserId());
+        Map map = new HashMap();
+        if(teacherIfo.get(0).containsKey("ImageSrc") && teacherIfo.get(0).get("ImageSrc").toString().contains("{")){
+            map = JSONObject.fromObject(teacherIfo.get(0).get("ImageSrc"));
+        }else{
+            map = null;
+        }
+        map.put("faceImg",faceImg);
+        map.put("idImg",idImg);
+        teacher.setImagesrc(com.alibaba.fastjson.JSONObject.toJSONString(map));
+        int i = teacherMapper.updateByPrimaryKeySelective(teacher);
+        try {
+            CustomException.customeIf(i);
+        }catch (MyException e){
+            return new MyResult(e);
+        }
+        return new MyResult(1,"success","");
     }
 
     /**

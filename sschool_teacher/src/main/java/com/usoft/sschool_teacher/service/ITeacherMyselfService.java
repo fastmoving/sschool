@@ -1,6 +1,7 @@
 package com.usoft.sschool_teacher.service;
 
 import com.usoft.smartschool.pojo.XnAddress;
+import com.usoft.smartschool.util.MyResult;
 
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,15 @@ public interface ITeacherMyselfService {
      * @return
      */
     int updateMyself(Integer teacherId,String faceImg,String idImg,String code);
+
+    /**
+     * 修改个人证件照(app)
+     * @param faceImg
+     * @param idImg
+     * @return
+     */
+    MyResult updateMyselfApp(String faceImg,String idImg);
+
     /**
      * 添加地址
      */

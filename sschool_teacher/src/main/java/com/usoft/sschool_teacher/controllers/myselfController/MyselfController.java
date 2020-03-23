@@ -72,6 +72,22 @@ public class MyselfController {
     }
 
     /**
+     * 修改证件照 (app端)
+     * * @param faceImg 头像
+     * * @param idImg 风采照
+     * @return
+     */
+    @PostMapping("/updateMyselfApp")
+    public MyResult updateMyselfApp(String faceImg,String idImg){
+        try {
+           SystemParam.getUserId();
+           return teacherService.updateMyselfApp(faceImg,idImg);
+        }catch (Exception e){
+            return new MyResult(2,"你还没有登陆","");
+        }
+    }
+
+    /**
      * 查找学校领导
      * @return
      */
