@@ -228,7 +228,9 @@ public class PayServiceImpl implements PayService {
         signMap.put("spbill_create_ip",  WXConstants.ip);
         signMap.put("product_id", String.valueOf(stringObjectMap.get("id")));
         signMap.put("out_trade_no", tradeNo);
-        signMap.put("total_fee", String.valueOf(money*100));// 测试
+        Integer totalfee = (int)(money*100);
+        logger.info("微信订单总金额为："+totalfee);
+        signMap.put("total_fee", totalfee.toString());// 测试
         signMap.put("body", WXConstants.User_BODY);
         signMap.put("attach",attach);
         // 得到微信sign签名
@@ -285,7 +287,9 @@ public class PayServiceImpl implements PayService {
         signMap.put("notify_url", payPojo.getWechatNotify_url());
         signMap.put("spbill_create_ip", WXConstants.ip);
         signMap.put("out_trade_no", tradeNo);
-        signMap.put("total_fee", String.valueOf(money*100));// 测试
+        Integer totalfee = (int)(money*100);
+        logger.info("微信订单总金额为："+totalfee);
+        signMap.put("total_fee",totalfee.toString());// 测试
         signMap.put("body", WXConstants.User_BODY);
         signMap.put("attach",attach);
         String s1=null;
@@ -365,7 +369,9 @@ public class PayServiceImpl implements PayService {
         signMap.put("notify_url", payPojo.getWechatNotify_url());
         signMap.put("spbill_create_ip", WXConstants.ip);
         signMap.put("out_trade_no", tradeNo);
-        signMap.put("total_fee", String.valueOf(money*100));// 测试
+        Integer totalfee = (int)(money*100);
+        logger.info("微信订单总金额为："+totalfee);
+        signMap.put("total_fee", totalfee.toString());// 测试
         signMap.put("body", WXConstants.User_BODY);
         signMap.put("attach",attach);
         String s1=null;
@@ -615,7 +621,9 @@ public class PayServiceImpl implements PayService {
             model.setBody(WXConstants.User_BODY);
             model.setSubject(attach);
             model.setOutTradeNo(tradeNo);
-            model.setTotalAmount("0.01");
+            String totalFee = String.format("%.2f", money);
+            logger.info("支付宝订单总金额为"+totalFee);
+            model.setTotalAmount(totalFee);
             //必传固定参数
             model.setProductCode("FAST_INSTANT_TRADE_PAY");
             alipayRequest.setNotifyUrl(payPojo.getAliNotify_url());
