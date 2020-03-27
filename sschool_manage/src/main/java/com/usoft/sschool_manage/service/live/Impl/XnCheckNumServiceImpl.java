@@ -203,9 +203,11 @@ public class XnCheckNumServiceImpl implements XnCheckNumService {
                     map.put("idImg",null);
                     map.put("ImageSrc",map2.get("faceImg"));
                 }else {
-                    String[] s=map2.get("faceImg").toString().split(",");
-                    map.put("ImageSrc",map2.get("faceImg"));
-                    map.put("idImg",s);
+                    if(map2.containsKey("faceImg")){
+                        String[] s=map2.get("faceImg").toString().split(",");
+                        map.put("ImageSrc",map2.get("faceImg"));
+                        map.put("idImg",s);
+                    }
                 }
             }
             map.put("phone",studentinfo.getPhone());
