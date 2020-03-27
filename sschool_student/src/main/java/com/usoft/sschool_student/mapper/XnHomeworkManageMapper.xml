@@ -115,6 +115,7 @@
     <include refid="Blob_Column_List" />
     from xn_homework_manage
     where ID = #{id,jdbcType=INTEGER}
+    ORDER BY expireTime DESC
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from xn_homework_manage
