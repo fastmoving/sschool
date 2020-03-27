@@ -713,7 +713,7 @@
     <include refid="Base_Column_List" />
     from hl_teacher
     <where>
-      Ttype in (1,9,14)
+      Ttype in (1,9,13,14)
       <if test="schoolId !=null">
         and SchoolID = ${schoolId}
       </if>
