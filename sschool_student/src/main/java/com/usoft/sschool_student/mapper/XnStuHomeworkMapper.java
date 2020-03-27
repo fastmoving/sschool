@@ -19,6 +19,12 @@ public interface XnStuHomeworkMapper {
 
     List<XnStuHomework> selectByExample(XnStuHomeworkExample example);
 
+    /**
+     * 查询学生未做作业 并倒序排序
+     * @return
+     */
+    List<XnStuHomework> selectByXnNotHomework(XnStuHomeworkExample example);
+
     XnStuHomework selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") XnStuHomework record, @Param("example") XnStuHomeworkExample example);

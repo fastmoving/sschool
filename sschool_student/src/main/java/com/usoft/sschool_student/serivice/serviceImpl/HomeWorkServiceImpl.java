@@ -95,7 +95,7 @@ public class HomeWorkServiceImpl implements HomeWorkService {
         XnStuHomeworkExample example=new XnStuHomeworkExample();
         example.createCriteria().andStuidEqualTo(SystemParam.getChildId()).andStateEqualTo((byte)1);
         example.setOrderByClause("submitTime desc");
-        List<XnStuHomework> xnStuHomeworks = xnStuHomeworkMapper.selectByExample(example);
+        List<XnStuHomework> xnStuHomeworks = xnStuHomeworkMapper.selectByXnNotHomework(example);
         if (ObjectUtil.isEmpty(xnStuHomeworks))return MyResult.failure("没有作业信息");
 
         List<Map> list=new ArrayList<>();
