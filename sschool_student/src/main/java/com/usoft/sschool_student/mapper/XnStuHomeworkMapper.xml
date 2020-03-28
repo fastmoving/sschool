@@ -94,7 +94,7 @@
     </if>
     <include refid="Base_Column_List" />
     from xn_stu_homework
-        left join  xn_homework_manage xhm
+        left join  xn_homework_manage xhm on xhm.ID=xn_stu_homework.hwId
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
