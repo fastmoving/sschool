@@ -399,7 +399,7 @@ public class TeacherMyselfServiceImp implements ITeacherMyselfService {
     @Override
     public Map getSchoolManager(){
         List<HlTeacher> school_manager= teacherMapper.getSchoolManager(SystemParam.getSchoolId());
-        if (school_manager.isEmpty())return null;
+        if (school_manager == null || school_manager.size() < 1)return null;
         Map data = new HashMap();
         Map res = JSONObject.fromObject(school_manager.get(0).getImagesrc());
         if (res.isEmpty())data.put("faceImg","");

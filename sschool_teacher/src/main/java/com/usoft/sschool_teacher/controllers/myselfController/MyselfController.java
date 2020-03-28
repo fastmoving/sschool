@@ -94,7 +94,7 @@ public class MyselfController {
     @GetMapping("/getSchoolManager")
     public Object getSchoolManager(){
         Map data = teacherService.getSchoolManager();
-        if (data.isEmpty())return new MyResult(2,"没有数据","");
+        if (data == null )return new MyResult(2,"没有数据","");
         return new MyResult(1,"success",data);
     }
     /**
