@@ -92,10 +92,7 @@ public class HomeWorkServiceImpl implements HomeWorkService {
      */
     @Override
     public MyResult notdidHwk(Integer pageNo, Integer pageSize) {
-        XnStuHomeworkExample example=new XnStuHomeworkExample();
-        example.createCriteria().andStuidEqualTo(SystemParam.getChildId()).andStateEqualTo((byte)1);
-        example.setOrderByClause("submitTime desc");
-        List<XnStuHomework> xnStuHomeworks = xnStuHomeworkMapper.selectByXnNotHomework(example);
+        List<XnStuHomework> xnStuHomeworks = xnStuHomeworkMapper.selectByXnNotHomework(SystemParam.getChildId(),1);
         if (ObjectUtil.isEmpty(xnStuHomeworks))return MyResult.failure("没有作业信息");
 
         List<Map> list=new ArrayList<>();

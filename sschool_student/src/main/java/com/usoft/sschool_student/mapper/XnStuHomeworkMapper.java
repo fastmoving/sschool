@@ -23,7 +23,7 @@ public interface XnStuHomeworkMapper {
      * 查询学生未做作业 并倒序排序
      * @return
      */
-    List<XnStuHomework> selectByXnNotHomework(XnStuHomeworkExample example);
+    List<XnStuHomework> selectByXnNotHomework(@Param("stuId")Integer stuId,@Param("status") Integer status);
 
     XnStuHomework selectByPrimaryKey(Integer id);
 

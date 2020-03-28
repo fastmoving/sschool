@@ -87,20 +87,16 @@
   </select>
 
 <!--查询待做作业并按照倒序排序-->
-  <select id="selectByXnNotHomework" resultMap="BaseResultMap" parameterType="com.usoft.smartschool.pojo.XnStuHomeworkExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from xn_stu_homework
-        left join  xn_homework_manage xhm on xhm.ID=xn_stu_homework.hwId
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
+  <select id="selectByXnNotHomework" resultMap="BaseResultMap">
+    select distinct
+    xsh.ID, xsh.StuID, xsh.hwId, xsh.state, xsh.type, xsh.answerContent, xsh.submitTime
+    from xn_stu_homework xsh
+        left join  xn_homework_manage xhm on xhm.ID=xsh.hwId
+        <where>
+          xsh.StuID = #{stuId}
+          and xsh.state = #{status}
+        </where>
       order by xhm.expireTime DESC
-    </if>
   </select>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
