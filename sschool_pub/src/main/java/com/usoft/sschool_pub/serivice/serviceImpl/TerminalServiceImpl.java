@@ -1220,10 +1220,10 @@ public class TerminalServiceImpl implements TermianlService {
         List l=new ArrayList();
         if (!ObjectUtil.isEmpty(xnFineclassOrders)){
             for (XnFineclassOrder xfo:xnFineclassOrders){
-                XnTopqualityPersonalRule xnTopqualityPersonalRule = xnTopqualityPersonalRuleMapper.selectByPrimaryKey(xfo.getFid());
-                Map<String, Object> stringObjectMap = voUtil.pointFocusInfo(xnTopqualityPersonalRule);
-                stringObjectMap.put("isPay",1);
-                list.add(stringObjectMap);
+//                XnTopqualityPersonalRule xnTopqualityPersonalRule = xnTopqualityPersonalRuleMapper.selectByPrimaryKey(xfo.getFid());
+//                Map<String, Object> stringObjectMap = voUtil.pointFocusInfo(xnTopqualityPersonalRule);
+//                stringObjectMap.put("isPay",1);
+//                list.add(stringObjectMap);
                 l.add(xfo.getFid());
             }
         }

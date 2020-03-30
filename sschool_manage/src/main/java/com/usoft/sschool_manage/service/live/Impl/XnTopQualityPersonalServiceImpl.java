@@ -119,4 +119,12 @@ public class XnTopQualityPersonalServiceImpl implements XnTopQualityPersonalServ
         }
         return MyResult.success(message);
     }
+
+    public static  void main(String[] args){
+        String tprice = "5.11";BigDecimal bigDecimal = new BigDecimal(tprice);
+        System.out.println(bigDecimal);
+
+    }
 }
+
+
