@@ -404,7 +404,7 @@ public class TeacherMyselfServiceImp implements ITeacherMyselfService {
         }
         Map data = new HashMap();
         Map res = JSONObject.fromObject(school_manager.get(0).getImagesrc());
-        if (!res.isEmpty()){
+        if (res.isEmpty()){
             data.put("faceImg","");
         } else {
             data.put("faceImg",res.get("idImg"));
