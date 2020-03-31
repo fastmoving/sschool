@@ -701,7 +701,7 @@
     <include refid="Base_Column_List" />
     from hl_teacher
     <where>
-      Ttype = 47
+      TType = 13
       <if test="_parameter !=null">
         and SchoolID = ${schoolId}
       </if>
