@@ -589,7 +589,6 @@ public class PayServiceImpl implements PayService {
         //设置请求参数
         if (type==1){
             AlipayTradeAppPayRequest alipayRequest = new AlipayTradeAppPayRequest();
-
             AlipayTradeAppPayModel model = new AlipayTradeAppPayModel();
             model.setBody(WXConstants.User_BODY);
             model.setSubject(attach);
@@ -830,7 +829,8 @@ public class PayServiceImpl implements PayService {
         } catch (AlipayApiException e) {
             e.printStackTrace();
         }
-        if(response.isSuccess()){
+        logger.info("----------------------订单返回的值:"+JSONObject.toJSONString(response)+"-----------------------");
+        if("TRADE_SUCCESS".equals(response.getTradeStatus())){
             System.out.println("该订单已支付成功");
             MyResult wirtes = wirtes(tradeNo, new BigDecimal(response.getTotalAmount()), response.getSubject(), payWay);
             if (wirtes.getStatus()==1){
