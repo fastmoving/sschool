@@ -60,6 +60,8 @@ public class ClassTimeUtil {
         return 1;
     }
 
+
+    //执行定时器
     public  void timer1(String[] classId ,String message,Long time){
         Timer nTimer = new Timer();
         Long timeNew = System.currentTimeMillis();
@@ -69,9 +71,14 @@ public class ClassTimeUtil {
         nTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                int i=0;
-                for (;i<=0;){
-                   i = classManagerService.insertClassOver(classId,message,teacherId,schoolId);
+                for (int i=0;i<=0;){
+                    if(classId == null || classId.length <1){//全部班级
+                        //获取全部班级
+                        String[] classId = classManagerService.getSchoolClassId(Integer.valueOf(schoolId));
+                        i = classManagerService.insertClassOver(classId,message,teacherId,schoolId);
+                    }else {//指定班级
+                        i = classManagerService.insertClassOver(classId,message,teacherId,schoolId);
+                    }
                 }
             }
         },times);

@@ -5,10 +5,7 @@ import com.usoft.sschool_teacher.common.SystemParam;
 import com.usoft.sschool_teacher.service.IClassManagerService;
 import com.usoft.sschool_teacher.util.ClassTimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,6 +27,12 @@ public class ClassOverController {
     @Autowired
     private ClassTimeUtil util;
 
+    /**
+     * 一键放学
+     * @param classIds
+     * @param message
+     * @return
+     */
     @PostMapping("/insertClassOver")
     public MyResult insertClassOver(String classIds ,String message){
         int i = 1;
@@ -37,7 +40,7 @@ public class ClassOverController {
             String[] classId = classIds.split(",");
             //判断班级id是否符合要求
             for (int j=0;j<classId.length;j++){
-                Pattern pattern = Pattern.compile("^-?\\d+(\\.\\d+)?$");//这个也行
+                Pattern pattern = Pattern.compile("^-?\\d+(\\.\\d+)?$");
                 Matcher isNum = pattern.matcher(classId[j]);
                 if (!isNum.matches()) {
                     return new MyResult(2,"上传ID字符串不对","");
@@ -66,10 +69,9 @@ public class ClassOverController {
      * @return
      */
     @PostMapping("/insertTimeClassOver")
-    public MyResult insertTimeClassOver(String classIds ,String message,Long time){
-        if(classIds==null && "".equals(classIds)){
-            return new MyResult(2,"上传ID字符串不对","");
-        }
+    public MyResult insertTimeClassOver(@RequestParam("classIds") String classIds ,
+                                        @RequestParam("message")String message,
+                                        @RequestParam("time")Long time){
         String[] classId = classIds.split(",");
         util.timer1(classId,message,time);
         return new MyResult(1,"success","");
