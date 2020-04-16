@@ -502,7 +502,7 @@ public class VoUtil {
                     String[] s=map2.get("idImg").toString().split(",");
                     map.put("ImageSrc",map2.get("faceImg"));
                     map.put("idImg",s);
-            }
+                }
             }
             map.put("phone",studentinfo.getPhone());
         }
@@ -521,12 +521,12 @@ public class VoUtil {
                 String str=hlTeacher.getImagesrc();
                 JSON json= JSONObject.parseObject(str);
                 Map<String,Object> map2=JSONObject.toJavaObject(json,Map.class);
-                if (map2.get("faceImg")==null || "null".equals(map2.get("faceImg")) || "".equals(map2.get("faceImg"))){
+                if (map2.get("idImg")==null || "null".equals(map2.get("idImg")) || "".equals(map2.get("idImg"))){
                     map.put("idImg",null);
-                    map.put("ImageSrc",map2.get("idImg"));
+                    map.put("ImageSrc",map2.get("faceImg"));
                 }else {
-                    String[] s=map2.get("faceImg").toString().split(",");
-                    map.put("ImageSrc",map2.get("idImg"));
+                    String[] s=map2.get("idImg").toString().split(",");
+                    map.put("ImageSrc",map2.get("faceImg"));
                     map.put("idImg",s);
                 }
             }
