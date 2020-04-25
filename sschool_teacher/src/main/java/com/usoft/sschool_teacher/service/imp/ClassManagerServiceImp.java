@@ -4,18 +4,25 @@ import com.usoft.smartschool.pojo.*;
 import com.usoft.sschool_teacher.common.SystemParam;
 import com.usoft.sschool_teacher.enums.AbsentEnums;
 import com.usoft.sschool_teacher.enums.CommonEnums;
+import com.usoft.sschool_teacher.enums.entity.XnTimingSchool;
 import com.usoft.sschool_teacher.exception.CustomException;
 import com.usoft.sschool_teacher.exception.MyException;
+import com.usoft.sschool_teacher.job.SchoolTimingJob;
 import com.usoft.sschool_teacher.mapper.*;
 import com.usoft.sschool_teacher.service.IClassManagerService;
 import com.usoft.sschool_teacher.util.ConstantsDate;
 import net.sf.json.JSONObject;
 import org.apache.commons.compress.utils.Lists;
+import org.quartz.*;
+import org.quartz.impl.JobDetailImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -58,6 +65,13 @@ public class ClassManagerServiceImp extends QueryAndInsertImp implements IClassM
     @Resource
     private XnCommentTableMapper commentTableMapper;
     private HlSchclassKey hlSchclassKey_key = new HlSchclassKey();
+
+    @Autowired
+    private SchoolTimingJob timingJob;//定时任务器
+
+    @Autowired
+    private SchedulerFactoryBean schedulerFactoryBean;//定时调度器
+
     /**
      * 查询教师管理班级
      * @param teacherId
@@ -700,6 +714,17 @@ public class ClassManagerServiceImp extends QueryAndInsertImp implements IClassM
         return i;
     }
 
+    /**
+     * 发送消息
+     * @param familyData
+     * @param message
+     * @param teacherId
+     * @param createuser
+     * @param type
+     * @param schoolId
+     * @return
+     */
+    @Override
     public List getMessage(List<Integer> familyData,String message,int teacherId,String createuser,int type,String schoolId){
         List key = new ArrayList<>();
         for(Integer id:familyData){
@@ -752,5 +777,99 @@ public class ClassManagerServiceImp extends QueryAndInsertImp implements IClassM
         }
         key.put("table",absent_num);
         return key;
+    }
+
+    /**
+     * 设置定时放学时间器
+     * @param classIds
+     * @return
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public String addTimingUpSchool(String[] classIds,Long time,String message){
+        //1.判断是否已经设置定期器
+        List<XnTimingSchool> xnSchools = this.schclassMapper.getTiming();
+        if(xnSchools!=null && xnSchools.size()>0){
+            //2.1.判断是是否是全年级
+            if(classIds == null){
+                return "存在班级已经设置了定时放学";
+            }
+            List<String> classIdList = Arrays.asList(classIds);
+            for (XnTimingSchool xnSchool:xnSchools){
+                for (String classId:classIdList){
+                    if(xnSchool.getClassId().contains(classId)){
+                        return "存在班级已经设置了定时放学";
+                    }
+                }
+            }
+        }
+        //2.添加时间设置记录
+        XnTimingSchool timingSchool = new XnTimingSchool();
+        timingSchool.setClassId(classIds.toString());
+        timingSchool.setIsEnable(1);
+        timingSchool.setUserId(SystemParam.getUserId());
+        timingSchool.setXnTiming(new Date(time));
+        timingSchool.setDescription(message);
+        this.schclassMapper.addTimingSchool(timingSchool);
+        return null;
+    }
+
+    /**
+     * 任务调度器
+     */
+    @Override
+    public void timingTask() {
+        List<XnTimingSchool> xnSchools = this.schclassMapper.getTiming();
+        xnSchools.stream().forEach(c->{
+            try{
+                this.jobHandler(this.timingJob,c.getXnTiming(),
+                        ""+c.getId()+ LocalDateTime.now()+ UUID.randomUUID(),
+                        ""+c.getId()+ LocalDateTime.now()+ UUID.randomUUID(),
+                        com.alibaba.fastjson.JSONObject.toJSONString(c),"商品修改定时任务");
+            }catch (Exception e){
+                System.out.println("#调度器出现异常");
+            }
+        });
+    }
+
+    /**
+     * 任务时间分配中心
+     * @param job 定时任务工作地
+     * @param time 开始时间
+     * @param identity 身份验证
+     * @param jobName 定时工作任务名
+     * @param jsonData 传输定时工作的数据
+     * @param description 工作描述
+     */
+    private synchronized void jobHandler(Job job, Date time, String identity,
+                                         String jobName, String jsonData, String description){
+        //1.传递参数
+        JobDataMap jobDataMap = new JobDataMap();
+        jobDataMap.put("data",jsonData);
+
+        //2.创建任务
+        JobDetailImpl jobDetail = new JobDetailImpl();
+        jobDetail.setName(jobName);
+        jobDetail.setJobClass(job.getClass());
+        jobDetail.setJobDataMap(jobDataMap);
+
+        //3.创建触发器
+        Trigger trigger = null;
+        trigger = TriggerBuilder.newTrigger()
+                .withIdentity(identity)//身份
+                .withDescription(description)//描述
+                .startAt(time)//开始时间
+                .build();
+
+        try {
+            //4.创建调度器
+            Scheduler scheduler = this.schedulerFactoryBean.getScheduler();
+            //5.执行放进调度池
+            scheduler.scheduleJob(jobDetail,trigger);
+            //6.执行调度器
+            scheduler.start();
+        }catch (SchedulerException e){
+            System.out.println("#调度器出错");
+        }
     }
 }

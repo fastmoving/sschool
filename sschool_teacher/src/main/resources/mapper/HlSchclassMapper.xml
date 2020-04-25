@@ -397,4 +397,117 @@ hs.ClassImg,hs.IndexNum,hs.IP,
           SchoolId = #{schoolId}
         </where>
     </select>
+
+  <sql id="Base_Timing_List">
+    id,xn_type,xn_timing,class_id,description,user_id,is_enable,school_id
+  </sql>
+
+  <resultMap id="XnTimingSchoolResouce" type="com.usoft.sschool_teacher.enums.entity.XnTimingSchool">
+    <result property="id" column="id"/>
+    <result property="userId" column="user_id"/>
+    <result property="classId" column="class_id"/>
+    <result property="isEnable" column="is_enable"/>
+    <result property="xnTiming" column="xn_timing"/>
+    <result property="xnType" column="xn_type"/>
+    <result property="description" column="description"/>
+    <result property="schoolId" column="school_id"/>
+  </resultMap>
+
+  <!--获取还处于设置状态的定时器-->
+    <select id="getTiming" resultType="com.usoft.sschool_teacher.enums.entity.XnTimingSchool">
+      select
+            <include refid="Base_Timing_List"/>
+            from xn_timing_school
+        <where>
+          is_enable = 1
+        </where>
+    </select>
+
+  <!--添加定时器-->
+  <insert id="addTimingSchool">
+    insert into xn_timing_school
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="item.id != null" >
+        id,
+      </if>
+      <if test="item.xnType != null" >
+        xn_type,
+      </if>
+      <if test="item.xnTiming != null" >
+        xn_timing,
+      </if>
+      <if test="item.classId != null" >
+        class_id,
+      </if>
+      <if test="item.description != null" >
+        description,
+      </if>
+      <if test="item.userId != null" >
+        user_id,
+      </if>
+      <if test="item.isEnable != null" >
+        is_enable,
+      </if>
+      <if test="item.schoolId != null">
+        school_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="item.id != null" >
+        #{item.id},
+      </if>
+      <if test="item.xnType != null" >
+        #{item.xnType},
+      </if>
+      <if test="item.xnTiming != null" >
+        #{item.xnTiming},
+      </if>
+      <if test="item.classId != null" >
+        #{item.classId},
+      </if>
+      <if test="item.description != null" >
+        #{item.description},
+      </if>
+      <if test="item.userId != null" >
+        #{item.userId},
+      </if>
+      <if test="item.isEnable != null" >
+        #{item.isEnable},
+      </if>
+      <if test="item.schoolId != null">
+        #{item.schoolId}
+      </if>
+    </trim>
+  </insert>
+
+  <!--修改定时器-->
+  <update id="updateTiming">
+    update xn_timing_school
+    <set >
+      <if test="item.xnType != null" >
+        xn_type = #{item.xnType},
+      </if>
+      <if test="item.xnTiming != null" >
+        xn_timing = #{item.xnTiming},
+      </if>
+      <if test="item.classId != null" >
+        class_id = #{item.classId},
+      </if>
+      <if test="item.description != null" >
+        description = #{item.description},
+      </if>
+      <if test="item.userId != null" >
+        user_id = #{item.userId},
+      </if>
+      <if test="item.isEnable != null" >
+        is_enable = #{item.isEnable},
+      </if>
+      <if test="item.schoolId != null">
+        school_id = #{item.schoolId}
+      </if>
+    </set>
+    <where>
+      id = #{item.id}
+    </where>
+  </update>
 </mapper>

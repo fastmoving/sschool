@@ -114,6 +114,18 @@
             <version>2.8.5</version>
         </dependency>
 
+        <!--定时器-->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+        </dependency>
+
+        <!--实体类-->
+<!--        <dependency>-->
+<!--            <groupId>com.sschool.sdk</groupId>-->
+<!--            <artifactId>sschool_model</artifactId>-->
+<!--            <version>1.0</version>-->
+<!--        </dependency>-->
     </dependencies>
 
     <dependencyManagement>

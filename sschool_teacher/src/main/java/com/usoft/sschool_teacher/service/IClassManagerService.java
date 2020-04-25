@@ -89,7 +89,31 @@ public interface IClassManagerService {
     int insertClassInform(String[] classIds,String message);
 
     /**
+     * 发送消息
+     * @param familyData
+     * @param message
+     * @param teacherId
+     * @param createuser
+     * @param type
+     * @param schoolId
+     * @return
+     */
+    List getMessage(List<Integer> familyData,String message,int teacherId,
+                    String createuser,int type,String schoolId);
+
+    /**
      * 班级考勤
      */
     Map getClassChecking(int classId);
+
+    /**
+     * 设置定时器
+     * @return
+     */
+    String addTimingUpSchool(String[] classIds,Long time,String message);
+
+    /**
+     * 任务调度器
+     */
+    void timingTask();
 }

@@ -5,6 +5,7 @@ import com.usoft.sschool_teacher.common.SystemParam;
 import com.usoft.sschool_teacher.service.IClassManagerService;
 import com.usoft.sschool_teacher.util.ClassTimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.regex.Matcher;
@@ -73,7 +74,28 @@ public class ClassOverController {
                                         @RequestParam("message")String message,
                                         @RequestParam("time")Long time){
         String[] classId = classIds.split(",");
+        String res = this.classManagerService.addTimingUpSchool(classId,time,message);
+        if(res != null){
+            return new MyResult(500,res,"");
+        }
         util.timer1(classId,message,time);
-        return new MyResult(1,"success","");
+        return new MyResult(1,"success","操作成功");
+    }
+
+    /**
+     * 轮询时间表，是否存在定时放学
+     *
+     * 每个半小时扫描一次
+     */
+    @Scheduled(cron = "* * 0/30 * * ?")
+    public void getDate(){
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                classManagerService.timingTask();
+            }
+        };
+        Thread thread = new Thread(runnable);
+        thread.start();
     }
 }

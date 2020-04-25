@@ -3,6 +3,7 @@ package com.usoft.sschool_teacher.mapper;
 import com.usoft.smartschool.pojo.HlSchclass;
 import com.usoft.smartschool.pojo.HlSchclassExample;
 import com.usoft.smartschool.pojo.HlSchclassKey;
+import com.usoft.sschool_teacher.enums.entity.XnTimingSchool;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -49,4 +50,21 @@ public interface HlSchclassMapper {
      * @return
      */
     List<String> getSchoolClassId(@Param("schoolId")Integer schoolId);
+
+    /**
+     * 获取还处于设置状态的定时器
+     * @return
+     */
+    List<XnTimingSchool> getTiming();
+
+    /**
+     * 添加定时器
+     * @param xnTimingSchool
+     */
+    void addTimingSchool(@Param("item") XnTimingSchool xnTimingSchool);
+
+    /**
+     * 修改定时器
+     */
+    void updateTiming(@Param("item") XnTimingSchool xnTimingSchool);
 }
