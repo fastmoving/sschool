@@ -78,7 +78,7 @@ public class ClassOverController {
         if(res != null){
             return new MyResult(500,res,"");
         }
-        util.timer1(classId,message,time);
+//        util.timer1(classId,message,time);
         return new MyResult(1,"success","操作成功");
     }
 
