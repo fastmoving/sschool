@@ -2,10 +2,12 @@ package com.usoft.sschool_teacher.controllers.myselfController;
 
 import com.usoft.smartschool.util.MyResult;
 import com.usoft.sschool_teacher.common.SystemParam;
+import com.usoft.sschool_teacher.enums.po.TeacherAddressPo;
 import com.usoft.sschool_teacher.service.ITeacherMyselfService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -23,34 +25,15 @@ public class AddressController {
 
     /**
      * 添加收货地址
-     * @param teacherId
-     * @param linkMan
-     * @param phone
-     * @param isDefault
-     * @param province
-     * @param city
-     * @param dist
-     * @param address
-     * @param cityCode
+     * @param po 添加条件
      * @return
      */
     @PostMapping("/insertAddress")
-    public MyResult insertAddress(String teacherId,String linkMan,String phone,String isDefault,
-                                  String province,String city,String dist,String address,String cityCode){
-        int thId = SystemParam.getUserId();
-        try{
-            //thId = Integer.parseInt(teacherId.trim());
-        }catch (Exception e){
-            return new MyResult(2,"上传的教师id不正确","");
-        }
-        if (linkMan == null && "".equals(linkMan)){
-            return new MyResult(2,"请填写联系人","");
-        }
-        if (phone == null && "".equals(phone)){
-            return new MyResult(2,"请填写联系电话","");
-        }
-        int i = myselfService.insertAddress(thId, linkMan,  phone,  isDefault,
-                province,  city,  dist,  address, cityCode);
+    public MyResult insertAddress(@Valid TeacherAddressPo po){
+        Integer thId = SystemParam.getUserId();
+        int i = myselfService.insertAddress(thId, po.getLinkMan(),  po.getPhone(),
+                po.getIsDefault(), po.getProvince(),  po.getCity(),  po.getDist(),
+                po.getAddress(), po.getCityCode());
         if (i==-2){
             return new MyResult(2,"网络延迟","");
         }
@@ -102,37 +85,19 @@ public class AddressController {
 
     /**
      * 编辑地址
-     * @param addressId
-     * @param teacherId
-     * @param linkMan
-     * @param phone
-     * @param isDefault
-     * @param province
-     * @param city
-     * @param dist
-     * @param address
-     * @param cityCode
+     * @param po 请求定制
      * @return
      */
     @PostMapping("/updateAddress")
-    public MyResult updateAddress(String addressId,String teacherId,String linkMan,String phone,String isDefault,
-                                  String province,String city,String dist,String address,String cityCode){
-        int thId = SystemParam.getUserId();
-        int id = 0;
-        try{
-           // thId = Integer.parseInt(teacherId.trim());
-            id = Integer.parseInt(addressId.trim());
-        }catch (Exception e){
-            return new MyResult(2,"上传的教师id不正确","");
+    public MyResult updateAddress(@Valid TeacherAddressPo po){
+        Integer thId = SystemParam.getUserId();
+        if(po.getId() == null ){
+            return new MyResult(2,"缺少参数ID",null);
         }
-        if (linkMan == null && "".equals(linkMan)){
-            return new MyResult(2,"请填写联系人","");
-        }
-        if (phone == null && "".equals(phone)){
-            return new MyResult(2,"请填写联系电话","");
-        }
-        int i = myselfService.updateAddress( id, thId, linkMan, phone, isDefault,
-                                     province, city, dist, address,cityCode);
+        int i = myselfService.updateAddress( po.getId(), thId, po.getLinkMan(),  po.getPhone(),
+                po.getIsDefault(), po.getProvince(),  po.getCity(),  po.getDist(),
+                po.getAddress(), po.getCityCode());
+
         if (i==-1 || i==-2){
             return new MyResult(2,"网络延迟",null);
         }else if (i>0){
