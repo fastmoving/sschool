@@ -3,13 +3,13 @@ package com.usoft.sschool_teacher.controllers.web;
 import com.usoft.smartschool.util.MyResult;
 import com.usoft.sschool_teacher.common.ResDataNum;
 import com.usoft.sschool_teacher.common.SystemParam;
+import com.usoft.sschool_teacher.enums.po.WebHomeWorkPo;
 import com.usoft.sschool_teacher.service.IHomeWorkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.validation.Valid;
+import java.util.*;
 
 /**
  * author : 陈秋
@@ -124,18 +124,24 @@ public class HomeworkController {
      * 发布作业
      */
     @PostMapping("/insertHomework")
-    public MyResult insertHomework(String hwName,Integer hwType,String acceptClass,String subject,
-                                   String expireTime,String hwContent,String hwContentImg,String array){
+    public MyResult insertHomework(@Valid WebHomeWorkPo po){
         int teacherId = 0;
-        //String arr ="[{'title':'数学作业学则提1','answera':'悬着1','answerb':'选择2','answerc':'选择伞','answerd':'选择四','rightanswer':'1'},{'title':'数学作业学则提2','answera':'悬着1','answerb':'选择2','answerc':'选择伞','answerd':'选择四','rightanswer':'2'},{'title':'数学作业学则提3','answera':'悬着1','answerb':'选择2','answerc':'选择伞','answerd':'选择四','rightanswer':'2'}]";
         try {
             teacherId = SystemParam.getUserId();
         }catch (Exception e){
             return new MyResult(2,"请登陆","");
         }
-        if (acceptClass==null || "".equals(acceptClass))return new MyResult(2,"请选择班级","");
-        int i = homeWorkService.insertHomework( hwName, hwType, acceptClass, subject,
-                 expireTime, hwContent, hwContentImg, array);
+        if (po.getAcceptClass()==null || "".equals(po.getAcceptClass())){
+            return new MyResult(2,"请选择班级","");
+        }
+        String[] classIds = po.getAcceptClass().split(",");
+        List<String> classList = Arrays.asList(classIds);
+        Set<String> classSet = new HashSet<>(classList);
+        if(classList.size() != classSet.size()){
+            return new MyResult(2,"不能选择相同的班级",false);
+        }
+        int i = homeWorkService.insertHomework( po.getHwName(), po.getHwType(), po.getAcceptClass(), po.getSubject(),
+                po.getExpireTime(), po.getHwContent(), po.getHwContentImg(), po.getArray());
         if (i==-1){
             return new MyResult(2,"网络延迟","");
         }else if (i==-2){

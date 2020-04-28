@@ -97,5 +97,8 @@ public interface IHomeWorkService {
     int insertHomework(String hwName,Integer hwType,String acceptClass,String subject,
                        String expireTime,String hwContent,String hwContentImg,String array);
 
+    /**
+     * 发布作业选择班级
+     */
     List getClasses(String subject);
 }
