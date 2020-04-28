@@ -5,6 +5,8 @@ import com.usoft.smartschool.util.MyResult;
 import com.usoft.smartschool.util.NumberKit;
 import com.usoft.sschool_teacher.common.ResultData;
 import com.usoft.sschool_teacher.common.SystemParam;
+import com.usoft.sschool_teacher.enums.po.AppHomeWorkPo;
+import com.usoft.sschool_teacher.enums.po.AppHomeWorkTitlePo;
 import com.usoft.sschool_teacher.service.IHomeWorkService;
 import com.usoft.sschool_teacher.util.UploadFileUtil;
 import org.apache.ibatis.annotations.Param;
@@ -13,9 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.validation.Valid;
+import java.util.*;
 
 /**
  * @Author: 陈秋
@@ -36,25 +37,27 @@ public class HomerWorkController {
 
     /**
      * 发布作业
-     * @param teacherId
-     * @param hwName
-     * @param hwType
-     * @param acceptClass
-     * @param subject
-     * @param expireTime
-     * @param hwContent
-     * @param hwContentImg
+     * @param po
      * @return
      */
     @PostMapping("/insertHomework")
-    public ResultData insertHomeWork(String teacherId,String hwName,Integer hwType,String acceptClass,String subject,
-                                    String expireTime,String hwContent,String hwContentImg){
+    public ResultData insertHomeWork(@Valid AppHomeWorkPo po){
         ResultData result = new ResultData();
         int thId = SystemParam.getUserId();
-        /*int i = homeWorkService.insertHomeWork(teacherId, hwName, hwType, acceptClass, subject,
-                                                expireTime, hwContent, hwContentImg);*/
-        int i = homeWorkService.insertHomeWork(thId, hwName, hwType, acceptClass, subject,
-                expireTime, hwContent, hwContentImg);
+
+        //判断班级不能重复
+        String[] classIds = po.getAcceptClass().split(",");
+        List<String> classList = Arrays.asList(classIds);
+        Set<String> classSet = new HashSet<>(classList);
+        if(classList.size() == classSet.size()){
+            result.setStatus(2);
+            result.setMessage("不能选择项目的班级");
+            result.setData(false);
+            return result;
+        }
+
+        int i = homeWorkService.insertHomeWork(thId, po.getHwName(), po.getHwType(), po.getAcceptClass(),
+                po.getSubject(), po.getExpireTime(), po.getHwContent(), po.getHwContentImg());
         if (i>0){
             result.setStatus(1);
             result.setMessage("success");
@@ -150,21 +153,14 @@ public class HomerWorkController {
 
     /**
      * 提交选择题
-     * @param hwid
-     * @param title
-     * @param answerA
-     * @param answerB
-     * @param answerC
-     * @param answerD
-     * @param rightAnswer
+     * @param po
      * @return
      */
     @PostMapping("/insertHomeworkTitle")
-    public ResultData insertHomeworkTitle(Integer hwid,String title,String answerA,String answerB,
-                                          String answerC,String answerD,Integer rightAnswer){
+    public ResultData insertHomeworkTitle(@Valid AppHomeWorkTitlePo po){
         ResultData res = new ResultData();
-        int i = homeWorkService.insertHomeworkTitle(hwid,title,answerA,answerB,
-                                        answerC,answerD,rightAnswer);
+        int i = homeWorkService.insertHomeworkTitle(po.getHwid(),po.getTitle(),
+                po.getAnswerA(),po.getAnswerB(), po.getAnswerC(),po.getAnswerD(),po.getRightAnswer());
         if (i>0){
             res.setStatus(1);
             res.setMessage("success");
@@ -354,13 +350,6 @@ public class HomerWorkController {
     public ResultData insertComments(String imgPath,String comment,String teacherId,String stuHmwIds,HttpServletRequest request){
         ResultData res = new ResultData();
         int tId = SystemParam.getUserId();
-        /*try{
-            //tId = Integer.parseInt(teacherId.trim());
-        }catch (Exception e){
-            res.setStatus(2);
-            res.setMessage("上传教师id错误");
-            return  res;
-        }*/
         HttpSession session = request.getSession();
         Map data = new HashMap();
         data.put("classId",session.getAttribute("classId"));
