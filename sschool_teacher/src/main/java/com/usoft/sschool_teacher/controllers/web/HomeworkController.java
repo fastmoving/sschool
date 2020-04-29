@@ -3,6 +3,7 @@ package com.usoft.sschool_teacher.controllers.web;
 import com.usoft.smartschool.util.MyResult;
 import com.usoft.sschool_teacher.common.ResDataNum;
 import com.usoft.sschool_teacher.common.SystemParam;
+import com.usoft.sschool_teacher.enums.po.HomeWorkManagePo;
 import com.usoft.sschool_teacher.enums.po.WebHomeWorkPo;
 import com.usoft.sschool_teacher.service.IHomeWorkService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,34 +87,22 @@ public class HomeworkController {
 
     /**
      * 作业审批
-     * @param teacherId 教师ID
-     * @param state 状态
-     * @param stuName 科目
-     * @param className 班级名字
-     * @param hwmName 作业名
-     * @param currentPage 分页
-     * @param pageSize 显示条数
-     * @param subject 科目
-     * @param classId 班级ID
+     * @param po 作业审批条件实体类
      * @return
      */
     @GetMapping("/getHomeworkStu")
-    public MyResult getHomeworkStu(String teacherId,String state,String stuName,String className,
-                                   String hwmName,String currentPage,String pageSize,
-                                   String subject,String classId){
+    public MyResult getHomeworkStu(@Valid HomeWorkManagePo po){
         int thId = 0;
-        Integer states = 0;
         try {
             thId = SystemParam.getUserId();
-            if (state!=null && !"".equals(state)){
-                states = Integer.parseInt(state.trim());
-            }
         }catch (Exception e){
             return new MyResult(e,"没有登录");
         }
-        List<Map<String,Object>> data = homeWorkService.getHomeworkmanager(thId,states,stuName, className, hwmName,
-                                                                            currentPage,pageSize,subject,classId,1);
-        int resNum = homeWorkService.getStuHomeworkEsCount(thId,states,stuName,className,hwmName,subject,classId,1);
+        List<Map<String,Object>> data = homeWorkService.getHomeworkmanager(thId,po.getState(),po.getStuName(),
+                po.getClassName(), po.getHwmName(), po.getCurrentPage(),po.getPageSize(),
+                po.getSubject(),po.getClassId(),1);
+        int resNum = homeWorkService.getStuHomeworkEsCount(thId,po.getState(),po.getStuName(),
+                po.getClassName(),po.getHwmName(),po.getSubject(),po.getClassId(),1);
         if (data == null || data.size()==0){
             return new MyResult(2,"没有数据","");
         }

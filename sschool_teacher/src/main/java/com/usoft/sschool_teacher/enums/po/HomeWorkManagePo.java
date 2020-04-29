@@ -102,7 +102,7 @@ public class HomeWorkManagePo {
     }
 
     public void setCurrentPage(Integer currentPage) {
-        this.currentPage = currentPage;
+        this.currentPage = currentPage != null?currentPage:1;
     }
 
     public Integer getPageSize() {
@@ -110,7 +110,7 @@ public class HomeWorkManagePo {
     }
 
     public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
+        this.pageSize = pageSize !=null?pageSize:10;
     }
 
     public String getSubject() {

@@ -54,8 +54,9 @@ public interface IHomeWorkService {
      */
     int getStuHomeworkEsCount(int teacherId,int state,String stuName,String className,
                               String hwmName, String subject,String classId,int code);
-    List<Map<String,Object>> getHomeworkmanager(int teacherId,int state,String stuName,String className,
-                                                String hwmName,String start,String page,String subject,String classId,int code);
+    List<Map<String,Object>> getHomeworkmanager(Integer teacherId,Integer state,String stuName,String className,
+                                                String hwmName,Integer page,Integer pageSize,
+                                                String subject,String classId,Integer code);
 
     /**
      * web作业管理

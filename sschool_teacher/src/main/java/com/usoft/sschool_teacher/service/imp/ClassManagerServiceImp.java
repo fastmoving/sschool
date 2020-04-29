@@ -276,7 +276,7 @@ public class ClassManagerServiceImp extends QueryAndInsertImp implements IClassM
      * @return
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int updateAbsent(String[] absentId,int status){
 
         //审批请假
@@ -293,7 +293,7 @@ public class ClassManagerServiceImp extends QueryAndInsertImp implements IClassM
         try {
             CustomException.customeIf(i);
         }catch (MyException e){
-            return -1;
+            throw new MyException(500,"服务器开小差",false);
         }
         //添加积分
         XnIntegralRule rule = queryIntegralRule(ConstantsDate.TOTAL_PASS);
@@ -302,7 +302,7 @@ public class ClassManagerServiceImp extends QueryAndInsertImp implements IClassM
             try {
                 CustomException.customeIf(k);
             }catch (MyException e){
-                return -1;
+                throw new MyException(500,"服务器开小差",false);
             }
         }
         return i;

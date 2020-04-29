@@ -10,10 +10,8 @@ import com.usoft.sschool_teacher.exception.CustomException;
 import com.usoft.sschool_teacher.exception.MyException;
 import com.usoft.sschool_teacher.mapper.*;
 import com.usoft.sschool_teacher.service.IHomeWorkService;
-import com.usoft.sschool_teacher.service.IQueryAndInsertClassService;
 import com.usoft.sschool_teacher.util.ConstantsDate;
 import net.sf.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,22 +28,22 @@ import java.util.*;
 @Service
 public class HomeWorkServiceImp extends QueryAndInsertImp implements IHomeWorkService {
 
-    @Autowired
+    @Resource
     private XnHomeworkManageMapper homeworkManageMapper;
 
-    @Autowired
+    @Resource
     private XnHomeworkTitleMapper homeworkTitleMapper;
 
-    @Autowired
+    @Resource
     private HlTeacherMapper teacherMapper;
 
-    @Autowired
+    @Resource
     private HlSchclassMapper schclassMapper;
 
-    @Autowired
+    @Resource
     private XnStuHomeworkMapper stuHomeworkMapper;
 
-    @Autowired
+    @Resource
     private HlStudentinfoMapper studentinfoMapper;
 
     @Resource
@@ -266,41 +264,22 @@ public class HomeWorkServiceImp extends QueryAndInsertImp implements IHomeWorkSe
      * @return
      */
     @Override
-    public List<Map<String, Object>> getHomeworkmanager(int teacherId, int state, String stuName,
-                                                        String className, String hwmName, String page, String start,
-                                                        String subject,String classId,int code) {
+    public List<Map<String, Object>> getHomeworkmanager(Integer teacherId, Integer state, String stuName,
+                                                        String className, String hwmName, Integer page, Integer start,
+                                                        String subject,String classId,Integer code) {
         Map key = getKey( teacherId,  state,stuName, className,
                 hwmName, subject, classId, code);
-        if (page!=null && !"".equals(page)){
-            if (start!=null && !"".equals(start)){
-                try {
-                    int page0 = Integer.parseInt(page);
-                    int start0 = Integer.parseInt(start);
-                    key.put("page",start0);
-                    key.put("start",(page0-1)*start0);
-                }catch (Exception e){
-                    List<Map<String,Object>> list = new ArrayList<>();
-                    Map<String,Object> map = new HashMap<>();
-                    map.put("code",-2);
-                    list.add(map);
-                    return list;
-                }
-            }
-        }else{
-            key.put("page",10);
-            key.put("start",0);
-        }
+        key.put("page",start);
+        key.put("start",(page-1)*start);
+
         List<Map<String,Object>> data = stuHomeworkMapper.getStuHomeworkEs(key);
         if (data.size()==0){
-            return null;
+            return new ArrayList<>();
         }
         List<Map<String,Object>> dataList = new ArrayList<>();
         for (Map<String,Object> dataMap : data) {
             dataMap.put("end_time",dataMap.get("expireTime").toString().substring(0,16));
             dataMap.put("create_time",dataMap.get("createTime").toString().substring(0,16));
-            /*Map mapData = JSONObject.fromObject(dataMap.get("hwContent"));
-            dataMap.put("hw_content",mapData.get("hwContent"));
-            dataMap.put("hw_content_img",mapData.get("Img"));*/
             if (dataMap.get("state")!=null && !"".equals(dataMap.get("state"))){
                 int states = Integer.parseInt(dataMap.get("state").toString());
                 dataMap.put("states", StateEnum.getState(states));

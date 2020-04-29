@@ -7,6 +7,7 @@ import com.usoft.sschool_teacher.common.ResultData;
 import com.usoft.sschool_teacher.common.SystemParam;
 import com.usoft.sschool_teacher.enums.po.AppHomeWorkPo;
 import com.usoft.sschool_teacher.enums.po.AppHomeWorkTitlePo;
+import com.usoft.sschool_teacher.enums.po.HomeWorkManagePo;
 import com.usoft.sschool_teacher.service.IHomeWorkService;
 import com.usoft.sschool_teacher.util.UploadFileUtil;
 import org.apache.ibatis.annotations.Param;
@@ -221,17 +222,12 @@ public class HomerWorkController {
 
     /**
      * 作业管理
-     * @param teacherId
+     * @param po 作业管理实体类条件
      * @return
      */
     @GetMapping("/getHomeworkManager")
-    public ResultData getHomeworkManager(String teacherId,Integer state,String stuName,String className,
-                                         String hwmName,String currentPage,String pageSize,
-                                         String subject,String classId,HttpServletRequest request){
+    public ResultData getHomeworkManager(@Valid HomeWorkManagePo po,HttpServletRequest request){
         ResultData result = new ResultData();
-        int page = 0;
-        if (pageSize!=null && !"".equals(pageSize))page = Integer.parseInt(pageSize);
-        else page = 10;
         int thId = 0;
         try {
             thId = SystemParam.getUserId();
@@ -241,14 +237,13 @@ public class HomerWorkController {
             result.setData("");
             return result;
         }
-        /*List<Map<String,Object>> data = homeWorkService.getHomeworkmanager(teacherId,state,stuName, className, hwmName, currentPage,pageSize);
-        int resNum = homeWorkService.getStuHomeworkEsCount(teacherId,state);*/
         HttpSession session = request.getSession();
-        session.setAttribute("subject",subject);
-        session.setAttribute("classId",classId);
-        List<Map<String,Object>> data = homeWorkService.getHomeworkmanager(thId,state,stuName, className,
-                                                                            hwmName, currentPage,pageSize,subject,classId,0);
-        int resNum = homeWorkService.getStuHomeworkEsCount(thId,state,stuName,className,hwmName,subject,classId,0);
+        session.setAttribute("subject",po.getSubject());
+        session.setAttribute("classId",po.getClassId());
+        List<Map<String,Object>> data = homeWorkService.getHomeworkmanager(thId,po.getState(),po.getStuName(), po.getClassName(),
+                    po.getHwmName(), po.getCurrentPage(),po.getPageSize(),po.getSubject(),po.getClassId(),0);
+        int resNum = homeWorkService.getStuHomeworkEsCount(thId,po.getState(),po.getStuName(),
+                po.getClassName(),po.getHwmName(),po.getSubject(),po.getClassId(),0);
         if (data == null || data.size()==0){
             result.setStatus(2);
             result.setMessage("暂无数据");
@@ -258,7 +253,7 @@ public class HomerWorkController {
         result.setMessage("success");
         result.setStatus(1);
         result.setData(data);
-        result.setTotalNumber((resNum+page)/page);
+        result.setTotalNumber((resNum+po.getPageSize())/po.getPageSize());
         return result;
     }
 
