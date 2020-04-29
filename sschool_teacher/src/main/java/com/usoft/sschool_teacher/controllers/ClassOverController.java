@@ -2,12 +2,14 @@ package com.usoft.sschool_teacher.controllers;
 
 import com.usoft.smartschool.util.MyResult;
 import com.usoft.sschool_teacher.common.SystemParam;
+import com.usoft.sschool_teacher.enums.po.TimeClassOverPo;
 import com.usoft.sschool_teacher.service.IClassManagerService;
 import com.usoft.sschool_teacher.util.ClassTimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -65,25 +67,23 @@ public class ClassOverController {
 
     /**
      * 定时放学
-     * @param classIds
-     * @param message
+     * @param po
      * @return
      */
     @PostMapping("/insertTimeClassOver")
-    public MyResult insertTimeClassOver(@RequestParam("classIds") String classIds ,
-                                        @RequestParam("message")String message,
-                                        @RequestParam("time")Long time){
+    public MyResult insertTimeClassOver(@Valid TimeClassOverPo po){
         //判断时间的正确性
-        if(time.longValue()<System.currentTimeMillis()){
+        Long newTime = System.currentTimeMillis();
+        if(po.getTime().longValue()<newTime){
             return new MyResult(2,"定时不能小于当前时间",false);
         }
 
-        String[] classId = classIds.split(",");
+        String[] classId = po.getClassIds().split(",");
 //        String res = this.classManagerService.addTimingUpSchool(classId,time,message);
 //        if(res != null){
 //            return new MyResult(500,res,"");
 //        }
-        util.timer1(classId,message,time);
+        util.timer1(classId,po.getMessage(),po.getTime());
         return new MyResult(1,"success","操作成功");
     }
 
