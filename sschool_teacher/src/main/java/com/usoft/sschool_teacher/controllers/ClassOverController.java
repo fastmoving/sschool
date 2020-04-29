@@ -73,12 +73,17 @@ public class ClassOverController {
     public MyResult insertTimeClassOver(@RequestParam("classIds") String classIds ,
                                         @RequestParam("message")String message,
                                         @RequestParam("time")Long time){
-        String[] classId = classIds.split(",");
-        String res = this.classManagerService.addTimingUpSchool(classId,time,message);
-        if(res != null){
-            return new MyResult(500,res,"");
+        //判断时间的正确性
+        if(time.longValue()<System.currentTimeMillis()){
+            return new MyResult(2,"定时不能小于当前时间",false);
         }
-//        util.timer1(classId,message,time);
+
+        String[] classId = classIds.split(",");
+//        String res = this.classManagerService.addTimingUpSchool(classId,time,message);
+//        if(res != null){
+//            return new MyResult(500,res,"");
+//        }
+        util.timer1(classId,message,time);
         return new MyResult(1,"success","操作成功");
     }
 
@@ -87,15 +92,15 @@ public class ClassOverController {
      *
      * 每个半小时扫描一次
      */
-    @Scheduled(cron = "* * 0/30 * * ?")
-    public void getDate(){
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                classManagerService.timingTask();
-            }
-        };
-        Thread thread = new Thread(runnable);
-        thread.start();
-    }
+//    @Scheduled(cron = "* * 0/30 * * ?")
+//    public void getDate(){
+//        Runnable runnable = new Runnable() {
+//            @Override
+//            public void run() {
+//                classManagerService.timingTask();
+//            }
+//        };
+//        Thread thread = new Thread(runnable);
+//        thread.start();
+//    }
 }
