@@ -81,10 +81,10 @@ public class ClassCircleController {
      * @return
      */
     @PostMapping("addLike")
-    public MyResult addLike(Integer ccid){
+    public MyResult addLike(Integer ccid,Integer classId){
         Integer schoolId = SystemParam.getSchoolId();
         Byte type = Byte.valueOf(SystemParam.getType().toString());
-        return classCircleService.addLike(ccid,schoolId, Integer.valueOf(type));
+        return classCircleService.addLike(ccid,schoolId, Integer.valueOf(type),classId);
     }
     @PostMapping("deleteLike")
     public MyResult deleteLike(Integer ccid){

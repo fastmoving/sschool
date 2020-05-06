@@ -16,7 +16,7 @@ public interface ClassCircleService {
     //评论班级圈
     MyResult addcomment(Integer schoolId,Integer ccid, String content, Integer parentId,Byte userType);
     //班级圈点赞
-    MyResult addLike(Integer ccid,Integer schoolId,Integer type );
+    MyResult addLike(Integer ccid,Integer schoolId,Integer type,Integer classId );
     //取消点赞
     MyResult deleteLike(Integer ccid,Integer schoolId, Integer type);
     //发布班级圈

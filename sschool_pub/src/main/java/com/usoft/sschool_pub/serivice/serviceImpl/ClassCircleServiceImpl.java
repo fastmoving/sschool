@@ -360,18 +360,21 @@ public class ClassCircleServiceImpl implements ClassCircleService {
      * @return
      */
     @Override
-    public MyResult addLike(Integer ccid, Integer schoolId, Integer type) {
+    public MyResult addLike(Integer ccid, Integer schoolId, Integer type,Integer classIds) {
         if (ObjectUtil.isEmpty(ccid))return MyResult.failure("请输入要点赞的班级圈");
         Integer userId=null;
         Integer classId=null;
         if(type==1){
             userId=SystemParam.getChildId();
             HlStudentinfo studentinfo = searchUtil.Studentinfo(schoolId, userId);
-            classId=studentinfo.getClassid();
         }else {
             userId=SystemParam.getUserId();
             List<Map> list = searchUtil.teacherClass(schoolId, userId);
-            classId= (Integer)list.get(0).get("classId");
+            if(classIds == null){
+                classId= (Integer)list.get(0).get("classId");
+            }else{
+                classId = classIds;
+            }
         }
         XnCircleLikeExample example=new XnCircleLikeExample();
         example.createCriteria().andSidEqualTo(schoolId).andCidEqualTo(classId).andCircleidEqualTo(ccid)
