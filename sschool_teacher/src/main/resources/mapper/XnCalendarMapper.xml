@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.usoft.sschool_teacher.mapper.XnCalendarMapper" >
+    <resultMap id="ResultXnCalendarMap" type="com.usoft.sschool_teacher.enums.entity.XnCalendarEntity">
+        <id column="id" property="id"/>
+        <result column="data_name" property="dataName"/>
+        <result column="data_time" property="dataTime"/>
+        <result column="holiday" property="holiday"/>
+    </resultMap>
+
+    <sql id="Base_list">
+        id,data_name,data_time,holiday
+    </sql>
+
+    <sql id="Base_list_insert">
+        data_name,data_time,holiday
+    </sql>
+
+    <!-- 批量添加日期 -->
+    <insert id="insertCalendarList">
+        insert into xn_calendar (<include refid="Base_list_insert"/>)
+        values
+        <foreach collection="calendar" item="item" separator=",">
+            (#{item.dataName},#{item.dataTime},#{item.holiday})
+        </foreach>
+    </insert>
+
+    <!--查询日期-->
+    <select id="selectCalendarList" resultMap="ResultXnCalendarMap">
+        select  <include refid="Base_list"/>
+        from xn_calendar
+        <where>
+            data_time like CONCAT(#{dataTime},'%')
+            <if test="startTime != null">
+              and  data_time <![CDATA[<=]]> #{startTime}
+            </if>
+            <if test="endTime != null">
+              and  data_time <![CDATA[>=]]> #{endTime}
+            </if>
+        </where>
+    </select>
+</mapper>
