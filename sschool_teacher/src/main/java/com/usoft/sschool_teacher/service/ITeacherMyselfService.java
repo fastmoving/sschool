@@ -2,6 +2,7 @@ package com.usoft.sschool_teacher.service;
 
 import com.usoft.smartschool.pojo.XnAddress;
 import com.usoft.smartschool.util.MyResult;
+import com.usoft.sschool_teacher.enums.vo.MyselfEvaluationVo;
 
 import java.util.List;
 import java.util.Map;
@@ -145,4 +146,10 @@ public interface ITeacherMyselfService {
      */
     List<Map> getOrderClassIfo(Integer classId,Integer start,Integer page);
     Integer listXnSetmealOrderCount(Integer classId);
+
+    /**
+     * 获取教师评价
+     * @return
+     */
+    MyResult getMyselfEvaluation(Integer pageNo,Integer pageSize);
 }

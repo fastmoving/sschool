@@ -3,7 +3,6 @@ package com.usoft.sschool_teacher.controllers.myselfController;
 import com.usoft.smartschool.util.MyResult;
 import com.usoft.sschool_teacher.common.SystemParam;
 import com.usoft.sschool_teacher.service.ITeacherMyselfService;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,13 +32,6 @@ public class MyselfController {
     @GetMapping("/getMyselfIfo")
     public MyResult getMyselfIfo(String teacherId){
         int thId = SystemParam.getUserId();
-        /*if (teacherId!=null && !"".equals(teacherId)){
-            try{
-                thId = Integer.parseInt(teacherId.trim());
-            }catch (Exception e){
-                return new MyResult(e,"上传教师ID格式不对");
-            }
-        }*/
         if (teacherService.getMyselfIfo(thId)==null){
             return new MyResult(2,"error",teacherService.getMyselfIfo(thId));
         }
@@ -94,7 +86,9 @@ public class MyselfController {
     @GetMapping("/getSchoolManager")
     public Object getSchoolManager(){
         Map data = teacherService.getSchoolManager();
-        if (data == null )return new MyResult(2,"没有数据","");
+        if (data == null ){
+            return new MyResult(2,"没有数据","");
+        }
         return new MyResult(1,"success",data);
     }
     /**
@@ -156,10 +150,14 @@ public class MyselfController {
         if (currentPage!=null && !"".equals(currentPage))start = Integer.parseInt(currentPage.trim());
         else start = 1;
         List data = teacherService.getMyselfManager();
-        if (data.isEmpty())return new MyResult(2,"你没有这个权限","");
+        if (data.isEmpty()){
+            return new MyResult(2,"你没有这个权限","");
+        }
         List res_data = teacherService.getTeacherAbsent(page,start,"1");
         Integer num = teacherService.getTeacherAbsentCount();
-        if (res_data.isEmpty())return new MyResult(2,"没有数据","");
+        if (res_data.isEmpty()){
+            return new MyResult(2,"没有数据","");
+        }
         return new MyResult(1,"success",res_data,start,(page+num)/page,page,num);
     }
 
@@ -331,5 +329,14 @@ public class MyselfController {
             return new MyResult(2,"没有数据","");
         }
         return new MyResult(1,"success",data,0,(resNum+page)/page,0,resNum);
+    }
+
+    /**
+     * 获取教师自己品论
+     * @return
+     */
+    @GetMapping("getMyselfEvaluation")
+    public MyResult getMyselfEvaluation(Integer pageNo,Integer pageSize){
+        return this.teacherService.getMyselfEvaluation(pageNo,pageSize);
     }
 }

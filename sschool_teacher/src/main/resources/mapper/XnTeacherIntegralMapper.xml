@@ -284,4 +284,43 @@
               </if>
             </where>
   </select>
+
+  <!-- 获取教师评价 -->
+  <select id="getTeacherEvaluation" resultType="com.usoft.sschool_teacher.enums.vo.MyselfEvaluationVo">
+      SELECT
+        xte.id,
+        xte.sid,
+        xte.cid,
+        xte.stuid,
+        xte.tid,
+        xte.star,
+        xte.des,
+        xte.createTime
+        FROM
+        xn_teacher_evaluation AS xte
+    <where>
+      <if test="teacherId != null">
+        xte.tid = #{teacherId} and
+      </if>
+      <if test="schoolId !=null">
+        xte.sid = #{schoolId}
+      </if>
+    </where>
+    ORDER BY xte.createTime DESC
+    LIMIT #{pageNO},#{pageSize}
+  </select>
+  <select id="getTeacherEvaluationCount" resultType="java.lang.Integer">
+    SELECT
+    COUNT(1)
+    FROM
+    xn_teacher_evaluation AS xte
+    <where>
+      <if test="teacherId != null">
+        xte.tid = #{teacherId} and
+      </if>
+      <if test="schoolId !=null">
+        xte.sid = #{schoolId}
+      </if>
+    </where>
+  </select>
 </mapper>

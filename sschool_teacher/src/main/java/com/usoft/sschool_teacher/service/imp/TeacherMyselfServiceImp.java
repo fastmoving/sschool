@@ -5,6 +5,7 @@ import com.usoft.smartschool.util.MyResult;
 import com.usoft.sschool_teacher.common.SystemParam;
 import com.usoft.sschool_teacher.enums.*;
 import com.usoft.sschool_teacher.enums.entity.XnCalendarEntity;
+import com.usoft.sschool_teacher.enums.vo.MyselfEvaluationVo;
 import com.usoft.sschool_teacher.exception.CustomException;
 import com.usoft.sschool_teacher.exception.MyException;
 import com.usoft.sschool_teacher.mapper.*;
@@ -1159,5 +1160,23 @@ public class TeacherMyselfServiceImp implements ITeacherMyselfService {
             key.put("schoolId", SystemParam.getSchoolId());
         }
         return key;
+    }
+
+    /**
+     * 获取教师评价
+     * @return
+     */
+    @Override
+    public MyResult getMyselfEvaluation(Integer pageNo,Integer pageSize) {
+        if(pageNo == null){
+            pageNo = 0;
+        }else {
+            pageNo = (pageNo-1)*pageSize;
+        }
+        List<MyselfEvaluationVo> evaluationVos = this.teacherIntegralMapper.getTeacherEvaluation(
+                SystemParam.getUserId(),SystemParam.getSchoolId(),pageNo,pageSize!=null?pageSize:10);
+        Integer count = this.teacherIntegralMapper.getTeacherEvaluationCount(SystemParam.getUserId(),
+                SystemParam.getSchoolId());
+        return new MyResult(2,"success",evaluationVos,pageNo,(count+pageSize)/pageSize,pageSize,count);
     }
 }
