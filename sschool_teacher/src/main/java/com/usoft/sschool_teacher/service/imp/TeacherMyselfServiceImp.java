@@ -269,8 +269,6 @@ public class TeacherMyselfServiceImp implements ITeacherMyselfService {
                     i = addressMapper.updateByPrimaryKeySelective(address1);
                     break;
                 }
-                /*isdefultAddress.get(0).setIsdefault(ConstantsDate.ADDRESS_NOIS);
-                int i = addressMapper.updateByPrimaryKeySelective(isdefultAddress.get(0));*/
                 try {
                     CustomException.customeIf(i);
                 } catch (MyException e) {
